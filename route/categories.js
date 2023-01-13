@@ -8,6 +8,8 @@ const router = express.Router();
  * @swagger
  * /api/categories/create:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: Create new category
@@ -39,9 +41,12 @@ router.post("/create", auth, categoryController.create);
  * @swagger
  * /api/categories/get:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new category
+ *    description: get category by id
  *    parameters:
  *      - in: body
  *        name: category
@@ -67,9 +72,12 @@ router.post("/get", auth, categoryController.get);
  * @swagger
  * /api/categories/getAll:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get all category
+ *    description: get all categories
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -84,9 +92,11 @@ router.post("/getAll", auth, categoryController.getAll);
  * @swagger
  * /api/categories/update:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new category
+ *    description: update category by id
  *    parameters:
  *      - in: body
  *        name: category
@@ -94,9 +104,10 @@ router.post("/getAll", auth, categoryController.getAll);
  *        schema:
  *          type: object
  *          required:
- *            - name
- *            - image
+ *            - id
  *          properties:
+ *            id:
+ *              type: string
  *            name:
  *              type: string
  *            image:
@@ -115,9 +126,11 @@ router.post("/update", auth,categoryController.update);
  * @swagger
  * /api/categories/delete:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new category
+ *    description: delete category by id
  *    parameters:
  *      - in: body
  *        name: category

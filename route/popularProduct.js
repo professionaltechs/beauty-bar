@@ -1,42 +1,28 @@
-const express = require('express')
+const express = require('express');
 const auth = require("../functions/authentication");
-const postController = require("../controller/post")
+const popularProductController = require("../controller/popularProduct");
 
 const router = express.Router();
 
 /**
  * @swagger
- * /api/post/create:
+ * /api/popularProduct/create:
  *  post:
  *    tags:
  *      - admin
  *    security: 
  *      - bearerAuth: []
- *    description: Create new post
+ *    description: Create new popularProduct
  *    parameters:
  *      - in: body
- *        name: post
- *        description: post
+ *        name: popularProduct
+ *        description: popularProduct
  *        schema:
  *          type: object
  *          required:
- *            - userId
- *            - image
- *            - text
+ *            - productId
  *          properties:
- *            userId:
- *              type: string
- *            image:
- *              type: string
- *            text:
- *              type: string
- *            taggedProducts:
- *              type: array
- *              items:
- *                type: string
- *            like:
- *              type: string
- *            hashtag:
+ *            productId:
  *              type: string
  *    responses:
  *      '200':
@@ -46,22 +32,103 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/create", auth, postController.create);
+router.post("/create", auth, popularProductController.create);
 
 /**
  * @swagger
- * /api/post/get:
+ * /api/popularProduct/get:
+ *  post:
+ *    tags:
+ *      - admin
+ *    security:
+ *      - bearerAuth: []
+ *    description: get popularProduct by id
+ *    parameters:
+ *      - in: body
+ *        name: popularProduct
+ *        description: popularProduct
+ *        schema:
+ *          type: object
+ *          required:
+ *            - id
+ *          properties:
+ *            id:
+ *              type: string
+ *    responses:
+ *      '200':
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
+ */
+router.post("/get", auth, popularProductController.get);
+
+/**
+ * @swagger
+ * /api/popularProduct/getAll:
  *  post:
  *    tags:
  *      - user
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get post by id
+ *    description: get all popularProduct
+ *    responses:
+ *      '200':
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
+ */
+router.post("/getAll", auth, popularProductController.getAll);
+
+/**
+ * @swagger
+ * /api/popularProduct/update:
+ *  post:
+ *    tags:
+ *      - admin
+ *    security:
+ *      - bearerAuth: []
+ *    description: update popularProduct by id
  *    parameters:
  *      - in: body
- *        name: post
- *        description: post
+ *        name: popularProduct
+ *        description: popularProduct
+ *        schema:
+ *          type: object
+ *          required:
+ *            - id
+ *          properties:
+ *            id:
+ *              type: string
+ *            productId:
+ *              type: string
+ *    responses:
+ *      '200':
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
+ */
+router.post("/update", auth, popularProductController.update);
+
+/**
+ * @swagger
+ * /api/popularProduct/delete:
+ *  post:
+ *    tags:
+ *      - admin
+ *    security:
+ *      - bearerAuth: []
+ *    description: delete popularProduct by id
+ *    parameters:
+ *      - in: body
+ *        name: popularProduct
+ *        description: popularProduct
  *        schema:
  *          type: object
  *          required:
@@ -77,100 +144,6 @@ router.post("/create", auth, postController.create);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/get", auth, postController.get);
-
-/**
- * @swagger
- * /api/post/getAll:
- *  post:
- *    tags:
- *      - user
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: get all posts
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/getAll", auth, postController.getAll);
-
-/**
- * @swagger
- * /api/post/update:
- *  post:
- *    tags:
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: update post by id
- *    parameters:
- *      - in: body
- *        name: post
- *        description: post
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
- *            userId:
- *              type: string
- *            image:
- *              type: string
- *            text:
- *              type: string
- *            taggedProducts:
- *              type: array
- *              items:
- *                type: string
- *            like:
- *              type: string
- *            hashtag:
- *              type: string
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/update", auth, postController.update);
-
-/**
- * @swagger
- * /api/post/delete:
- *  post:
- *    tags:
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: delete post by id
- *    parameters:
- *      - in: body
- *        name: post
- *        description: post
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/delete", auth, postController.delete);
+router.post("/delete", auth, popularProductController.delete);
 
 module.exports = router;

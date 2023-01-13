@@ -1,42 +1,36 @@
-const express = require('express')
+const express = require('express');
 const auth = require("../functions/authentication");
-const postController = require("../controller/post")
+const commentController = require("../controller/comment");
 
 const router = express.Router();
 
 /**
  * @swagger
- * /api/post/create:
+ * /api/comment/create:
  *  post:
  *    tags:
  *      - admin
  *    security: 
  *      - bearerAuth: []
- *    description: Create new post
+ *    description: Create new comment
  *    parameters:
  *      - in: body
- *        name: post
- *        description: post
+ *        name: comment
+ *        description: comment
  *        schema:
  *          type: object
  *          required:
  *            - userId
- *            - image
+ *            - postId
  *            - text
  *          properties:
  *            userId:
  *              type: string
- *            image:
+ *            postId:
+ *              type: string
+ *            commentId:
  *              type: string
  *            text:
- *              type: string
- *            taggedProducts:
- *              type: array
- *              items:
- *                type: string
- *            like:
- *              type: string
- *            hashtag:
  *              type: string
  *    responses:
  *      '200':
@@ -46,22 +40,22 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/create", auth, postController.create);
+router.post("/create", auth, commentController.create);
 
 /**
  * @swagger
- * /api/post/get:
+ * /api/comment/get:
  *  post:
  *    tags:
  *      - user
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get post by id
+ *    description: get comment by id
  *    parameters:
  *      - in: body
- *        name: post
- *        description: post
+ *        name: comment
+ *        description: comment
  *        schema:
  *          type: object
  *          required:
@@ -77,18 +71,18 @@ router.post("/create", auth, postController.create);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/get", auth, postController.get);
+router.post("/get", auth, commentController.get);
 
 /**
  * @swagger
- * /api/post/getAll:
+ * /api/comment/getAll:
  *  post:
  *    tags:
  *      - user
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get all posts
+ *    description: get all comment
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -97,21 +91,21 @@ router.post("/get", auth, postController.get);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/getAll", auth, postController.getAll);
+router.post("/getAll", auth, commentController.getAll);
 
 /**
  * @swagger
- * /api/post/update:
+ * /api/comment/update:
  *  post:
  *    tags:
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: update post by id
+ *    description: update comment by id
  *    parameters:
  *      - in: body
- *        name: post
- *        description: post
+ *        name: comment
+ *        description: comment
  *        schema:
  *          type: object
  *          required:
@@ -121,17 +115,11 @@ router.post("/getAll", auth, postController.getAll);
  *              type: string
  *            userId:
  *              type: string
- *            image:
+ *            postId:
+ *              type: string
+ *            commentId:
  *              type: string
  *            text:
- *              type: string
- *            taggedProducts:
- *              type: array
- *              items:
- *                type: string
- *            like:
- *              type: string
- *            hashtag:
  *              type: string
  *    responses:
  *      '200':
@@ -141,21 +129,21 @@ router.post("/getAll", auth, postController.getAll);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/update", auth, postController.update);
+router.post("/update", auth, commentController.update);
 
 /**
  * @swagger
- * /api/post/delete:
+ * /api/comment/delete:
  *  post:
  *    tags:
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: delete post by id
+ *    description: delete comment by id
  *    parameters:
  *      - in: body
- *        name: post
- *        description: post
+ *        name: comment
+ *        description: comment
  *        schema:
  *          type: object
  *          required:
@@ -171,6 +159,6 @@ router.post("/update", auth, postController.update);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/delete", auth, postController.delete);
+router.post("/delete", auth, commentController.delete);
 
 module.exports = router;

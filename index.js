@@ -11,6 +11,7 @@ const bannerRoutes = require("./route/banner");
 const brandRoutes = require("./route/brand");
 const categoriesRoutes = require("./route/categories");
 const groupRoutes = require("./route/group");
+const popularProductRoutes = require("./route/popularProduct");
 const postRoutes = require("./route/post");
 const productRoutes = require("./route/product");
 const reviewRoutes = require("./route/review");
@@ -45,22 +46,7 @@ app.use("/api/categories", categoriesRoutes);
 app.use("/api/group", groupRoutes);
 app.use("/api/review", reviewRoutes);
 app.use("/api/shades", shadesRoutes);
-
-/**
- * @swagger
- * /testApi:
- *  get:
- *    description: aaaaaaaaaaaaaaaaaaaaaaaaaaa
- *    responses:
- *      '200':
- *        description: dddddddddddddddddddddd
- */
-app.get("/testApi", (req, res) => {
-  res.json({
-    response: "TestAPI Response"
-  })
-})
-
+app.use("/api/popularProduct", popularProductRoutes);
 
 // swaggerOptionObject
 const swaggerOptions = {
@@ -100,6 +86,7 @@ const swaggerOptions = {
     "./route/product.js",
     "./route/review.js",
     "./route/shades.js",
+    "./route/popularProduct.js",
   ]
 }
 

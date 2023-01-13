@@ -8,6 +8,8 @@ const router = express.Router();
  * @swagger
  * /api/skinType/create:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: Create new skinType
@@ -35,9 +37,12 @@ router.post("/create", auth, skinTypeController.create);
  * @swagger
  * /api/skinType/get:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: fetch skinType by Id 
+ *    description: get skinType by Id 
  *    parameters:
  *      - in: body
  *        name: SkinType
@@ -59,9 +64,12 @@ router.post("/get", auth, skinTypeController.get);
  * @swagger
  * /api/skinType/getAll:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: fetch all SkinTypes 
+ *    description: get all SkinTypes 
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -72,6 +80,8 @@ router.post("/getAll", auth, skinTypeController.getAll);
  * @swagger
  * /api/skinType/update:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: Update SkinType
@@ -83,8 +93,6 @@ router.post("/getAll", auth, skinTypeController.getAll);
  *          type: object
  *          required:
  *            - id
- *            - name
- *            - image
  *          properties:
  *            id:
  *              type: string
@@ -102,9 +110,11 @@ router.post("/update", auth, skinTypeController.update);
  * @swagger
  * /api/skinType/delete:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: fetch skinType by Id 
+ *    description: delete skinType by Id 
  *    parameters:
  *      - in: body
  *        name: SkinType

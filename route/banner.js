@@ -8,6 +8,8 @@ const router = express.Router();
  * @swagger
  * /api/banner/create:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: Create new banner
@@ -32,9 +34,12 @@ router.post("/create", auth, bannerController.create);
  * @swagger
  * /api/banner/get:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: fetch banner by Id 
+ *    description: get banner by Id 
  *    parameters:
  *      - in: body
  *        name: banner
@@ -56,9 +61,12 @@ router.post("/get", auth, bannerController.get);
  * @swagger
  * /api/banner/getAll:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: fetch all banners 
+ *    description: get all banners 
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -67,11 +75,13 @@ router.post("/getAll", auth, bannerController.getAll);
 
 /**
  * @swagger
- * /api/skinConcern/update:
+ * /api/banner/update:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new skinConcern
+ *    description: update banner by id
  *    parameters:
  *      - in: body
  *        name: skinConcern
@@ -80,7 +90,6 @@ router.post("/getAll", auth, bannerController.getAll);
  *          type: object
  *          required:
  *            - id
- *            - image
  *          properties:
  *            id:
  *              type: string
@@ -94,11 +103,13 @@ router.post("/update", auth, bannerController.update);
 
 /**
  * @swagger
- * /api/skinConcern/delete:
+ * /api/banner/delete:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new skinConcern
+ *    description: delete banner by id
  *    parameters:
  *      - in: body
  *        name: skinConcern

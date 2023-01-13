@@ -8,6 +8,8 @@ const router = express.Router();
  * @swagger
  * /api/user/:
  *  post:
+ *    tags:
+ *      - user
  *    description: User SignUp(Create User) Api
  *    parameters:
  *      - in: body
@@ -28,6 +30,8 @@ const router = express.Router();
  *              type: string
  *            email:
  *              type: string
+ *            userId:
+ *              type: string
  *            password:
  *              type: string
  *            age:
@@ -40,6 +44,15 @@ const router = express.Router();
  *              type: string
  *            profileImage:
  *              type: string
+ *            socialMedia:
+ *              type: object
+ *              properties:
+ *                instagram:
+ *                  type: string
+ *                facebook:
+ *                  type: string
+ *                youtube:
+ *                  type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -50,6 +63,8 @@ router.post("/", userController.signUp);
  * @swagger
  * /api/user/signIn:
  *  post:
+ *    tags:
+ *      - user
  *    description: User SignIn(login) Api
  *    parameters:
  *      - in: body

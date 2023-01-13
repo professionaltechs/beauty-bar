@@ -8,6 +8,8 @@ const router = express.Router();
  * @swagger
  * /api/group/create:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: Create new group
@@ -18,12 +20,15 @@ const router = express.Router();
  *        schema:
  *          type: object
  *          required:
- *            - name
+ *            - title
  *            - image
+ *            - description
  *          properties:
- *            name:
+ *            title:
  *              type: string
- *            image:
+ *            image: 
+ *              type: string
+ *            description: 
  *              type: string
  *    responses:
  *      '200':
@@ -39,9 +44,12 @@ router.post("/create", auth, groupController.create);
  * @swagger
  * /api/group/get:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new group
+ *    description: get group by id
  *    parameters:
  *      - in: body
  *        name: group
@@ -67,9 +75,12 @@ router.post("/get", auth, groupController.get);
  * @swagger
  * /api/group/getAll:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get all group
+ *    description: get all groups
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -84,9 +95,11 @@ router.post("/getAll", auth, groupController.getAll);
  * @swagger
  * /api/group/update:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new group
+ *    description: update group by id
  *    parameters:
  *      - in: body
  *        name: group
@@ -94,12 +107,15 @@ router.post("/getAll", auth, groupController.getAll);
  *        schema:
  *          type: object
  *          required:
- *            - name
- *            - image
+ *            - id
  *          properties:
- *            name:
+ *            id:
  *              type: string
- *            image:
+ *            title:
+ *              type: string
+ *            image: 
+ *              type: string
+ *            description: 
  *              type: string
  *    responses:
  *      '200':
@@ -115,9 +131,11 @@ router.post("/update", auth,groupController.update);
  * @swagger
  * /api/group/delete:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new group
+ *    description: delete group by id
  *    parameters:
  *      - in: body
  *        name: group

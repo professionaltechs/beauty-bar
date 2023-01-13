@@ -8,6 +8,8 @@ const router = express.Router();
  * @swagger
  * /api/skinTone/create:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: Create new skinTone
@@ -35,9 +37,12 @@ router.post("/create", auth, skinToneController.create);
  * @swagger
  * /api/skinTone/get:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: fetch skinTone by Id 
+ *    description: get skinTone by Id 
  *    parameters:
  *      - in: body
  *        name: skinTone
@@ -59,9 +64,12 @@ router.post("/get", auth, skinToneController.get);
  * @swagger
  * /api/skinTone/getAll:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: fetch all skinTones 
+ *    description: get all skinTones 
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -72,6 +80,8 @@ router.post("/getAll", auth, skinToneController.getAll);
  * @swagger
  * /api/skinTone/update:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: Update skinTone
@@ -83,8 +93,6 @@ router.post("/getAll", auth, skinToneController.getAll);
  *          type: object
  *          required:
  *            - id
- *            - name
- *            - image
  *          properties:
  *            id:
  *              type: string
@@ -102,9 +110,11 @@ router.post("/update", auth, skinToneController.update);
  * @swagger
  * /api/skinTone/delete:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: fetch skinTone by Id 
+ *    description: delete skinTone by Id 
  *    parameters:
  *      - in: body
  *        name: skinTone

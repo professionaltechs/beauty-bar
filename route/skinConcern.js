@@ -8,6 +8,8 @@ const router = express.Router();
  * @swagger
  * /api/skinConcern/create:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: Create new skinConcern
@@ -32,9 +34,12 @@ router.post("/create", auth, skinConcernController.create);
  * @swagger
  * /api/skinConcern/get:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: fetch skinConcern by Id 
+ *    description: get skinConcern by Id 
  *    parameters:
  *      - in: body
  *        name: skinConcern
@@ -56,9 +61,12 @@ router.post("/get", auth, skinConcernController.get);
  * @swagger
  * /api/skinConcern/getAll:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: fetch all skinConcern 
+ *    description: get all skinConcerns
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -69,9 +77,11 @@ router.post("/getAll", auth, skinConcernController.getAll);
  * @swagger
  * /api/skinConcern/update:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new skinConcern
+ *    description: update skinConcern by id
  *    parameters:
  *      - in: body
  *        name: skinConcern
@@ -96,9 +106,11 @@ router.post("/update", auth, skinConcernController.update);
  * @swagger
  * /api/skinConcern/delete:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new skinConcern
+ *    description: delete skinConcern by id
  *    parameters:
  *      - in: body
  *        name: skinConcern

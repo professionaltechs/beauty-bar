@@ -16,6 +16,11 @@ const commentSchema = new Schema ({
         ref : "Post",
         required : [true , "post id is required"]
     },
+    commentId : {
+        type: Schema.Types.ObjectId,
+        ref : "Comment",
+        required: false
+    },
     isActive: {
         type: Number,
         required: false,
@@ -33,4 +38,4 @@ const commentSchema = new Schema ({
 },
     { timestamps: true }
 );
-module.exports = mongoose.model("Comments", commentSchema)
+module.exports = mongoose.model("Comment", commentSchema)

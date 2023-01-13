@@ -8,6 +8,8 @@ const router = express.Router();
  * @swagger
  * /api/skinUnderTone/create:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: Create new skinUnderTone
@@ -35,9 +37,12 @@ router.post("/create", auth, skinUnderToneController.create);
  * @swagger
  * /api/skinUnderTone/get:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: fetch skinUnderTone by Id 
+ *    description: get skinUnderTone by Id 
  *    parameters:
  *      - in: body
  *        name: skinUnderTone
@@ -59,9 +64,12 @@ router.post("/get", auth, skinUnderToneController.get);
  * @swagger
  * /api/skinUnerTone/getAll:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: fetch all skinUnderTones 
+ *    description: get all skinUnderTones 
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -72,6 +80,8 @@ router.post("/getAll", auth, skinUnderToneController.getAll);
  * @swagger
  * /api/skinUnderTone/update:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: Update skinUnderTone
@@ -83,8 +93,6 @@ router.post("/getAll", auth, skinUnderToneController.getAll);
  *          type: object
  *          required:
  *            - id
- *            - name
- *            - image
  *          properties:
  *            id:
  *              type: string
@@ -102,9 +110,11 @@ router.post("/update", auth, skinUnderToneController.update);
  * @swagger
  * /api/skinUnderTone/delete:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: fetch skinUnderTone by Id 
+ *    description: delete skinUnderTone by Id 
  *    parameters:
  *      - in: body
  *        name: skinUnderTone

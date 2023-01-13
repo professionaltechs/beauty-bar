@@ -8,6 +8,8 @@ const router = express.Router();
  * @swagger
  * /api/brand/create:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: Create new brand
@@ -39,9 +41,12 @@ router.post("/create", auth,brandController.create);
  * @swagger
  * /api/brand/get:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new brand
+ *    description: get brand by id
  *    parameters:
  *      - in: body
  *        name: brand
@@ -67,9 +72,12 @@ router.post("/get", auth,brandController.get);
  * @swagger
  * /api/brand/getAll:
  *  post:
+ *    tags:
+ *      - user
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get all brand
+ *    description: get all brands
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -84,9 +92,11 @@ router.post("/getAll", auth, brandController.getAll);
  * @swagger
  * /api/brand/update:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new brand
+ *    description: update brand by id
  *    parameters:
  *      - in: body
  *        name: brand
@@ -94,9 +104,10 @@ router.post("/getAll", auth, brandController.getAll);
  *        schema:
  *          type: object
  *          required:
- *            - name
- *            - image
+ *            - id
  *          properties:
+ *            id:
+ *              type: string
  *            name:
  *              type: string
  *            image:
@@ -115,9 +126,11 @@ router.post("/update", auth, brandController.update);
  * @swagger
  * /api/brand/delete:
  *  post:
+ *    tags:
+ *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new brand
+ *    description: delete brand by id
  *    parameters:
  *      - in: body
  *        name: brand
