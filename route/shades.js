@@ -13,20 +13,20 @@ const router = express.Router();
  *    security: 
  *      - bearerAuth: []
  *    description: Create new shade
- *    parameters:
- *      - in: body
- *        name: shades
- *        description: shades
- *        schema:
- *          type: object
- *          required:
- *            - name
- *            - colorShade
- *          properties:
- *            name:
- *              type: string
- *            colorShade:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - name
+ *              - colorShade
+ *            properties:
+ *              name:
+ *                type: string
+ *              colorShade:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -47,17 +47,17 @@ router.post("/create", auth,shadesController.create);
  *    security:
  *      - bearerAuth: []
  *    description: get shade by id
- *    parameters:
- *      - in: body
- *        name: shades
- *        description: shades
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -97,21 +97,21 @@ router.post("/getAll", auth, shadesController.getAll);
  *    security: 
  *      - bearerAuth: []
  *    description: update shade by id
- *    parameters:
- *      - in: body
- *        name: shades
- *        description: shades
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
- *            name:
- *              type: string
- *            colorShade:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *              name:
+ *                type: string
+ *              colorShade:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -131,17 +131,17 @@ router.post("/update", auth, shadesController.update);
  *    security:
  *      - bearerAuth: []
  *    description: delete shade by id
- *    parameters:
- *      - in: body
- *        name: shades
- *        description: shades
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response

@@ -13,20 +13,20 @@ const router = express.Router();
  *    security:
  *      - bearerAuth: []
  *    description: Create new skinUnderTone
- *    parameters:
- *      - in: body
- *        name: skinUnderTone
- *        description: skinUnderTone
- *        schema:
- *          type: object
- *          required:
- *            - name
- *            - image
- *          properties:
- *            name:
- *              type: string
- *            image:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - name
+ *              - image
+ *            properties:
+ *              name:
+ *                type: string
+ *              image:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -42,18 +42,18 @@ router.post("/create", auth, skinUnderToneController.create);
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get skinUnderTone by Id 
- *    parameters:
- *      - in: body
- *        name: skinUnderTone
- *        description: skinUnderTone.
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    description: get skinUnderTone by Id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -85,21 +85,21 @@ router.post("/getAll", auth, skinUnderToneController.getAll);
  *    security:
  *      - bearerAuth: []
  *    description: Update skinUnderTone
- *    parameters:
- *      - in: body
- *        name: skinUnderTone
- *        description: skinUnderTone
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
- *            name:
- *              type: string
- *            image:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *              name:
+ *                type: string
+ *              image:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -114,18 +114,18 @@ router.post("/update", auth, skinUnderToneController.update);
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: delete skinUnderTone by Id 
- *    parameters:
- *      - in: body
- *        name: skinUnderTone
- *        description: skinUnderTone.
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    description: delete skinUnderTone by Id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200

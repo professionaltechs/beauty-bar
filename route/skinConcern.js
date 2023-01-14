@@ -13,17 +13,17 @@ const router = express.Router();
  *    security:
  *      - bearerAuth: []
  *    description: Create new skinConcern
- *    parameters:
- *      - in: body
- *        name: skinConcern
- *        description: skinConcern
- *        schema:
- *          type: object
- *          required:
- *            - title
- *          properties:
- *            title:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - title
+ *            properties:
+ *              title:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -40,17 +40,17 @@ router.post("/create", auth, skinConcernController.create);
  *    security:
  *      - bearerAuth: []
  *    description: get skinConcern by Id 
- *    parameters:
- *      - in: body
- *        name: skinConcern
- *        description: skinConcern.
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -82,20 +82,20 @@ router.post("/getAll", auth, skinConcernController.getAll);
  *    security:
  *      - bearerAuth: []
  *    description: update skinConcern by id
- *    parameters:
- *      - in: body
- *        name: skinConcern
- *        description: skinConcern
- *        schema:
- *          type: object
- *          required:
- *            - id
- *            - title
- *          properties:
- *            id:
- *              type: string
- *            title:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *              - title
+ *            properties:
+ *              id:
+ *                type: string
+ *              title:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -111,17 +111,17 @@ router.post("/update", auth, skinConcernController.update);
  *    security:
  *      - bearerAuth: []
  *    description: delete skinConcern by id
- *    parameters:
- *      - in: body
- *        name: skinConcern
- *        description: skinConcern
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200

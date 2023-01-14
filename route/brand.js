@@ -13,20 +13,20 @@ const router = express.Router();
  *    security:
  *      - bearerAuth: []
  *    description: Create new brand
- *    parameters:
- *      - in: body
- *        name: brand
- *        description: brand
- *        schema:
- *          type: object
- *          required:
- *            - name
- *            - image
- *          properties:
- *            name:
- *              type: string
- *            image:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - name
+ *              - image
+ *            properties:
+ *              name:
+ *                type: string
+ *              image:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -47,17 +47,17 @@ router.post("/create", auth,brandController.create);
  *    security:
  *      - bearerAuth: []
  *    description: get brand by id
- *    parameters:
- *      - in: body
- *        name: brand
- *        description: brand
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -97,21 +97,21 @@ router.post("/getAll", auth, brandController.getAll);
  *    security:
  *      - bearerAuth: []
  *    description: update brand by id
- *    parameters:
- *      - in: body
- *        name: brand
- *        description: brand
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
- *            name:
- *              type: string
- *            image:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *             - id
+ *            properties:
+ *              id:
+ *                type: string
+ *              name:
+ *                type: string
+ *              image:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -131,17 +131,17 @@ router.post("/update", auth, brandController.update);
  *    security:
  *      - bearerAuth: []
  *    description: delete brand by id
- *    parameters:
- *      - in: body
- *        name: brand
- *        description: brand
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response

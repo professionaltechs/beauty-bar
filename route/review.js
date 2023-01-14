@@ -13,25 +13,25 @@ const router = express.Router();
  *    security: 
  *      - bearerAuth: []
  *    description: Create new review
- *    parameters:
- *      - in: body
- *        name: review
- *        description: review
- *        schema:
- *          type: object
- *          required:
- *            - userId
- *            - productId
- *            - rating
- *          properties:
- *            userId:
- *              type: string
- *            productId:
- *              type: string
- *            rating:
- *              type: integer
- *            comment:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - userId
+ *              - productId
+ *              - rating
+ *            properties:
+ *              userId:
+ *                type: string
+ *              productId:
+ *                type: string
+ *              rating:
+ *                type: integer
+ *              comment:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -52,17 +52,17 @@ router.post("/create", auth,reviewController.create);
  *    security:
  *      - bearerAuth: []
  *    description: get review by id
- *    parameters:
- *      - in: body
- *        name: product
- *        description: product
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -102,25 +102,25 @@ router.post("/getAll", auth, reviewController.getAll);
  *    security: 
  *      - bearerAuth: []
  *    description: update review by id
- *    parameters:
- *      - in: body
- *        name: review
- *        description: review
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
- *            userId:
- *              type: string
- *            productId:
- *              type: string
- *            rating:
- *              type: integer
- *            comment:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *              userId:
+ *                type: string
+ *              productId:
+ *                type: string
+ *              rating:
+ *                type: integer
+ *              comment:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -140,17 +140,17 @@ router.post("/update", auth, reviewController.update);
  *    security:
  *      - bearerAuth: []
  *    description: delete review by id
- *    parameters:
- *      - in: body
- *        name: review
- *        description: review
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response

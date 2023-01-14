@@ -13,17 +13,17 @@ const router = express.Router();
  *    security: 
  *      - bearerAuth: []
  *    description: Create new popularProduct
- *    parameters:
- *      - in: body
- *        name: popularProduct
- *        description: popularProduct
- *        schema:
- *          type: object
- *          required:
- *            - productId
- *          properties:
- *            productId:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - productId
+ *            properties:
+ *              productId:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -43,17 +43,17 @@ router.post("/create", auth, popularProductController.create);
  *    security:
  *      - bearerAuth: []
  *    description: get popularProduct by id
- *    parameters:
- *      - in: body
- *        name: popularProduct
- *        description: popularProduct
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -93,19 +93,19 @@ router.post("/getAll", auth, popularProductController.getAll);
  *    security:
  *      - bearerAuth: []
  *    description: update popularProduct by id
- *    parameters:
- *      - in: body
- *        name: popularProduct
- *        description: popularProduct
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
- *            productId:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *              productId:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -125,17 +125,17 @@ router.post("/update", auth, popularProductController.update);
  *    security:
  *      - bearerAuth: []
  *    description: delete popularProduct by id
- *    parameters:
- *      - in: body
- *        name: popularProduct
- *        description: popularProduct
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response

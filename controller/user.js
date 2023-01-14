@@ -38,6 +38,7 @@ exports.signUp = async (req, res) => {
 };
 
 exports.signIn = async (req, res) => {
+    console.log(req.body)
     let foundUser;
     User
         .findOne({ email: req.body.email })

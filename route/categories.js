@@ -13,20 +13,20 @@ const router = express.Router();
  *    security:
  *      - bearerAuth: []
  *    description: Create new category
- *    parameters:
- *      - in: body
- *        name: category
- *        description: category
- *        schema:
- *          type: object
- *          required:
- *            - name
- *            - image
- *          properties:
- *            name:
- *              type: string
- *            image:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:  
+ *          schema:
+ *            type: object
+ *            required:
+ *              - name
+ *              - image
+ *            properties:
+ *              name:
+ *                type: string
+ *              image:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -47,17 +47,17 @@ router.post("/create", auth, categoryController.create);
  *    security:
  *      - bearerAuth: []
  *    description: get category by id
- *    parameters:
- *      - in: body
- *        name: category
- *        description: category
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -97,21 +97,21 @@ router.post("/getAll", auth, categoryController.getAll);
  *    security:
  *      - bearerAuth: []
  *    description: update category by id
- *    parameters:
- *      - in: body
- *        name: category
- *        description: category
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
- *            name:
- *              type: string
- *            image:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *              name:
+ *                type: string
+ *              image:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -131,17 +131,17 @@ router.post("/update", auth,categoryController.update);
  *    security:
  *      - bearerAuth: []
  *    description: delete category by id
- *    parameters:
- *      - in: body
- *        name: category
- *        description: category
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response

@@ -13,25 +13,25 @@ const router = express.Router();
  *    security: 
  *      - bearerAuth: []
  *    description: Create new comment
- *    parameters:
- *      - in: body
- *        name: comment
- *        description: comment
- *        schema:
- *          type: object
- *          required:
- *            - userId
- *            - postId
- *            - text
- *          properties:
- *            userId:
- *              type: string
- *            postId:
- *              type: string
- *            commentId:
- *              type: string
- *            text:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - userId
+ *              - postId
+ *              - text
+ *            properties:
+ *              userId:
+ *                type: string
+ *              postId:
+ *                type: string
+ *              commentId:
+ *                type: string
+ *              text:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -52,17 +52,17 @@ router.post("/create", auth, commentController.create);
  *    security:
  *      - bearerAuth: []
  *    description: get comment by id
- *    parameters:
- *      - in: body
- *        name: comment
- *        description: comment
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -102,25 +102,25 @@ router.post("/getAll", auth, commentController.getAll);
  *    security:
  *      - bearerAuth: []
  *    description: update comment by id
- *    parameters:
- *      - in: body
- *        name: comment
- *        description: comment
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
- *            userId:
- *              type: string
- *            postId:
- *              type: string
- *            commentId:
- *              type: string
- *            text:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *              userId:
+ *                type: string
+ *              postId:
+ *                type: string
+ *              commentId:
+ *                type: string
+ *              text:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -140,17 +140,17 @@ router.post("/update", auth, commentController.update);
  *    security:
  *      - bearerAuth: []
  *    description: delete comment by id
- *    parameters:
- *      - in: body
- *        name: comment
- *        description: comment
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response

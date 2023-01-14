@@ -13,20 +13,20 @@ const router = express.Router();
  *    security:
  *      - bearerAuth: []
  *    description: Create new skinTone
- *    parameters:
- *      - in: body
- *        name: skinTone
- *        description: skinTone
- *        schema:
- *          type: object
- *          required:
- *            - name
- *            - image
- *          properties:
- *            name:
- *              type: string
- *            image:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - name
+ *              - image
+ *            properties:
+ *              name:
+ *                type: string
+ *              image:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -42,18 +42,18 @@ router.post("/create", auth, skinToneController.create);
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get skinTone by Id 
- *    parameters:
- *      - in: body
- *        name: skinTone
- *        description: skinTone.
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    description: get skinTone by Id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -85,21 +85,21 @@ router.post("/getAll", auth, skinToneController.getAll);
  *    security:
  *      - bearerAuth: []
  *    description: Update skinTone
- *    parameters:
- *      - in: body
- *        name: skinTone
- *        description: skinTone
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
- *            name:
- *              type: string
- *            image:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *              name:
+ *                type: string
+ *              image:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -114,18 +114,18 @@ router.post("/update", auth, skinToneController.update);
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: delete skinTone by Id 
- *    parameters:
- *      - in: body
- *        name: skinTone
- *        description: skinTone.
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    description: delete skinTone by Id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200

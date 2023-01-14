@@ -13,17 +13,17 @@ const router = express.Router();
  *    security:
  *      - bearerAuth: []
  *    description: Create new banner
- *    parameters:
- *      - in: body
- *        name: banner
- *        description: banner
- *        schema:
- *          type: object
- *          required:
- *            - image
- *          properties:
- *            image:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - image
+ *            properties:
+ *              image:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -39,18 +39,18 @@ router.post("/create", auth, bannerController.create);
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get banner by Id 
- *    parameters:
- *      - in: body
- *        name: banner
- *        description: banner.
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    description: get banner by Id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -82,19 +82,19 @@ router.post("/getAll", auth, bannerController.getAll);
  *    security:
  *      - bearerAuth: []
  *    description: update banner by id
- *    parameters:
- *      - in: body
- *        name: skinConcern
- *        description: skinConcern
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
- *            image:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *              image:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -110,17 +110,17 @@ router.post("/update", auth, bannerController.update);
  *    security:
  *      - bearerAuth: []
  *    description: delete banner by id
- *    parameters:
- *      - in: body
- *        name: skinConcern
- *        description: skinConcern
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200

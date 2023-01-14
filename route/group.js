@@ -13,23 +13,23 @@ const router = express.Router();
  *    security:
  *      - bearerAuth: []
  *    description: Create new group
- *    parameters:
- *      - in: body
- *        name: group
- *        description: group
- *        schema:
- *          type: object
- *          required:
- *            - title
- *            - image
- *            - description
- *          properties:
- *            title:
- *              type: string
- *            image: 
- *              type: string
- *            description: 
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - title
+ *              - image
+ *              - description
+ *            properties:
+ *              title:
+ *                type: string
+ *              image: 
+ *                type: string
+ *              description: 
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -50,17 +50,17 @@ router.post("/create", auth, groupController.create);
  *    security:
  *      - bearerAuth: []
  *    description: get group by id
- *    parameters:
- *      - in: body
- *        name: group
- *        description: group
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -100,23 +100,23 @@ router.post("/getAll", auth, groupController.getAll);
  *    security:
  *      - bearerAuth: []
  *    description: update group by id
- *    parameters:
- *      - in: body
- *        name: group
- *        description: group
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
- *            title:
- *              type: string
- *            image: 
- *              type: string
- *            description: 
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *              title:
+ *                type: string
+ *              image: 
+ *                type: string
+ *              description: 
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -136,17 +136,17 @@ router.post("/update", auth,groupController.update);
  *    security:
  *      - bearerAuth: []
  *    description: delete group by id
- *    parameters:
- *      - in: body
- *        name: group
- *        description: group
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response

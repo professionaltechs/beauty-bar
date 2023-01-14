@@ -8,51 +8,51 @@ const router = express.Router();
  * @swagger
  * /api/product/create:
  *  post:
- *    tags:
+ *    tags:  
  *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: Create new product
- *    parameters:
- *      - in: body
- *        name: product
- *        description: product
- *        schema:
- *          type: object
- *          required:
- *            - images
- *            - title
- *            - price
- *            - ingredients
- *            - categoryId
- *          properties:
- *            images:
- *              type: array
- *              items:
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - images
+ *              - title
+ *              - price
+ *              - ingredients
+ *              - categoryId
+ *            properties:
+ *              images:
+ *                type: array
+ *                items:
+ *                  type: string
+ *              title:
  *                type: string
- *            title:
- *              type: string
- *            price:
- *              type: integer
- *            rating:
- *              type: integer
- *            description:
- *              type: object
- *              properties:
- *                images:
- *                  type: array
- *                  items:
+ *              price:
+ *                type: integer
+ *              rating:
+ *                type: integer
+ *              description:
+ *                type: object
+ *                properties:
+ *                  images:
+ *                    type: array
+ *                    items:
+ *                      type: string
+ *                  text:
  *                    type: string
- *                text:
- *                  type: string
- *                videoURL:
- *                  type: string
- *            ingredients:
- *              type: string
- *            discount:
- *              type: integer
- *            categoryId:
- *              type: string
+ *                  videoURL:
+ *                    type: string
+ *              ingredients:
+ *                type: string
+ *              discount:
+ *                type: integer
+ *              categoryId:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -73,17 +73,17 @@ router.post("/create", auth, productController.create);
  *    security:
  *      - bearerAuth: []
  *    description: get product by id
- *    parameters:
- *      - in: body
- *        name: product
- *        description: product
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -123,44 +123,44 @@ router.post("/getAll", auth, productController.getAll);
  *    security:
  *      - bearerAuth: []
  *    description: update product
- *    parameters:
- *      - in: body
- *        name: product
- *        description: product
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
- *            images:
- *              type: array
- *              items:
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
  *                type: string
- *            title:
- *              type: string
- *            price:
- *              type: integer
- *            rating:
- *              type: integer
- *            description:
- *              type: object
- *              properties:
- *                images:
- *                  type: array
- *                  items:
+ *              images:
+ *                type: array
+ *                items:
+ *                  type: string
+ *              title:
+ *                type: string
+ *              price:
+ *                type: integer
+ *              rating:
+ *                type: integer
+ *              description:
+ *                type: object
+ *                properties:
+ *                  images:
+ *                    type: array
+ *                    items:
+ *                      type: string
+ *                  text:
  *                    type: string
- *                text:
- *                  type: string
- *                videoURL:
- *                  type: string
- *            ingredients:
- *              type: string
- *            discount:
- *              type: integer
- *            categoryId:
- *              type: string
+ *                  videoURL:
+ *                    type: string
+ *              ingredients:
+ *                type: string
+ *              discount:
+ *                type: integer
+ *              categoryId:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -180,17 +180,17 @@ router.post("/update", auth, productController.update);
  *    security:
  *      - bearerAuth: []
  *    description: delete new product
- *    parameters:
- *      - in: body
- *        name: product
- *        description: product
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response

@@ -13,31 +13,31 @@ const router = express.Router();
  *    security: 
  *      - bearerAuth: []
  *    description: Create new post
- *    parameters:
- *      - in: body
- *        name: post
- *        description: post
- *        schema:
- *          type: object
- *          required:
- *            - userId
- *            - image
- *            - text
- *          properties:
- *            userId:
- *              type: string
- *            image:
- *              type: string
- *            text:
- *              type: string
- *            taggedProducts:
- *              type: array
- *              items:
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - userId
+ *              - image
+ *              - text
+ *            properties:
+ *              userId:
  *                type: string
- *            like:
- *              type: string
- *            hashtag:
- *              type: string
+ *              image:
+ *                type: string
+ *              text:
+ *                type: string
+ *              taggedProducts:
+ *                type: array
+ *                items:
+ *                  type: string
+ *              like:
+ *                type: string
+ *              hashtag:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -58,17 +58,17 @@ router.post("/create", auth, postController.create);
  *    security:
  *      - bearerAuth: []
  *    description: get post by id
- *    parameters:
- *      - in: body
- *        name: post
- *        description: post
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -108,31 +108,31 @@ router.post("/getAll", auth, postController.getAll);
  *    security:
  *      - bearerAuth: []
  *    description: update post by id
- *    parameters:
- *      - in: body
- *        name: post
- *        description: post
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
- *            userId:
- *              type: string
- *            image:
- *              type: string
- *            text:
- *              type: string
- *            taggedProducts:
- *              type: array
- *              items:
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
  *                type: string
- *            like:
- *              type: string
- *            hashtag:
- *              type: string
+ *              userId:
+ *                type: string
+ *              image:
+ *                type: string
+ *              text:
+ *                type: string
+ *              taggedProducts:
+ *                type: array
+ *                items:
+ *                  type: string
+ *              like:
+ *                type: string
+ *              hashtag:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -152,17 +152,17 @@ router.post("/update", auth, postController.update);
  *    security:
  *      - bearerAuth: []
  *    description: delete post by id
- *    parameters:
- *      - in: body
- *        name: post
- *        description: post
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: 200 OK response

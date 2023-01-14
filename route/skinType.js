@@ -13,20 +13,21 @@ const router = express.Router();
  *    security:
  *      - bearerAuth: []
  *    description: Create new skinType
- *    parameters:
- *      - in: body
- *        name: SkinType
- *        description: SkinType
- *        schema:
- *          type: object
- *          required:
- *            - name
- *            - image
- *          properties:
- *            name:
- *              type: string
- *            image:
- *              type: string
+ *    requestBody:
+ *      description: skinType to create
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - name
+ *              - image
+ *            properties:
+ *              name:
+ *                type: string
+ *              image:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -43,17 +44,18 @@ router.post("/create", auth, skinTypeController.create);
  *    security:
  *      - bearerAuth: []
  *    description: get skinType by Id 
- *    parameters:
- *      - in: body
- *        name: SkinType
- *        description: SkinType.
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      description: skintype
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -85,21 +87,22 @@ router.post("/getAll", auth, skinTypeController.getAll);
  *    security:
  *      - bearerAuth: []
  *    description: Update SkinType
- *    parameters:
- *      - in: body
- *        name: SkinType
- *        description: SkinType
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
- *            name:
- *              type: string
- *            image:
- *              type: string
+ *    requestBody:
+ *      description: update skintype
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *              name:
+ *                type: string
+ *              image:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -115,17 +118,18 @@ router.post("/update", auth, skinTypeController.update);
  *    security:
  *      - bearerAuth: []
  *    description: delete skinType by Id 
- *    parameters:
- *      - in: body
- *        name: SkinType
- *        description: SkinType.
- *        schema:
- *          type: object
- *          required:
- *            - id
- *          properties:
- *            id:
- *              type: string
+ *    requestBody:
+ *      description: delete skinType by Id 
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
