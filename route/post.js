@@ -140,6 +140,17 @@ router.post("/getAll", auth, postController.getAll);
  *                type: array
  *                items:
  *                  type: string
+ *              taggedProductsLink:
+ *                type: array
+ *                items:
+ *                  type: object
+ *                  properties:
+ *                    link:
+ *                      type: string
+ *                    title:
+ *                      type: string
+ *                    description:
+ *                      type: string
  *              like:
  *                type: integer
  *              hashtag:
