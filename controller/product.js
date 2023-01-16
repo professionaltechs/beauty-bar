@@ -1,16 +1,12 @@
 const Product = require("../model/product");
 
 exports.create = async (req, res) => {
-    if(!req.body.content) {
-        return res.status(400).send({
-            message: "prodcut content can not be empty"
-        });
-    }
     try {
         const product = await new Product(req.body);
     
         product.save().then(response => {
             res.status(200).json({
+                id: response._id,
                 message: "product created succesfully"
             })
         })

@@ -34,8 +34,19 @@ const router = express.Router();
  *                type: array
  *                items:
  *                  type: string
+ *              taggedProductsLink:
+ *                type: array
+ *                items:
+ *                  type: object
+ *                  properties:
+ *                    link:
+ *                      type: string
+ *                    title:
+ *                      type: string
+ *                    description:
+ *                      type: string
  *              like:
- *                type: string
+ *                type: integer
  *              hashtag:
  *                type: string
  *    responses:
@@ -130,7 +141,7 @@ router.post("/getAll", auth, postController.getAll);
  *                items:
  *                  type: string
  *              like:
- *                type: string
+ *                type: integer
  *              hashtag:
  *                type: string
  *    responses:

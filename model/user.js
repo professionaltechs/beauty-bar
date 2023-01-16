@@ -4,32 +4,44 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     name: {
         type: String,
-        required: [true, "name is required"],
     },
-    email: {
-        type: String,
-        required: [true, "email is required"],
-    },
-    password: {
-        type: String,
-        required: [true, "password is required"],
-    },
+    // email: {
+    //     type: String,
+    //     required: [true, "email is required"],
+    // },
+    // password: {
+    //     type: String,
+    //     required: [true, "password is required"],
+    // },
     skinTypeId: {
         type: Schema.Types.ObjectId,
         ref: "SkinType",
         required: [false, "skinTypeId is required"],
     },
+    skinToneId: {
+        type: Schema.Types.ObjectId,
+        ref: "SkinTone",
+        required: [false, "SkinToneId is required"],
+    },
+    skinUnderToneId: {
+        type: Schema.Types.ObjectId,
+        ref: "SkinUnderTone",
+        required: [false, "SkinUnderToneId is required"],
+    },
+    skinConcernId: {
+        type: [Schema.Types.ObjectId],
+        ref: "SkinConcern",
+        required: [false, "SkinConcernId is required"],
+    },
     age: {
         type: String,
-        required: [true, "age is required"]
     },
     gender: {
         type: String,
-        required: [true, "gender is required"]
     },
     phone: {
         type: String,
-        required: [true, "name is required"]
+        required: [true, "Phone is required"]
     },
     aboutMe: {
         type: String,
@@ -37,7 +49,6 @@ const UserSchema = new Schema({
     },
     profileImage: {
         type: String,
-        required: [true, "profileImage is required"]
     },
     socialMedia: {
         instagram: {type: String},

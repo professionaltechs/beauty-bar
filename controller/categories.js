@@ -1,16 +1,13 @@
 const Category = require("../model/categories");
 
 exports.create = async (req, res) => {
-    if(!req.body.content) {
-        return res.status(400).send({
-            message: "group content can not be empty"
-        });
-    }
     try {
         const category = await new Category(req.body);
     
         category.save().then(response => {
+            console.log(response)
             res.status(200).json({
+                id: response._id,
                 message: "category created succesfully"
             })
         })

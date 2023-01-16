@@ -4,8 +4,9 @@ const Post = require('../model/post');
 exports.create = async (req , res) =>{
     try {
         const post = await new Post(req.body)
-        post.save().then(()=>{
+        post.save().then((response)=>{
             res.status(200).json({
+                id:  response._id,
                 message : "post created"
             })
         })    
@@ -45,7 +46,7 @@ exports.update = async (req, res) =>{
         const post = await Post.findOne({_id : req.body.id})
       
         post.userId = req.body.userId || post.userId;
-        post.image = req.body.image || post.image;
+        post.images = req.body.images || post.images;
         post.text = req.body.text || post.text;
         post.taggedProducts = req.body.taggedProducts || post.taggedProducts;
         post.like = req.body.like || post.like;

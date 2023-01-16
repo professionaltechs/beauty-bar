@@ -10,6 +10,9 @@ const categoriesSchema = Schema({
         type: String,
         required: [true, "image is required"],
     },
+    subCategories: {
+        type: [String]
+    },
     isActive: {
         type: Number,
         required: false,

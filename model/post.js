@@ -6,8 +6,8 @@ const postSchema = new Schema({
         ref : "User",
         required : [true, "Id is required"]
     },
-    image: {
-        type: String,
+    images: {
+        type: [String],
         required: [true, "image is required"]
     },
     text : {
@@ -18,12 +18,17 @@ const postSchema = new Schema({
         type : [Schema.Types.ObjectId],
         required : false
     },
+    taggedProductsLink : [{
+        link: {type: String},
+        title: {type: String},
+        description: {type: String},
+    }],
     like: {
         type : Number,
         required : false
     },
     hashtag : {
-        type : Number,
+        type : String,
         required : false
     },
     isActive: {

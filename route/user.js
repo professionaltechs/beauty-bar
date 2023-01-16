@@ -19,21 +19,11 @@ const router = express.Router();
  *          schema:
  *            type: object
  *            required:
- *              - name
- *              - email
- *              - password
- *              - age
  *              - phone
- *              - gender
- *              - profileImage
  *            properties:
  *              name:
  *                type: string
- *              email:
- *                type: string
  *              userId:
- *                type: string
- *              password:
  *                type: string
  *              age:
  *                type: string
@@ -75,17 +65,72 @@ router.post("/", userController.signUp);
  *          schema:
  *            type: object
  *            required:
- *              - email
- *              - password
+ *              - phone
  *            properties:
- *              email:
- *                type: string
- *              password:
+ *              phone:
  *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
  */
 router.post("/signIn", userController.signIn);
+
+/**
+ * @swagger
+ * /api/user/updateProfile:
+ *  post:
+ *    tags:
+ *      - user
+ *    description: Update User Profile
+ *    requestBody:
+ *      description: Update User Profile
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              name:
+ *                type: string
+ *              userId:
+ *                type: string
+ *              age:
+ *                type: string
+ *              phone:
+ *                type: string
+ *              gender:
+ *                type: string
+ *              aboutMe:
+ *                type: string
+ *              profileImage:
+ *                type: string
+ *              skinTypeId:
+ *                type: string
+ *              skinToneId:
+ *                type: string
+ *              skinUnderToneId:
+ *                type: string
+ *              followers:
+ *                type: integer
+ *              posts:
+ *                type: integer
+ *              skinConcernId:
+ *                type: array
+ *                items:
+ *                  type: string
+ *              socialMedia:
+ *                type: object
+ *                properties:
+ *                  instagram:
+ *                    type: string
+ *                  facebook:
+ *                    type: string
+ *                  youtube:
+ *                    type: string
+ *    responses:
+ *      '200':
+ *        description: response on status 200
+ */
+router.post("/", userController.update);
 
 module.exports = router;
