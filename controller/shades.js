@@ -1,11 +1,6 @@
 const Shade = require("../model/shades");
 
 exports.create = async (req, res) => {
-    if(!req.body.content) {
-        return res.status(400).send({
-            message: "shade content can not be empty"
-        });
-    }
     try {
         const shade = await new Shade(req.body);
     

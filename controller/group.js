@@ -1,11 +1,6 @@
 const Group = require("../model/group");
 
 exports.create = async (req, res) => {
-    if(!req.body.content) {
-        return res.status(400).send({
-            message: "group content can not be empty"
-        });
-    }
     try {
         const group = await new Group(req.body);
     

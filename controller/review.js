@@ -1,11 +1,6 @@
 const Review = require("../model/review");
 
 exports.create = async (req, res) => {
-    if(!req.body.content) {
-        return res.status(400).send({
-            message: "review content can not be empty"
-        });
-    }
     try {
         const review = await new Review(req.body);
     
