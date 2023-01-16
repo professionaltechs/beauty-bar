@@ -49,6 +49,7 @@ exports.update = async (req, res) =>{
         post.images = req.body.images || post.images;
         post.text = req.body.text || post.text;
         post.taggedProducts = req.body.taggedProducts || post.taggedProducts;
+        post.taggedProductsLink = req.body.taggedProductsLink || post.taggedProductsLink;
         post.like = req.body.like || post.like;
         post.hashtag = req.body.hashtag || post.hashtag;
 
