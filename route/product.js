@@ -116,6 +116,26 @@ router.post("/getAll", auth, productController.getAll);
 
 /**
  * @swagger
+ * /api/product/getPopularProducts:
+ *  post:
+ *    tags:
+ *      - user
+ *      - admin
+ *    security:
+ *      - bearerAuth: []
+ *    description: get popular products by passing the limit(number of products to fetch)
+ *    responses:
+ *      '200':
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
+ */
+router.post("/getPopularProducts", auth, productController.getPopularProducts);
+
+/**
+ * @swagger
  * /api/product/update:
  *  post:
  *    tags:

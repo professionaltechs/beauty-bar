@@ -3,8 +3,9 @@ const PopularProduct =  require("../model/popularProduct");
 exports.create = async (req , res) =>{
     try {
         const popularProduct = await new PopularProduct(req.body)
-        popularProduct.save().then(()=>{
+        popularProduct.save().then((response)=>{
             res.status(200).json({
+                id: response._id,
                 message : "PopularProduct created"
             })
         })    
@@ -19,7 +20,7 @@ exports.create = async (req , res) =>{
 
 exports.get = async (req, res) =>{
     try {
-        const popularProduct = await PopularProduct.findOne({_id: req.body.id})
+        const popularProduct = await PopularProduct.findOne({_id: req.body.id, isDeleted: {$ne: 1}})
         res.status(200).json({message : popularProduct})
     } catch (error) {
         console.log(error)
@@ -30,7 +31,7 @@ exports.get = async (req, res) =>{
 }
 exports.getAll = async (req, res) =>{
     try {
-        const popularProduct = await PopularProduct.find({})
+        const popularProduct = await PopularProduct.find({isDeleted: {$ne: 1}})
         res.status(200).json({message : popularProduct})
     } catch (error) {
         console.log(error)
@@ -47,7 +48,10 @@ exports.update = async (req, res) =>{
         popularProduct.productId = req.body.productId || popularProduct.productId;
 
         post.save().then(()=>{
-            res.status(200).json({message : "post updated"})
+            res.status(200).json({
+                popularProduct,
+                message : "popularProduct updated"
+            })
         })
     } catch (error) {
         console.log(error)

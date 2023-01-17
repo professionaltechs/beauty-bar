@@ -33,8 +33,38 @@ const productSchema = new Schema({
     },
     categoryId: {
         type: Schema.Types.ObjectId,
-        ref: "Categories",
+        ref: "Category",
         required: [true, "categoryId is required"]
+    },
+    subCategoryId: {
+        type: Schema.Types.ObjectId,
+        ref: "SubCategory",
+        required: [true, "SubCategoryId is required"]
+    },
+    brandId: {
+        type: Schema.Types.ObjectId,
+        ref: "Brand",
+        required: [true, "BrandId is required"]
+    },
+    skinTypeId: {
+        type: Schema.Types.ObjectId,
+        ref: "SkinType",
+    },
+    skinToneId: {
+        type: Schema.Types.ObjectId,
+        ref: "SkinTone",
+    },
+    skinUnderToneId: {
+        type: Schema.Types.ObjectId,
+        ref: "SkinUnderTone",
+    },
+    skinConcernId: {
+        type: [Schema.Types.ObjectId],
+        ref: "SkinConcern",
+    },
+    shades: {
+        type: [Schema.Types.ObjectId],
+        ref: "Shades"
     },
     isActive: {
         type: Number,

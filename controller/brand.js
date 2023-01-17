@@ -5,7 +5,8 @@ exports.create = async (req, res)=>{
         const brand = await new Brand(req.body)
         brand.save().then(()=>{
             res.status(200).json({
-                message : "updade brand"
+                id: brand._id,
+                message : "updated brand"
             })
         })
     } catch (error) {
@@ -18,7 +19,7 @@ exports.create = async (req, res)=>{
 
 exports.get = async (req , res)=>{
     try {
-        const brand = await Brand.findOne({_id : req.body.id})
+        const brand = await Brand.findOne({_id : req.body.id, isDeleted: {$ne: 1}})
         res.status(200).json({message : "get"})
     } catch (error) {
         console.log(error)
@@ -29,7 +30,7 @@ exports.get = async (req , res)=>{
 }
 exports.getAll = async (req , res)=>{
     try {
-        const brand = await Brand.find({})
+        const brand = await Brand.find({isDeleted: {$ne: 1}})
         res.status(200).json({message : "getall"})
     } catch (error) {
         console.log(error)
@@ -44,9 +45,12 @@ exports.update = async (req , res)=>{
         const brand = await Brand.findOne({_id : req.body.id})
 
         brand.image = req.body.image || brand.image;
-        brand.name = req.body.name || brand.name;
+        brand.title = req.body.title || brand.title;
         brand.save().then(()=>{
-            res.status(200).json({message : "brand updated"})
+            res.status(200).json({
+                brand,
+                message : "brand updated"
+            })
         })
     } catch (error) {
         console.log(error);

@@ -20,7 +20,7 @@ const router = express.Router();
  *          schema:
  *            type: object
  *            required:
- *              - name
+ *              - title
  *              - image
  *            properties:
  *              name:
@@ -108,7 +108,7 @@ router.post("/getAll", auth, brandController.getAll);
  *            properties:
  *              id:
  *                type: string
- *              name:
+ *              title:
  *                type: string
  *              image:
  *                type: string

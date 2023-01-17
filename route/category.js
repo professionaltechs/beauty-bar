@@ -1,45 +1,52 @@
-const bannerController = require('../controller/banner')
 const express = require('express')
 const auth = require("../functions/authentication");
+const categoryController = require("../controller/category")
 
 const router = express.Router();
 
 /**
  * @swagger
- * /api/banner/create:
+ * /api/category/create:
  *  post:
  *    tags:
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new banner
+ *    description: Create new category
  *    requestBody:
  *      required: true
  *      content:
- *        application/json:
+ *        application/json:  
  *          schema:
  *            type: object
  *            required:
+ *              - title
  *              - image
  *            properties:
+ *              title:
+ *                type: string
  *              image:
  *                type: string
  *    responses:
  *      '200':
- *        description: response on status 200
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
  */
-router.post("/create", auth, bannerController.create);
+router.post("/create", auth, categoryController.create);
 
 /**
  * @swagger
- * /api/banner/get:
+ * /api/category/get:
  *  post:
  *    tags:
  *      - user
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get banner by Id
+ *    description: get category by id
  *    requestBody:
  *      required: true
  *      content:
@@ -53,35 +60,43 @@ router.post("/create", auth, bannerController.create);
  *                type: string
  *    responses:
  *      '200':
- *        description: response on status 200
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
  */
-router.post("/get", auth, bannerController.get);
+router.post("/get", auth, categoryController.get);
 
 /**
  * @swagger
- * /api/banner/getAllBannerImages:
+ * /api/category/getAllCategories:
  *  post:
  *    tags:
  *      - user
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get all banner images
+ *    description: get all categories
  *    responses:
  *      '200':
- *        description: response on status 200
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
  */
-router.post("/getAllBannerImages", auth, bannerController.getAll);
+router.post("/getAllCategories", auth, categoryController.getAll);
 
 /**
  * @swagger
- * /api/banner/update:
+ * /api/category/update:
  *  post:
  *    tags:
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: update banner by id
+ *    description: update category by id
  *    requestBody:
  *      required: true
  *      content:
@@ -92,24 +107,30 @@ router.post("/getAllBannerImages", auth, bannerController.getAll);
  *              - id
  *            properties:
  *              id:
+ *                type: string
+ *              title:
  *                type: string
  *              image:
  *                type: string
  *    responses:
  *      '200':
- *        description: response on status 200
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
  */
-router.post("/update", auth, bannerController.update);
+router.post("/update", auth,categoryController.update);
 
 /**
  * @swagger
- * /api/banner/delete:
+ * /api/category/delete:
  *  post:
  *    tags:
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: delete banner by id
+ *    description: delete category by id
  *    requestBody:
  *      required: true
  *      content:
@@ -123,8 +144,12 @@ router.post("/update", auth, bannerController.update);
  *                type: string
  *    responses:
  *      '200':
- *        description: response on status 200
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
  */
-router.post("/delete", auth, bannerController.delete);
+router.post("/delete", auth, categoryController.delete);
 
 module.exports = router;

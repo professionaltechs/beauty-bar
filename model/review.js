@@ -5,12 +5,12 @@ const reviewSchema = new Schema({
     userId:{
         type: Schema.Types.ObjectId,
         ref : "User",
-        required : [true, "Id is required"],
+        required : [true, "review author Id is required"],
     },
     productId:{
         type: Schema.Types.ObjectId,
         ref : "Product",
-        required : [true, "Id is required"],
+        required : [true, "review product Id is required"],
     },
     rating:{
         type : Number,

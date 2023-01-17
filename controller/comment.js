@@ -3,8 +3,9 @@ const Comment = require("../model/comment");
 exports.create = async (req , res) =>{
     try {
         const comment = await new Comment(req.body)
-        comment.save().then(()=>{
+        comment.save().then((response)=>{
             res.status(200).json({
+                id: response._id,
                 message : "comment created"
             })
         })    
@@ -18,7 +19,7 @@ exports.create = async (req , res) =>{
 
 exports.get = async (req, res) =>{
     try {
-        const comment = await Comment.findOne({_id: req.body.id})
+        const comment = await Comment.findOne({_id: req.body.id, isDeleted: {$ne: 1}})
         res.status(200).json({message : comment})
     } catch (error) {
         console.log(error)
@@ -30,7 +31,7 @@ exports.get = async (req, res) =>{
 
 exports.getAll = async (req, res) =>{
     try {
-        const comment = await Comment.find({})
+        const comment = await Comment.find({isDeleted: {$ne: 1}})
         res.status(200).json({message : comment})
     } catch (error) {
         console.log(error)
@@ -50,7 +51,10 @@ exports.update = async (req, res) =>{
         comment.text = req.body.text || comment.text;
 
         comment.save().then(()=>{
-            res.status(200).json({message : "comment updated"})
+            res.status(200).json({
+                comment,
+                message : "comment updated"
+            })
         })
     } catch (error) {
         console.log(error)

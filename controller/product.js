@@ -69,6 +69,7 @@ exports.update = async (req, res) => {
     
         product.save().then(response => {
             res.status(200).json({
+                product,
                 message: "updated succesfully"
             })
         })
@@ -103,4 +104,8 @@ exports.delete = async (req, res) => {
             message: error.message
         })
     }
+}
+
+exports.getPopularProducts = async (req, res) => {
+    
 }

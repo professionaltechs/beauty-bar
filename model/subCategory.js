@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const brandSchema = Schema({
+const subCategorySchema = Schema({
     title: {
         type: String,
         required: [true, "title is required"],
@@ -9,6 +9,10 @@ const brandSchema = Schema({
     image: {
         type: String,
         required: [true, "image is required"],
+    },
+    categoryId: {
+        type: Schema.Types.ObjectId,
+        ref: "Category",
     },
     isActive: {
         type: Number,
@@ -28,4 +32,4 @@ const brandSchema = Schema({
     { timestamps: true }
 )
 
-module.exports = mongoose.model("Brand", brandSchema)
+module.exports = mongoose.model("SubCategory", subCategorySchema)

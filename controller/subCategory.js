@@ -1,14 +1,14 @@
-const Category = require("../model/categories");
+const SubCategory = require("../model/subCategory");
 
 exports.create = async (req, res) => {
     try {
-        const category = await new Category(req.body);
+        const subCategory = await new SubCategory(req.body);
     
-        category.save().then(response => {
+        subCategory.save().then(response => {
             console.log(response)
             res.status(200).json({
                 id: response._id,
-                message: "category created succesfully"
+                message: "subCategory created succesfully"
             })
         })
     } catch (error) {
@@ -21,10 +21,10 @@ exports.create = async (req, res) => {
 
 exports.get = async (req, res) => {
     try {
-        const category = await Category.findOne({_id: req.body.id, isDeleted: {$ne: 1}});
+        const subCategory = await SubCategory.findOne({_id: req.body.id, isDeleted: {$ne: 1}});
     
         res.status(200).json({
-            message: category
+            message: subCategory
         })
     } catch (error) {
         console.log(error)
@@ -36,10 +36,10 @@ exports.get = async (req, res) => {
 
 exports.getAll = async (req, res) => {
     try {
-        const category = await Category.find({isDeleted: {$ne: 1}});
+        const subCategory = await SubCategory.find({isDeleted: {$ne: 1}});
     
         res.status(200).json({
-            message: category
+            message: subCategory
         })
     } catch (error) {
         console.log(error)
@@ -51,18 +51,20 @@ exports.getAll = async (req, res) => {
 
 exports.update = async (req, res) => {
     try {
-        const category = await Category.findOne({_id: req.body.id});
-        if(!category){
+        const subCategory = await SubCategory.findOne({_id: req.body.id});
+        if(!subCategory){
             res.status(404).json({
-                message: "category not found with given id "
+                message: "subCategory not found with given id "
             });
         }
     
-        category.name = req.body.name || category.name;
-        category.images = req.body.images || category.images;
+        subCategory.title = req.body.title || subCategory.title;
+        subCategory.images = req.body.images || subCategory.images;
+        subCategory.categoryId = req.body.categoryId || subCategory.categoryId;
     
-        category.save().then(response => {
+        subCategory.save().then(response => {
             res.status(200).json({
+                subCategory,
                 message: "updated succesfully"
             })
         })
@@ -76,15 +78,15 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
     try {
-        const category = await Category.findOne({_id: req.body.id});
-        if(!category){
+        const subCategory = await SubCategory.findOne({_id: req.body.id});
+        if(!subCategory){
             res.status(404).json({
-                message: "category not found with given id "
+                message: "subCategory not found with given id "
             });
         }
     
-        category.isDeleted = 1;
-        category.save().then(response => {
+        subCategory.isDeleted = 1;
+        subCategory.save().then(response => {
             console.log(response)
             res.status(200).json({
                 message: "deleted succesfully"

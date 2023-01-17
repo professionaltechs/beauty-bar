@@ -9,6 +9,7 @@ exports.create = async (req, res) => {
     
         skinUnderTone.save().then(response => {
             res.json({
+                id: response._id,
                 message: "SkinUnderTone created succesfully"
             })
         })
@@ -21,7 +22,7 @@ exports.create = async (req, res) => {
 }
 
 exports.get = async (req, res) => {
-    const skinUnderTone = await SkinUnderTone.findOne({_id: req.body.id});
+    const skinUnderTone = await SkinUnderTone.findOne({_id: req.body.id, isDeleted: {$ne: 1}});
 
     res.json({
         skinUnderTone 
@@ -29,7 +30,7 @@ exports.get = async (req, res) => {
 }
 
 exports.getAll = async (req, res) => {
-    const skinUnderTone = await SkinUnderTone.find({});
+    const skinUnderTone = await SkinUnderTone.find({isDeleted: {$ne: 1}});
 
     res.json({
         message: skinUnderTone
@@ -40,11 +41,12 @@ exports.update = async (req, res) => {
     try {
         const skinUnderTone = await SkinUnderTone.findOne({_id: req.body.id});
     
-        skinUnderTone.name = req.body.name;
-        skinUnderTone.image = req.body.image;
+        skinUnderTone.title = req.body.title || skinUnderTone.title;
+        skinUnderTone.image = req.body.image || skinUnderTone.image;
     
         skinUnderTone.save().then(response => {
             res.json({
+                skinUnderTone,
                 message: "updated succesfully"
             })
         })

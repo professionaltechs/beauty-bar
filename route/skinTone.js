@@ -20,10 +20,10 @@ const router = express.Router();
  *          schema:
  *            type: object
  *            required:
- *              - name
+ *              - title
  *              - image
  *            properties:
- *              name:
+ *              title:
  *                type: string
  *              image:
  *                type: string
@@ -96,7 +96,7 @@ router.post("/getAll", auth, skinToneController.getAll);
  *            properties:
  *              id:
  *                type: string
- *              name:
+ *              title:
  *                type: string
  *              image:
  *                type: string

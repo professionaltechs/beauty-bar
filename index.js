@@ -9,7 +9,7 @@ const swaggerUi = require("swagger-ui-express");
 // Routes
 const bannerRoutes = require("./route/banner");
 const brandRoutes = require("./route/brand");
-const categoriesRoutes = require("./route/categories");
+const categoryRoutes = require("./route/category");
 const groupRoutes = require("./route/group");
 const popularProductRoutes = require("./route/popularProduct");
 const postRoutes = require("./route/post");
@@ -42,7 +42,7 @@ app.use("/api/banner", bannerRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/brand", brandRoutes);
-app.use("/api/categories", categoriesRoutes);
+app.use("/api/category", categoryRoutes);
 app.use("/api/group", groupRoutes);
 app.use("/api/review", reviewRoutes);
 app.use("/api/shades", shadesRoutes);
@@ -86,7 +86,7 @@ const swaggerOptions = {
     "./route/product.js",
     "./route/review.js",
     "./route/shades.js",
-    "./route/popularProduct.js",
+    // "./route/popularProduct.js",
   ]
 }
 

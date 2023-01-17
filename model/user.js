@@ -2,36 +2,19 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
+    phone: {
+        type: String,
+        unique : true
+    },
+    userId: {
+        type: String,
+        unique: true
+    },
+    loginMode: {
+        type: String
+    },
     name: {
         type: String,
-    },
-    // email: {
-    //     type: String,
-    //     required: [true, "email is required"],
-    // },
-    // password: {
-    //     type: String,
-    //     required: [true, "password is required"],
-    // },
-    skinTypeId: {
-        type: Schema.Types.ObjectId,
-        ref: "SkinType",
-        required: [false, "skinTypeId is required"],
-    },
-    skinToneId: {
-        type: Schema.Types.ObjectId,
-        ref: "SkinTone",
-        required: [false, "SkinToneId is required"],
-    },
-    skinUnderToneId: {
-        type: Schema.Types.ObjectId,
-        ref: "SkinUnderTone",
-        required: [false, "SkinUnderToneId is required"],
-    },
-    skinConcernId: {
-        type: [Schema.Types.ObjectId],
-        ref: "SkinConcern",
-        required: [false, "SkinConcernId is required"],
     },
     age: {
         type: String,
@@ -39,25 +22,32 @@ const UserSchema = new Schema({
     gender: {
         type: String,
     },
-    phone: {
-        type: String,
-        required: [true, "Phone is required"]
-    },
     aboutMe: {
         type: String,
-        required: [false]
     },
     profileImage: {
         type: String,
+    },
+    skinTypeId: {
+        type: Schema.Types.ObjectId,
+        ref: "SkinType",
+    },
+    skinToneId: {
+        type: Schema.Types.ObjectId,
+        ref: "SkinTone",
+    },
+    skinUnderToneId: {
+        type: Schema.Types.ObjectId,
+        ref: "SkinUnderTone",
+    },
+    skinConcernId: {
+        type: [Schema.Types.ObjectId],
+        ref: "SkinConcern",
     },
     socialMedia: {
         instagram: {type: String},
         facebook: {type: String},
         youtube: {type: String}
-    },
-    userId: {
-        type: String,
-        required: false
     },
     followers: {
         type: Number,

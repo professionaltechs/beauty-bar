@@ -21,29 +21,8 @@ const router = express.Router();
  *            required:
  *              - phone
  *            properties:
- *              name:
- *                type: string
- *              userId:
- *                type: string
- *              age:
- *                type: string
  *              phone:
  *                type: string
- *              gender:
- *                type: string
- *              aboutMe:
- *                type: string
- *              profileImage:
- *                type: string
- *              socialMedia:
- *                type: object
- *                properties:
- *                  instagram:
- *                    type: string
- *                  facebook:
- *                    type: string
- *                  youtube:
- *                    type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -77,19 +56,23 @@ router.post("/signIn", userController.signIn);
 
 /**
  * @swagger
- * /api/user/updateProfile:
+ * /api/user/completeProfile:
  *  post:
  *    tags:
  *      - user
- *    description: Update User Profile
+ *    security:
+ *      - bearerAuth: []
+ *    description: complete User Profile
  *    requestBody:
- *      description: Update User Profile
+ *      description: this API can also be used update user's profile later on in the app by passing user's id
  *      required: true
  *      content:
  *        application/json:
  *          schema:
  *            type: object
  *            properties:
+ *              id:
+ *                type: string
  *              name:
  *                type: string
  *              userId:
@@ -131,6 +114,6 @@ router.post("/signIn", userController.signIn);
  *      '200':
  *        description: response on status 200
  */
-router.post("/", userController.update);
+router.post("/completeProfile", auth, userController.update);
 
 module.exports = router;

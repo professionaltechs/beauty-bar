@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const skinToneSchema = Schema({
-    name: {
+    title: {
         type: String,
-        required: [true, "name is required"],
+        required: [true, "title is required"],
     },
     image: {
         type: String,

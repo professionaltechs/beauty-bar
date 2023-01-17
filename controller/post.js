@@ -20,7 +20,7 @@ exports.create = async (req , res) =>{
 
 exports.get = async (req, res) =>{
     try {
-        const post = await Post.findOne({_id: req.body.id})
+        const post = await Post.findOne({_id: req.body.id, isDeleted: {$ne: 1}})
         res.status(200).json({message : post})
     } catch (error) {
         console.log(error)
@@ -31,7 +31,7 @@ exports.get = async (req, res) =>{
 }
 exports.getAll = async (req, res) =>{
     try {
-        const post = await Post.find({})
+        const post = await Post.find({isDeleted: {$ne: 1}})
         res.status(200).json({message : post})
     } catch (error) {
         console.log(error)
@@ -54,7 +54,10 @@ exports.update = async (req, res) =>{
         post.hashtag = req.body.hashtag || post.hashtag;
 
         post.save().then(()=>{
-            res.status(200).json({message : "post updated"})
+            res.status(200).json({
+                post,
+                message : "post updated"
+            })
         })
     } catch (error) {
         console.log(error)

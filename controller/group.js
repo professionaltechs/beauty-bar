@@ -6,6 +6,7 @@ exports.create = async (req, res) => {
     
         group.save().then(response => {
             res.status(200).json({
+                id: response._id,
                 message: "group created succesfully"
             })
         })
@@ -52,6 +53,7 @@ exports.update = async (req, res) => {
         const group = await Group.findOne({_id: req.body.id});
         if(!group){
             res.status(404).json({
+                group,
                 message: "group not found with given id "
             });
         }

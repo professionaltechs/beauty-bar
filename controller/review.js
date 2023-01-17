@@ -2,10 +2,12 @@ const Review = require("../model/review");
 
 exports.create = async (req, res) => {
     try {
+        const productId = req.body.prodcutId
         const review = await new Review(req.body);
     
         review.save().then(response => {
             res.status(200).json({
+                id: response._id,
                 message: "review created succesfully"
             })
         })
@@ -63,6 +65,7 @@ exports.update = async (req, res) => {
     
         review.save().then(response => {
             res.status(200).json({
+                review,
                 message: "updated succesfully"
             })
         })

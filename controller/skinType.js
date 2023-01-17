@@ -9,6 +9,7 @@ exports.create = async (req, res) => {
     
         skinType.save().then(response => {
             res.json({
+                id: response._id,
                 message: "skinType created succesfully"
             })
         })
@@ -21,7 +22,7 @@ exports.create = async (req, res) => {
 }
 
 exports.get = async (req, res) => {
-    const skinType = await SkinType.findOne({_id: req.body.id});
+    const skinType = await SkinType.findOne({_id: req.body.id, isDeleted: {$ne: 1}});
 
     res.json({
         skinType 
@@ -29,7 +30,7 @@ exports.get = async (req, res) => {
 }
 
 exports.getAll = async (req, res) => {
-    const skinType = await SkinType.find({});
+    const skinType = await SkinType.find({isDeleted: {$ne: 1}});
 
     res.json({
         message: skinType
@@ -40,11 +41,12 @@ exports.update = async (req, res) => {
     try {
         const skinType = await SkinType.findOne({_id: req.body.id});
     
-        skinType.name = req.body.name;
-        skinType.image = req.body.image;
+        skinType.title = req.body.title || skinType.title;
+        skinType.image = req.body.image || skinType.image;
     
         skinType.save().then(response => {
             res.json({
+                skinType,
                 message: "updated succesfully"
             })
         })
