@@ -131,9 +131,9 @@ router.post("/getProduct", auth, productController.get);
  *          schema:
  *            type: object
  *            required:
- *              - id
+ *              - subCategoryId
  *            properties:
- *              id:
+ *              subCategoryId:
  *                type: string
  *    responses:
  *      '200':
@@ -162,9 +162,9 @@ router.post("/getProductsBySubCatId", auth, productController.getProductsBySubCa
  *          schema:
  *            type: object
  *            required:
- *              - id
+ *              - brandId
  *            properties:
- *              id:
+ *              brandId:
  *                type: string
  *    responses:
  *      '200':
@@ -205,7 +205,7 @@ router.post("/getAllProduct", auth, productController.getAll);
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get popular products by passing the limit(number of products to fetch)
+ *    description: get popular products by passing the limit(number of products to fetch) this will be also used be used for top 10/3 products
  *    requestBody:
  *      required: true
  *      content:
@@ -234,16 +234,7 @@ router.post("/getPopularProducts", auth, productController.getPopularProducts);
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get popular products by passing the limit(number of products to fetch)
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            properties:
- *              limit:
- *                type: integer
+ *    description: get top 3 newest products
  *    responses:
  *      '200':
  *        description: 200 OK response
