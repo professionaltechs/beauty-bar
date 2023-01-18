@@ -6,13 +6,13 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/subCategory/create:
+ * /api/subCategory/createSubCategory:
  *  post:
  *    tags:
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new category
+ *    description: Create new sub category
  *    requestBody:
  *      required: true
  *      content:
@@ -37,18 +37,18 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/create", auth, subCategoryController.create);
+router.post("/createSubCategory", auth, subCategoryController.create);
 
 /**
  * @swagger
- * /api/subCategory/get:
+ * /api/subCategory/getSubCategory:
  *  post:
  *    tags:
  *      - user
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get category by id
+ *    description: get sub category by id
  *    requestBody:
  *      required: true
  *      content:
@@ -68,11 +68,42 @@ router.post("/create", auth, subCategoryController.create);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/get", auth, subCategoryController.get);
+router.post("/getSubCategory", auth, subCategoryController.get);
 
 /**
  * @swagger
- * /api/subCategory/getAll:
+ * /api/subCategory/getSubCategoriesByCatId:
+ *  post:
+ *    tags:
+ *      - user
+ *      - admin
+ *    security:
+ *      - bearerAuth: []
+ *    description: get subCategories by category id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - categoryId
+ *            properties:
+ *              categoryId:
+ *                type: string
+ *    responses:
+ *      '200':
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
+ */
+router.post("/getSubCategoriesByCatId", auth, subCategoryController.getSubCategoriesByCatId);
+
+/**
+ * @swagger
+ * /api/subCategory/getAllSubCategory:
  *  post:
  *    tags:
  *      - user
@@ -88,17 +119,17 @@ router.post("/get", auth, subCategoryController.get);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/getAll", auth, subCategoryController.getAll);
+router.post("/getAllSubCategory", auth, subCategoryController.getAll);
 
 /**
  * @swagger
- * /api/subCategory/update:
+ * /api/subCategory/updateSubCategory:
  *  post:
  *    tags:
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: update category by id
+ *    description: update sub category by id
  *    requestBody:
  *      required: true
  *      content:
@@ -124,17 +155,17 @@ router.post("/getAll", auth, subCategoryController.getAll);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/update", auth,subCategoryController.update);
+router.post("/updateSubCategory", auth,subCategoryController.update);
 
 /**
  * @swagger
- * /api/subCategory/delete:
+ * /api/subCategory/deleteSubCategory:
  *  post:
  *    tags:
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: delete category by id
+ *    description: delete sub category by id
  *    requestBody:
  *      required: true
  *      content:
@@ -154,6 +185,6 @@ router.post("/update", auth,subCategoryController.update);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/delete", auth, subCategoryController.delete);
+router.post("/deleteSubCategory", auth, subCategoryController.delete);
 
 module.exports = router;

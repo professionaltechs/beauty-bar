@@ -44,7 +44,7 @@ exports.update = async (req, res) => {
         skinUnderTone.title = req.body.title || skinUnderTone.title;
         skinUnderTone.image = req.body.image || skinUnderTone.image;
     
-        skinUnderTone.save().then(response => {
+        skinUnderTone.save().then(res => {
             res.json({
                 skinUnderTone,
                 message: "updated succesfully"

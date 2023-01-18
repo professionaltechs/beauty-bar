@@ -1,10 +1,14 @@
+const Product = require("../model/product");
 const Review = require("../model/review");
 
 exports.create = async (req, res) => {
     try {
-        const productId = req.body.prodcutId
+        const product = await Product.findOne({_id: req.body.prodcutId});
         const review = await new Review(req.body);
-    
+
+        product.rating = (req.body.rating + product.rating) / 2;
+        product.save();
+
         review.save().then(response => {
             res.status(200).json({
                 id: response._id,

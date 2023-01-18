@@ -6,7 +6,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/product/create:
+ * /api/product/createProduct:
  *  post:
  *    tags:  
  *      - admin
@@ -25,8 +25,18 @@ const router = express.Router();
  *              - price
  *              - ingredients
  *              - categoryId
+ *              - subCategoryId
+ *              - brandId
  *            properties:
  *              images:
+ *                type: array
+ *                items:
+ *                  type: string
+ *              skinConcernId:
+ *                type: array
+ *                items:
+ *                  type: string
+ *              shades:
  *                type: array
  *                items:
  *                  type: string
@@ -36,6 +46,16 @@ const router = express.Router();
  *                type: integer
  *              rating:
  *                type: integer
+ *              brandId:
+ *                type: string
+ *              subCategoryId:
+ *                type: string
+ *              skinTypeId:
+ *                type: string
+ *              skinToneId:
+ *                type: string
+ *              skinUnderToneId:
+ *                type: string
  *              description:
  *                type: object
  *                properties:
@@ -61,11 +81,11 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/create", auth, productController.create);
+router.post("/createProduct", auth, productController.create);
 
 /**
  * @swagger
- * /api/product/get:
+ * /api/product/getProduct:
  *  post:
  *    tags:
  *      - user
@@ -92,11 +112,73 @@ router.post("/create", auth, productController.create);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/get", auth, productController.get);
+router.post("/getProduct", auth, productController.get);
 
 /**
  * @swagger
- * /api/product/getAll:
+ * /api/product/getProductsBySubCatId:
+ *  post:
+ *    tags:
+ *      - user
+ *      - admin
+ *    security:
+ *      - bearerAuth: []
+ *    description: get product by id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *    responses:
+ *      '200':
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
+ */
+router.post("/getProductsBySubCatId", auth, productController.getProductsBySubCatId);
+
+/**
+ * @swagger
+ * /api/product/getProductsByBrandId:
+ *  post:
+ *    tags:
+ *      - user
+ *      - admin
+ *    security:
+ *      - bearerAuth: []
+ *    description: get product by id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *    responses:
+ *      '200':
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
+ */
+router.post("/getProductsByBrandId", auth, productController.getProductsByBrandId);
+
+/**
+ * @swagger
+ * /api/product/getAllProduct:
  *  post:
  *    tags:
  *      - user
@@ -112,7 +194,7 @@ router.post("/get", auth, productController.get);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/getAll", auth, productController.getAll);
+router.post("/getAllProduct", auth, productController.getAll);
 
 /**
  * @swagger
@@ -124,6 +206,15 @@ router.post("/getAll", auth, productController.getAll);
  *    security:
  *      - bearerAuth: []
  *    description: get popular products by passing the limit(number of products to fetch)
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              limit:
+ *                type: integer
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -136,7 +227,36 @@ router.post("/getPopularProducts", auth, productController.getPopularProducts);
 
 /**
  * @swagger
- * /api/product/update:
+ * /api/product/getTop3NewestProducts:
+ *  post:
+ *    tags:
+ *      - user
+ *      - admin
+ *    security:
+ *      - bearerAuth: []
+ *    description: get popular products by passing the limit(number of products to fetch)
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              limit:
+ *                type: integer
+ *    responses:
+ *      '200':
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
+ */
+router.post("/getTop3NewestProducts", auth, productController.getTop3NewestProducts);
+
+/**
+ * @swagger
+ * /api/product/updateProduct:
  *  post:
  *    tags:
  *      - admin
@@ -189,11 +309,11 @@ router.post("/getPopularProducts", auth, productController.getPopularProducts);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/update", auth, productController.update);
+router.post("/updateProduct", auth, productController.update);
 
 /**
  * @swagger
- * /api/product/delete:
+ * /api/product/deleteProduct:
  *  post:
  *    tags:
  *      - admin
@@ -219,6 +339,6 @@ router.post("/update", auth, productController.update);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/delete", auth, productController.delete);
+router.post("/deleteProduct", auth, productController.delete);
 
 module.exports = router;

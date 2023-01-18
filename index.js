@@ -10,6 +10,7 @@ const swaggerUi = require("swagger-ui-express");
 const bannerRoutes = require("./route/banner");
 const brandRoutes = require("./route/brand");
 const categoryRoutes = require("./route/category");
+const subCategoryRoutes = require("./route/subCategory");
 const groupRoutes = require("./route/group");
 const popularProductRoutes = require("./route/popularProduct");
 const postRoutes = require("./route/post");
@@ -43,6 +44,7 @@ app.use("/api/product", productRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/brand", brandRoutes);
 app.use("/api/category", categoryRoutes);
+app.use("/api/subCategory", subCategoryRoutes);
 app.use("/api/group", groupRoutes);
 app.use("/api/review", reviewRoutes);
 app.use("/api/shades", shadesRoutes);
@@ -80,7 +82,8 @@ const swaggerOptions = {
     "./route/skinConcern.js",
     "./route/banner.js",
     "./route/brand.js",
-    "./route/categories.js",
+    "./route/category.js",
+    "./route/subCategory.js",
     "./route/group.js",
     "./route/post.js",
     "./route/product.js",

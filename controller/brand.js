@@ -20,7 +20,7 @@ exports.create = async (req, res)=>{
 exports.get = async (req , res)=>{
     try {
         const brand = await Brand.findOne({_id : req.body.id, isDeleted: {$ne: 1}})
-        res.status(200).json({message : "get"})
+        res.status(200).json({message : brand})
     } catch (error) {
         console.log(error)
         res.json({
@@ -31,7 +31,7 @@ exports.get = async (req , res)=>{
 exports.getAll = async (req , res)=>{
     try {
         const brand = await Brand.find({isDeleted: {$ne: 1}})
-        res.status(200).json({message : "getall"})
+        res.status(200).json({message : brand})
     } catch (error) {
         console.log(error)
         res.json({

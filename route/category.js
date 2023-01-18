@@ -6,7 +6,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/category/create:
+ * /api/category/createCategory:
  *  post:
  *    tags:
  *      - admin
@@ -35,11 +35,11 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/create", auth, categoryController.create);
+router.post("/createCategory", auth, categoryController.create);
 
 /**
  * @swagger
- * /api/category/get:
+ * /api/category/getCategory:
  *  post:
  *    tags:
  *      - user
@@ -66,7 +66,7 @@ router.post("/create", auth, categoryController.create);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/get", auth, categoryController.get);
+router.post("/getCategory", auth, categoryController.get);
 
 /**
  * @swagger
@@ -90,7 +90,7 @@ router.post("/getAllCategories", auth, categoryController.getAll);
 
 /**
  * @swagger
- * /api/category/update:
+ * /api/category/updateCategory:
  *  post:
  *    tags:
  *      - admin
@@ -120,11 +120,11 @@ router.post("/getAllCategories", auth, categoryController.getAll);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/update", auth,categoryController.update);
+router.post("/updateCategory", auth,categoryController.update);
 
 /**
  * @swagger
- * /api/category/delete:
+ * /api/category/deleteCategory:
  *  post:
  *    tags:
  *      - admin
@@ -150,6 +150,6 @@ router.post("/update", auth,categoryController.update);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/delete", auth, categoryController.delete);
+router.post("/deleteCategory", auth, categoryController.delete);
 
 module.exports = router;

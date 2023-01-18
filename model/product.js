@@ -16,7 +16,10 @@ const productSchema = new Schema({
     },
     rating: {
         type: Number,
-        required: false
+        required: false,
+        min: 0,
+        max: 5,
+        default: 0
     },
     description: {
         images: {type: [String]},

@@ -107,5 +107,62 @@ exports.delete = async (req, res) => {
 }
 
 exports.getPopularProducts = async (req, res) => {
-    
+    try {
+        const products = await Product.find({isDeleted: {$ne: 1}}).sort({rating: -1}).limit(req.body.limit).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernId shades")
+
+        res.status(200).json({
+            message: products
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: error.message
+        })
+    }
+}
+
+exports.getProductsBySubCatId = async (req, res) => {
+    try {
+        const products = Product.find({subCategoryId: req.body.subCategoryId, isDeleted: {$ne: 1}});
+        
+        res.status(200).json({
+            message: products
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: error.message
+        })
+    }
+
+}
+
+exports.getProductsByBrandId = async (req, res) => {
+    try {
+        const products = Product.find({brandId: req.body.brandId, isDeleted: {$ne: 1}});
+
+        res.status(200).json({
+            message: products
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: error.message
+        })
+    }
+}
+
+exports.getTop3NewestProducts = async (req, res) => {
+    try {
+        const products = Product.find({isDeleted: {$ne: 1}}).sort({createdAt: -1}).limit(3);
+
+        res.status(200).json({
+            message: products
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: error.message
+        })
+    }
 }

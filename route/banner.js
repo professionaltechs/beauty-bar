@@ -6,7 +6,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/banner/create:
+ * /api/banner/createBanner:
  *  post:
  *    tags:
  *      - admin
@@ -28,11 +28,11 @@ const router = express.Router();
  *      '200':
  *        description: response on status 200
  */
-router.post("/create", auth, bannerController.create);
+router.post("/createBanner", auth, bannerController.create);
 
 /**
  * @swagger
- * /api/banner/get:
+ * /api/banner/getBanner:
  *  post:
  *    tags:
  *      - user
@@ -55,11 +55,11 @@ router.post("/create", auth, bannerController.create);
  *      '200':
  *        description: response on status 200
  */
-router.post("/get", auth, bannerController.get);
+router.post("/getBanner", auth, bannerController.get);
 
 /**
  * @swagger
- * /api/banner/getAllBannerImages:
+ * /api/banner/getAllBanner:
  *  post:
  *    tags:
  *      - user
@@ -71,7 +71,7 @@ router.post("/get", auth, bannerController.get);
  *      '200':
  *        description: response on status 200
  */
-router.post("/getAllBannerImages", auth, bannerController.getAll);
+router.post("/getAllBanner", auth, bannerController.getAll);
 
 /**
  * @swagger
