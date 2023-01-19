@@ -6,7 +6,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/comment/create:
+ * /api/comment/createComment:
  *  post:
  *    tags:
  *      - admin
@@ -40,11 +40,11 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/create", auth, commentController.create);
+router.post("/createComment", auth, commentController.createComment);
 
 /**
  * @swagger
- * /api/comment/get:
+ * /api/comment/getCommentById:
  *  post:
  *    tags:
  *      - user
@@ -71,11 +71,11 @@ router.post("/create", auth, commentController.create);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/get", auth, commentController.get);
+router.post("/getCommentById", auth, commentController.getCommentById);
 
 /**
  * @swagger
- * /api/comment/getAll:
+ * /api/comment/getAllComments:
  *  post:
  *    tags:
  *      - user
@@ -91,11 +91,11 @@ router.post("/get", auth, commentController.get);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/getAll", auth, commentController.getAll);
+router.post("/getAllComments", auth, commentController.getAllComments);
 
 /**
  * @swagger
- * /api/comment/update:
+ * /api/comment/updateCommentById:
  *  post:
  *    tags:
  *      - admin
@@ -129,11 +129,11 @@ router.post("/getAll", auth, commentController.getAll);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/update", auth, commentController.update);
+router.post("/updateCommentById", auth, commentController.updateCommentById);
 
 /**
  * @swagger
- * /api/comment/delete:
+ * /api/comment/deleteCommentById:
  *  post:
  *    tags:
  *      - admin
@@ -159,6 +159,6 @@ router.post("/update", auth, commentController.update);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/delete", auth, commentController.delete);
+router.post("/deleteCommentById", auth, commentController.deleteCommentById);
 
 module.exports = router;

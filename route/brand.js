@@ -35,11 +35,11 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/createBrand", auth,brandController.create);
+router.post("/createBrand", auth,brandController.createBrand);
 
 /**
  * @swagger
- * /api/brand/getBrand:
+ * /api/brand/getBrandById:
  *  post:
  *    tags:
  *      - user
@@ -66,11 +66,11 @@ router.post("/createBrand", auth,brandController.create);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/getBrand", auth,brandController.get);
+router.post("/getBrandById", auth,brandController.getBrandById);
 
 /**
  * @swagger
- * /api/brand/getAllBrand:
+ * /api/brand/getAllBrands:
  *  post:
  *    tags:
  *      - user
@@ -86,11 +86,11 @@ router.post("/getBrand", auth,brandController.get);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/getAllBrand", auth, brandController.getAll);
+router.post("/getAllBrands", auth, brandController.getAllBrands);
 
 /**
  * @swagger
- * /api/brand/updateBrand:
+ * /api/brand/updateBrandById:
  *  post:
  *    tags:
  *      - admin
@@ -120,11 +120,11 @@ router.post("/getAllBrand", auth, brandController.getAll);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/updateBrand", auth, brandController.update);
+router.post("/updateBrandById", auth, brandController.updateBrandById);
 
 /**
  * @swagger
- * /api/brand/deleteBrand:
+ * /api/brand/deleteBrandById:
  *  post:
  *    tags:
  *      - admin
@@ -150,6 +150,6 @@ router.post("/updateBrand", auth, brandController.update);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/deleteBrand", auth, brandController.delete);
+router.post("/deleteBrandById", auth, brandController.deleteBrandById);
 
 module.exports = router;

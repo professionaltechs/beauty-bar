@@ -1,9 +1,6 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
 const SkinConcern = require("../model/skinConcern");
 
-
-exports.create = async (req, res) => {
+exports.createSkinConcern = async (req, res) => {
     try {
         const skinConcern = await new SkinConcern(req.body);
     
@@ -21,7 +18,7 @@ exports.create = async (req, res) => {
     }
 }
 
-exports.get = async (req, res) => {
+exports.getSkinConcernById = async (req, res) => {
     const skinConcern = await SkinConcern.findOne({_id: req.body.id, isDeleted: {$ne: 1}});
 
     res.json({
@@ -29,7 +26,7 @@ exports.get = async (req, res) => {
     })
 }
 
-exports.getAll = async (req, res) => {
+exports.getAllSkinConcerns = async (req, res) => {
     const skinConcern = await SkinConcern.find({isDeleted: {$ne: 1}});
 
     res.json({
@@ -37,7 +34,7 @@ exports.getAll = async (req, res) => {
     })
 }
 
-exports.update = async (req, res) => {
+exports.updateSkinConcernById = async (req, res) => {
     try {
         const skinConcern = await SkinConcern.findOne({_id: req.body.id});
     
@@ -57,7 +54,7 @@ exports.update = async (req, res) => {
     }
 }
 
-exports.delete = async (req, res) => {
+exports.deleteSkinConcernById = async (req, res) => {
     try {
         const skinConcern = await SkinConcern.findOne({_id: req.body.id});
     

@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const Banner = require("../model/Banner");
 
 
-exports.create = async (req, res) => {
+exports.createBanner = async (req, res) => {
     try {
         const banner = await new Banner(req.body);
     
@@ -21,7 +21,7 @@ exports.create = async (req, res) => {
     }
 }
 
-exports.get = async (req, res) => {
+exports.getBannerById = async (req, res) => {
     const banner = await Banner.findOne({_id: req.body.id, isDeleted: {$ne: 1}});
 
     res.json({
@@ -29,7 +29,7 @@ exports.get = async (req, res) => {
     })
 }
 
-exports.getAll = async (req, res) => {
+exports.getAllBanners = async (req, res) => {
     const banner = await Banner.find({isDeleted: {$ne: 1}});
 
     res.json({
@@ -37,7 +37,7 @@ exports.getAll = async (req, res) => {
     })
 }
 
-exports.update = async (req, res) => {
+exports.updateBannerById = async (req, res) => {
     try {
         const banner = await Banner.findOne({_id: req.body.id});
     
@@ -57,7 +57,7 @@ exports.update = async (req, res) => {
     }
 }
 
-exports.delete = async (req, res) => {
+exports.deleteBannerById = async (req, res) => {
     try {
         const banner = await Banner.findOne({_id: req.body.id});
     

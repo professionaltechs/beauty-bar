@@ -15,4 +15,4 @@ const discountSchema = Schema({
     }
 })
 
-module.exports = mongoose.model("", )
+module.exports = mongoose.model("Discount", discountSchema)

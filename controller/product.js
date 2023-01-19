@@ -1,6 +1,8 @@
+const Discount = require("../model/discount");
 const Product = require("../model/product");
+const User = require("../model/user");
 
-exports.create = async (req, res) => {
+exports.createProduct = async (req, res) => {
     try {
         const product = await new Product(req.body);
     
@@ -18,9 +20,9 @@ exports.create = async (req, res) => {
     }
 }
 
-exports.get = async (req, res) => {
+exports.getProductById = async (req, res) => {
     try {
-        const product = await Product.findOne({_id: req.body.id, isDeleted: {$ne: 1}});
+        const product = await Product.findOne({_id: req.body.id, isDeleted: {$ne: 1}}).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernId shades");
     
         res.status(200).json({
             message: product
@@ -33,9 +35,9 @@ exports.get = async (req, res) => {
     }
 }
 
-exports.getAll = async (req, res) => {
+exports.getAllProducts = async (req, res) => {
     try {
-        const product = await Product.find({isDeleted: {$ne: 1}});
+        const product = await Product.find({isDeleted: {$ne: 1}}).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernId shades");
     
         res.status(200).json({
             message: product
@@ -48,7 +50,7 @@ exports.getAll = async (req, res) => {
     }
 }
 
-exports.update = async (req, res) => {
+exports.updateProductById = async (req, res) => {
     try {
         const product = await Product.findOne({_id: req.body.id});
         if(!product){
@@ -81,7 +83,7 @@ exports.update = async (req, res) => {
     }
 }
 
-exports.delete = async (req, res) => {
+exports.deleteProductById = async (req, res) => {
     try {
         const product = await Product.findOne({_id: req.body.id});
         if(!product){
@@ -158,6 +160,61 @@ exports.getTop3NewestProducts = async (req, res) => {
 
         res.status(200).json({
             message: products
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: error.message
+        })
+    }
+}
+
+exports.getBestMatchProducts = async (req, res) => {
+    try {
+        const user = await User.findOne({_id: req.body.userId})
+        let products = await Product.find({
+            skinTypeId: user.skinTypeId, 
+            skinToneId: user.skinToneId, 
+            skinUnderToneId: user.skinUnderToneId
+        }).limit(req.body.limit).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernId shades");
+
+        let moreProducts = [];
+        if(req.body.limit > products.length){
+            moreProducts = await Product.find({
+                $or: [
+                    {$and : [{ skinTypeId: user.skinTypeId}, { skinToneId: user.skinToneId }]},
+                    {$and : [{ skinTypeId: user.skinTypeId}, { skinUnderToneId: user.skinUnderToneId }]},
+                    {$and : [{ skinToneId: user.skinToneId}, { skinUnderToneId: user.skinUnderToneId }]},
+                ]
+            }).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernId shades")
+
+            products = [...products, moreProducts]
+        }
+
+        return res.json({
+            products
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: error.message
+        })
+    }
+}
+
+exports.getDiscountedProducts = async (req, res) => {
+    try {
+        const discounts = await Discount.find().sort({percentage: -1}).populate("productIds");
+
+        const productArray = [];
+        discounts.forEach((item, index) => {
+            productArray = [...productArray, ...item.productIds]
+        })
+    
+        const finalProducts = productArray.filter((item, index) => productArray.indexOf(item) == -1)
+    
+        res.status(200).json({
+            finalProducts
         })
     } catch (error) {
         console.log(error)

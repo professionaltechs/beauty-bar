@@ -6,7 +6,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/skinUnderTone/create:
+ * /api/skinUnderTone/createSkinUnderTone:
  *  post:
  *    tags:
  *      - admin
@@ -31,11 +31,11 @@ const router = express.Router();
  *      '200':
  *        description: response on status 200
  */
-router.post("/create", auth, skinUnderToneController.create);
+router.post("/createSkinUnderTone", auth, skinUnderToneController.createSkinUnderTone);
 
 /**
  * @swagger
- * /api/skinUnderTone/get:
+ * /api/skinUnderTone/getSkinUnderToneById:
  *  post:
  *    tags:
  *      - user
@@ -58,11 +58,11 @@ router.post("/create", auth, skinUnderToneController.create);
  *      '200':
  *        description: response on status 200
  */
-router.post("/get", auth, skinUnderToneController.get);
+router.post("/getSkinUnderToneById", auth, skinUnderToneController.getSkinUnderToneById);
 
 /**
  * @swagger
- * /api/skinUnerTone/getAll:
+ * /api/skinUnerTone/getAllSkinUnderTones:
  *  post:
  *    tags:
  *      - user
@@ -74,11 +74,11 @@ router.post("/get", auth, skinUnderToneController.get);
  *      '200':
  *        description: response on status 200
  */
-router.post("/getAll", auth, skinUnderToneController.getAll);
+router.post("/getAllSkinUnderTones", auth, skinUnderToneController.getAllSkinUnderTones);
 
 /**
  * @swagger
- * /api/skinUnderTone/update:
+ * /api/skinUnderTone/updateSkinUnderToneById:
  *  post:
  *    tags:
  *      - admin
@@ -104,11 +104,11 @@ router.post("/getAll", auth, skinUnderToneController.getAll);
  *      '200':
  *        description: response on status 200
  */
-router.post("/update", auth, skinUnderToneController.update);
+router.post("/updateSkinUnderToneById", auth, skinUnderToneController.updateSkinUnderToneById);
 
 /**
  * @swagger
- * /api/skinUnderTone/delete:
+ * /api/skinUnderTone/deleteSkinUnderToneById:
  *  post:
  *    tags:
  *      - admin
@@ -130,6 +130,6 @@ router.post("/update", auth, skinUnderToneController.update);
  *      '200':
  *        description: response on status 200
  */
-router.post("/delete", auth, skinUnderToneController.delete);
+router.post("/deleteSkinUnderToneById", auth, skinUnderToneController.deleteSkinUnderToneById);
 
 module.exports = router;

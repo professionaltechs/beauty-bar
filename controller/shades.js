@@ -1,6 +1,6 @@
 const Shade = require("../model/shades");
 
-exports.create = async (req, res) => {
+exports.createShade = async (req, res) => {
     try {
         const shade = await new Shade(req.body);
     
@@ -18,7 +18,7 @@ exports.create = async (req, res) => {
     }
 }
 
-exports.get = async (req, res) => {
+exports.getShadeById = async (req, res) => {
     try {
         const shade = await Shade.findOne({_id: req.body.id, isDeleted: {$ne: 1}});
     
@@ -33,7 +33,7 @@ exports.get = async (req, res) => {
     }
 }
 
-exports.getAll = async (req, res) => {
+exports.getAllShades = async (req, res) => {
     try {
         const shade = await Shade.find({isDeleted: {$ne: 1}});
     
@@ -48,7 +48,7 @@ exports.getAll = async (req, res) => {
     }
 }
 
-exports.update = async (req, res) => {
+exports.updateShadeById = async (req, res) => {
     try {
         const shade = await Shade.findOne({_id: req.body.id});
         if(!shade){
@@ -74,7 +74,7 @@ exports.update = async (req, res) => {
     }
 }
 
-exports.delete = async (req, res) => {
+exports.deleteShadeById = async (req, res) => {
     try {
         const shade = await Shade.findOne({_id: req.body.id});
         if(!shade){

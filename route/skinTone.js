@@ -6,7 +6,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/skinTone/create:
+ * /api/skinTone/createSkinTone:
  *  post:
  *    tags:
  *      - admin
@@ -31,11 +31,11 @@ const router = express.Router();
  *      '200':
  *        description: response on status 200
  */
-router.post("/create", auth, skinToneController.create);
+router.post("/createSkinTone", auth, skinToneController.createSkinTone);
 
 /**
  * @swagger
- * /api/skinTone/get:
+ * /api/skinTone/getSkinToneById:
  *  post:
  *    tags:
  *      - user
@@ -58,11 +58,11 @@ router.post("/create", auth, skinToneController.create);
  *      '200':
  *        description: response on status 200
  */
-router.post("/get", auth, skinToneController.get);
+router.post("/getSkinToneById", auth, skinToneController.getSkinToneById);
 
 /**
  * @swagger
- * /api/skinTone/getAll:
+ * /api/skinTone/getAllSkinTones:
  *  post:
  *    tags:
  *      - user
@@ -74,11 +74,11 @@ router.post("/get", auth, skinToneController.get);
  *      '200':
  *        description: response on status 200
  */
-router.post("/getAll", auth, skinToneController.getAll);
+router.post("/getAllSkinTones", auth, skinToneController.getAllSkinTones);
 
 /**
  * @swagger
- * /api/skinTone/update:
+ * /api/skinTone/updateSkinToneById:
  *  post:
  *    tags:
  *      - admin
@@ -104,11 +104,11 @@ router.post("/getAll", auth, skinToneController.getAll);
  *      '200':
  *        description: response on status 200
  */
-router.post("/update", auth, skinToneController.update);
+router.post("/updateSkinToneById", auth, skinToneController.updateSkinToneById);
 
 /**
  * @swagger
- * /api/skinTone/delete:
+ * /api/skinTone/deleteSkinToneById:
  *  post:
  *    tags:
  *      - admin
@@ -130,6 +130,6 @@ router.post("/update", auth, skinToneController.update);
  *      '200':
  *        description: response on status 200
  */
-router.post("/delete", auth, skinToneController.delete);
+router.post("/deleteSkinToneById", auth, skinToneController.deleteSkinToneById);
 
 module.exports = router;

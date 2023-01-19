@@ -6,7 +6,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/skinConcern/create:
+ * /api/skinConcern/createSkinConcern:
  *  post:
  *    tags:
  *      - admin
@@ -28,11 +28,11 @@ const router = express.Router();
  *      '200':
  *        description: response on status 200
  */
-router.post("/create", auth, skinConcernController.create);
+router.post("/createSkinConcern", auth, skinConcernController.createSkinConcern);
 
 /**
  * @swagger
- * /api/skinConcern/get:
+ * /api/getSkinConcernById/get:
  *  post:
  *    tags:
  *      - user
@@ -55,11 +55,11 @@ router.post("/create", auth, skinConcernController.create);
  *      '200':
  *        description: response on status 200
  */
-router.post("/get", auth, skinConcernController.get);
+router.post("/getSkinConcernById", auth, skinConcernController.getSkinConcernById);
 
 /**
  * @swagger
- * /api/skinConcern/getAll:
+ * /api/skinConcern/getAllSkinConcerns:
  *  post:
  *    tags:
  *      - user
@@ -71,11 +71,11 @@ router.post("/get", auth, skinConcernController.get);
  *      '200':
  *        description: response on status 200
  */
-router.post("/getAll", auth, skinConcernController.getAll);
+router.post("/getAllSkinConcerns", auth, skinConcernController.getAllSkinConcerns);
 
 /**
  * @swagger
- * /api/skinConcern/update:
+ * /api/skinConcern/updateSkinConcernById:
  *  post:
  *    tags:
  *      - admin
@@ -100,11 +100,11 @@ router.post("/getAll", auth, skinConcernController.getAll);
  *      '200':
  *        description: response on status 200
  */
-router.post("/update", auth, skinConcernController.update);
+router.post("/updateSkinConcernById", auth, skinConcernController.updateSkinConcernById);
 
 /**
  * @swagger
- * /api/skinConcern/delete:
+ * /api/skinConcern/deleteSkinConcernById:
  *  post:
  *    tags:
  *      - admin
@@ -126,6 +126,6 @@ router.post("/update", auth, skinConcernController.update);
  *      '200':
  *        description: response on status 200
  */
-router.post("/delete", auth, skinConcernController.delete);
+router.post("/deleteSkinConcernById", auth, skinConcernController.deleteSkinConcernById);
 
 module.exports = router;

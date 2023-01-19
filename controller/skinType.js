@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const SkinType = require("../model/skinType");
 
 
-exports.create = async (req, res) => {
+exports.createSkinType = async (req, res) => {
     try {
         const skinType = await new SkinType(req.body);
     
@@ -21,7 +21,7 @@ exports.create = async (req, res) => {
     }
 }
 
-exports.get = async (req, res) => {
+exports.getSkinTypeById = async (req, res) => {
     const skinType = await SkinType.findOne({_id: req.body.id, isDeleted: {$ne: 1}});
 
     res.json({
@@ -29,7 +29,7 @@ exports.get = async (req, res) => {
     })
 }
 
-exports.getAll = async (req, res) => {
+exports.getAllSkinTypes = async (req, res) => {
     const skinType = await SkinType.find({isDeleted: {$ne: 1}});
 
     res.json({
@@ -37,7 +37,7 @@ exports.getAll = async (req, res) => {
     })
 }
 
-exports.update = async (req, res) => {
+exports.updateSkinTypeById = async (req, res) => {
     try {
         const skinType = await SkinType.findOne({_id: req.body.id});
     
@@ -58,7 +58,7 @@ exports.update = async (req, res) => {
     }
 }
 
-exports.delete = async (req, res) => {
+exports.deleteSkinTypeById = async (req, res) => {
     try {
         const skinType = await SkinType.findOne({_id: req.body.id});
     

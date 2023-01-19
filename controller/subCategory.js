@@ -1,6 +1,6 @@
 const SubCategory = require("../model/subCategory");
 
-exports.create = async (req, res) => {
+exports.createSubCategory = async (req, res) => {
     try {
         const subCategory = await new SubCategory(req.body);
     
@@ -19,7 +19,7 @@ exports.create = async (req, res) => {
     }
 }
 
-exports.get = async (req, res) => {
+exports.getSubCategoryById = async (req, res) => {
     try {
         const subCategory = await SubCategory.findOne({_id: req.body.id, isDeleted: {$ne: 1}});
     
@@ -34,7 +34,7 @@ exports.get = async (req, res) => {
     }
 }
 
-exports.getAll = async (req, res) => {
+exports.getAllSubCategories = async (req, res) => {
     try {
         const subCategory = await SubCategory.find({isDeleted: {$ne: 1}});
     
@@ -49,7 +49,7 @@ exports.getAll = async (req, res) => {
     }
 }
 
-exports.update = async (req, res) => {
+exports.updateSubCategoryById = async (req, res) => {
     try {
         const subCategory = await SubCategory.findOne({_id: req.body.id});
         if(!subCategory){
@@ -76,7 +76,7 @@ exports.update = async (req, res) => {
     }
 }
 
-exports.delete = async (req, res) => {
+exports.deleteSubCategoryById = async (req, res) => {
     try {
         const subCategory = await SubCategory.findOne({_id: req.body.id});
         if(!subCategory){

@@ -1,6 +1,6 @@
 const Category = require("../model/category");
 
-exports.create = async (req, res) => {
+exports.createCategory = async (req, res) => {
     try {
         const category = await new Category(req.body);
     
@@ -19,7 +19,7 @@ exports.create = async (req, res) => {
     }
 }
 
-exports.get = async (req, res) => {
+exports.getCategoryById = async (req, res) => {
     try {
         const category = await Category.findOne({_id: req.body.id, isDeleted: {$ne: 1}});
     
@@ -34,7 +34,7 @@ exports.get = async (req, res) => {
     }
 }
 
-exports.getAll = async (req, res) => {
+exports.getAllCategories = async (req, res) => {
     try {
         const category = await Category.find({isDeleted: {$ne: 1}});
     
@@ -49,7 +49,7 @@ exports.getAll = async (req, res) => {
     }
 }
 
-exports.update = async (req, res) => {
+exports.updateCategoryById = async (req, res) => {
     try {
         const category = await Category.findOne({_id: req.body.id});
         if(!category){
@@ -75,7 +75,7 @@ exports.update = async (req, res) => {
     }
 }
 
-exports.delete = async (req, res) => {
+exports.deleteCategoryById = async (req, res) => {
     try {
         const category = await Category.findOne({_id: req.body.id});
         if(!category){

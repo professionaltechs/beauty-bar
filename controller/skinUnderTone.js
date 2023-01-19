@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const SkinUnderTone = require("../model/skinUnderTone");
 
 
-exports.create = async (req, res) => {
+exports.createSkinUnderTone = async (req, res) => {
     try {
         const skinUnderTone = await new SkinUnderTone(req.body);
     
@@ -21,7 +21,7 @@ exports.create = async (req, res) => {
     }
 }
 
-exports.get = async (req, res) => {
+exports.getSkinUnderToneById = async (req, res) => {
     const skinUnderTone = await SkinUnderTone.findOne({_id: req.body.id, isDeleted: {$ne: 1}});
 
     res.json({
@@ -29,7 +29,7 @@ exports.get = async (req, res) => {
     })
 }
 
-exports.getAll = async (req, res) => {
+exports.getAllSkinUnderTones = async (req, res) => {
     const skinUnderTone = await SkinUnderTone.find({isDeleted: {$ne: 1}});
 
     res.json({
@@ -37,7 +37,7 @@ exports.getAll = async (req, res) => {
     })
 }
 
-exports.update = async (req, res) => {
+exports.updateSkinUnderToneById = async (req, res) => {
     try {
         const skinUnderTone = await SkinUnderTone.findOne({_id: req.body.id});
     
@@ -58,7 +58,7 @@ exports.update = async (req, res) => {
     }
 }
 
-exports.delete = async (req, res) => {
+exports.deleteSkinUnderToneById = async (req, res) => {
     try {
         const skinUnderTone = await SkinUnderTone.findOne({_id: req.body.id});
     

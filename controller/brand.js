@@ -1,6 +1,6 @@
 const Brand = require('../model/brand')
 
-exports.create = async (req, res)=>{
+exports.createBrand = async (req, res)=>{
     try {
         const brand = await new Brand(req.body)
         brand.save().then(()=>{
@@ -17,7 +17,7 @@ exports.create = async (req, res)=>{
     }
 }
 
-exports.get = async (req , res)=>{
+exports.getBrandById = async (req , res)=>{
     try {
         const brand = await Brand.findOne({_id : req.body.id, isDeleted: {$ne: 1}})
         res.status(200).json({message : brand})
@@ -28,7 +28,7 @@ exports.get = async (req , res)=>{
         })
     }
 }
-exports.getAll = async (req , res)=>{
+exports.getAllBrands = async (req , res)=>{
     try {
         const brand = await Brand.find({isDeleted: {$ne: 1}})
         res.status(200).json({message : brand})
@@ -40,7 +40,7 @@ exports.getAll = async (req , res)=>{
     }
 }
 
-exports.update = async (req , res)=>{
+exports.updateBrandById = async (req , res)=>{
     try {
         const brand = await Brand.findOne({_id : req.body.id})
 
@@ -61,7 +61,7 @@ exports.update = async (req , res)=>{
 }
 
 
-exports.delete = async (req , res)=>{
+exports.deleteBrandById = async (req , res)=>{
     try {
         const brand = await Brand.findOne({_id : req.body.id})
         brand.isDeleted = 1

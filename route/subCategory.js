@@ -37,11 +37,11 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/createSubCategory", auth, subCategoryController.create);
+router.post("/createSubCategory", auth, subCategoryController.createSubCategory);
 
 /**
  * @swagger
- * /api/subCategory/getSubCategory:
+ * /api/subCategory/getSubCategoryById:
  *  post:
  *    tags:
  *      - user
@@ -68,7 +68,7 @@ router.post("/createSubCategory", auth, subCategoryController.create);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/getSubCategory", auth, subCategoryController.get);
+router.post("/getSubCategoryById", auth, subCategoryController.getSubCategoryById);
 
 /**
  * @swagger
@@ -103,7 +103,7 @@ router.post("/getSubCategoriesByCatId", auth, subCategoryController.getSubCatego
 
 /**
  * @swagger
- * /api/subCategory/getAllSubCategory:
+ * /api/subCategory/getAllSubCategories:
  *  post:
  *    tags:
  *      - user
@@ -119,11 +119,11 @@ router.post("/getSubCategoriesByCatId", auth, subCategoryController.getSubCatego
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/getAllSubCategory", auth, subCategoryController.getAll);
+router.post("/getAllSubCategories", auth, subCategoryController.getAllSubCategories);
 
 /**
  * @swagger
- * /api/subCategory/updateSubCategory:
+ * /api/subCategory/updateSubCategoryById:
  *  post:
  *    tags:
  *      - admin
@@ -155,11 +155,11 @@ router.post("/getAllSubCategory", auth, subCategoryController.getAll);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/updateSubCategory", auth,subCategoryController.update);
+router.post("/updateSubCategoryById", auth,subCategoryController.updateSubCategoryById);
 
 /**
  * @swagger
- * /api/subCategory/deleteSubCategory:
+ * /api/subCategory/deleteSubCategoryById:
  *  post:
  *    tags:
  *      - admin
@@ -185,6 +185,6 @@ router.post("/updateSubCategory", auth,subCategoryController.update);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/deleteSubCategory", auth, subCategoryController.delete);
+router.post("/deleteSubCategoryById", auth, subCategoryController.deleteSubCategoryById);
 
 module.exports = router;

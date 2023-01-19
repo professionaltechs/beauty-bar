@@ -11,9 +11,9 @@ const bannerRoutes = require("./route/banner");
 const brandRoutes = require("./route/brand");
 const categoryRoutes = require("./route/category");
 const subCategoryRoutes = require("./route/subCategory");
-const groupRoutes = require("./route/group");
-const popularProductRoutes = require("./route/popularProduct");
-const postRoutes = require("./route/post");
+// const groupRoutes = require("./route/group");
+// const popularProductRoutes = require("./route/popularProduct");
+// const postRoutes = require("./route/post");
 const productRoutes = require("./route/product");
 const reviewRoutes = require("./route/review");
 const shadesRoutes = require("./route/shades");
@@ -22,6 +22,7 @@ const skinToneRoutes = require("./route/skinTone");
 const skinTypeRoutes = require("./route/skinType");
 const skinUnderToneRoutes = require("./route/skinUnderTone");
 const userRoutes = require("./route/user");
+const discountRoutes = require("./route/discount");
 
 // Middleware
 app.use(cors());
@@ -41,14 +42,15 @@ app.use("/api/skinUnderTone", skinUnderToneRoutes);
 app.use("/api/skinConcern", skinConcernRoutes);
 app.use("/api/banner", bannerRoutes);
 app.use("/api/product", productRoutes);
-app.use("/api/post", postRoutes);
+// app.use("/api/post", postRoutes);
 app.use("/api/brand", brandRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/subCategory", subCategoryRoutes);
-app.use("/api/group", groupRoutes);
+// app.use("/api/group", groupRoutes);
 app.use("/api/review", reviewRoutes);
 app.use("/api/shades", shadesRoutes);
-app.use("/api/popularProduct", popularProductRoutes);
+// app.use("/api/popularProduct", popularProductRoutes);
+app.use("/api/discount", discountRoutes);
 
 // swaggerOptionObject
 const swaggerOptions = {
@@ -84,11 +86,12 @@ const swaggerOptions = {
     "./route/brand.js",
     "./route/category.js",
     "./route/subCategory.js",
-    "./route/group.js",
-    "./route/post.js",
+    // "./route/group.js",
+    // "./route/post.js",
     "./route/product.js",
     "./route/review.js",
     "./route/shades.js",
+    "./route/discount.js",
     // "./route/popularProduct.js",
   ]
 }

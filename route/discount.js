@@ -1,18 +1,18 @@
-const express = require('express')
+const express = require('express');
 const auth = require("../functions/authentication");
-const shadesController = require("../controller/shades")
+const discountController = require("../controller/discount");
 
 const router = express.Router();
 
 /**
  * @swagger
- * /api/shades/createShade:
+ * /api/discount/createDiscount:
  *  post:
  *    tags:
  *      - admin
  *    security: 
  *      - bearerAuth: []
- *    description: Create new shade
+ *    description: Create new discount
  *    requestBody:
  *      required: true
  *      content:
@@ -20,13 +20,19 @@ const router = express.Router();
  *          schema:
  *            type: object
  *            required:
- *              - name
- *              - colorShade
+ *              - percentage
+ *              - validity
  *            properties:
- *              name:
- *                type: string
- *              colorShade:
- *                type: string
+ *              percentage:
+ *                type: integer
+ *              validity:
+ *                type: date
+ *                pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+ *                example: "2019-05-17"
+ *              productIds:
+ *                type: array
+ *                items:
+ *                  type: string
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -35,18 +41,18 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/createShade", auth,shadesController.createShade);
+router.post("/createDiscount", auth, discountController.createDiscount);
 
 /**
  * @swagger
- * /api/shades/getShadeById:
+ * /api/discount/getDiscountById:
  *  post:
  *    tags:
  *      - user
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get shade by id
+ *    description: get discount by id
  *    requestBody:
  *      required: true
  *      content:
@@ -66,18 +72,18 @@ router.post("/createShade", auth,shadesController.createShade);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/getShadeById", auth,shadesController.getShadeById);
+router.post("/getDiscountById", auth, discountController.getDiscountById);
 
 /**
  * @swagger
- * /api/shades/getAllShades:
+ * /api/discount/getAllDiscounts:
  *  post:
  *    tags:
  *      - user
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get all shades
+ *    description: get all discounts
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -86,51 +92,91 @@ router.post("/getShadeById", auth,shadesController.getShadeById);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/getAllShades", auth, shadesController.getAllShades);
+router.post("/getAllDiscounts", auth, discountController.getAllDiscounts);
 
 /**
  * @swagger
- * /api/shades/updateShadeById:
- *  post:
- *    tags:
- *      - admin
- *    security: 
- *      - bearerAuth: []
- *    description: update shade by id
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - id
- *            properties:
- *              id:
- *                type: string
- *              name:
- *                type: string
- *              colorShade:
- *                type: string
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/updateShadeById", auth, shadesController.updateShadeById);
-
-/**
- * @swagger
- * /api/shades/deleteShadeById:
+ * /api/discount/updateDiscountById:
  *  post:
  *    tags:
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: delete shade by id
+ *    description: update discount by id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *              percentage:
+ *                type: integer
+ *              validity:
+ *                type: date
+ *                pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
+ *                example: "2019-05-17"
+ *              productIds:
+ *                type: array
+ *                items:
+ *                  type: string
+ *    responses:
+ *      '200':
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
+ */
+router.post("/updateDiscountById", auth, discountController.updateDiscountById);
+
+/**
+ * @swagger
+ * /api/discount/insertProductsInDiscountById:
+ *  post:
+ *    tags:
+ *      - admin
+ *    security:
+ *      - bearerAuth: []
+ *    description: update discount by id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *              productIds:
+ *                type: array
+ *                items:
+ *                  type: string
+ *    responses:
+ *      '200':
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
+ */
+router.post("/insertProductsInDiscountById", auth, discountController.insertProductsInDiscountById);
+
+/**
+ * @swagger
+ * /api/discount/deleteDiscountById:
+ *  post:
+ *    tags:
+ *      - admin
+ *    security:
+ *      - bearerAuth: []
+ *    description: delete discount by id
  *    requestBody:
  *      required: true
  *      content:
@@ -150,6 +196,6 @@ router.post("/updateShadeById", auth, shadesController.updateShadeById);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/deleteShadeById", auth, shadesController.deleteShadeById);
+router.post("/deleteDiscountById", auth, discountController.deleteDiscountById);
 
 module.exports = router;

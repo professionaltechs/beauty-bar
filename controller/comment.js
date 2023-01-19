@@ -1,6 +1,6 @@
 const Comment = require("../model/comment");
 
-exports.create = async (req , res) =>{
+exports.createComment = async (req , res) =>{
     try {
         const comment = await new Comment(req.body)
         comment.save().then((response)=>{
@@ -17,7 +17,7 @@ exports.create = async (req , res) =>{
     }  
 }
 
-exports.get = async (req, res) =>{
+exports.getCommentById = async (req, res) =>{
     try {
         const comment = await Comment.findOne({_id: req.body.id, isDeleted: {$ne: 1}})
         res.status(200).json({message : comment})
@@ -29,7 +29,7 @@ exports.get = async (req, res) =>{
     }
 }
 
-exports.getAll = async (req, res) =>{
+exports.getAllComments = async (req, res) =>{
     try {
         const comment = await Comment.find({isDeleted: {$ne: 1}})
         res.status(200).json({message : comment})
@@ -41,7 +41,7 @@ exports.getAll = async (req, res) =>{
     }
 }
 
-exports.update = async (req, res) =>{
+exports.updateCommentById = async (req, res) =>{
     try {
         const comment = await Comment.findOne({_id : req.body.id})
       
@@ -62,7 +62,7 @@ exports.update = async (req, res) =>{
     }
 }
 
-exports.delete = async (req, res) =>{
+exports.deleteCommentById = async (req, res) =>{
     try {
         const comment = await Comment.findOne({_id: req.body.id})
         comment.isDeleted = 1

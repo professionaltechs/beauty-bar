@@ -6,7 +6,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/review/create:
+ * /api/review/createReview:
  *  post:
  *    tags:
  *      - admin
@@ -40,11 +40,11 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/create", auth,reviewController.create);
+router.post("/createReview", auth,reviewController.createReview);
 
 /**
  * @swagger
- * /api/review/get:
+ * /api/review/getReviewById:
  *  post:
  *    tags:
  *      - user
@@ -71,11 +71,11 @@ router.post("/create", auth,reviewController.create);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/get", auth,reviewController.get);
+router.post("/getReviewById", auth,reviewController.getReviewById);
 
 /**
  * @swagger
- * /api/review/getAll:
+ * /api/review/getAllReviews:
  *  post:
  *    tags:
  *      - user
@@ -91,11 +91,11 @@ router.post("/get", auth,reviewController.get);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/getAll", auth, reviewController.getAll);
+router.post("/getAllReviews", auth, reviewController.getAllReviews);
 
 /**
  * @swagger
- * /api/review/update:
+ * /api/review/updateReviewById:
  *  post:
  *    tags:
  *      - admin
@@ -129,11 +129,11 @@ router.post("/getAll", auth, reviewController.getAll);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/update", auth, reviewController.update);
+router.post("/updateReviewById", auth, reviewController.updateReviewById);
 
 /**
  * @swagger
- * /api/review/delete:
+ * /api/review/deleteReviewById:
  *  post:
  *    tags:
  *      - admin
@@ -159,6 +159,6 @@ router.post("/update", auth, reviewController.update);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/delete", auth, reviewController.delete);
+router.post("/deleteReviewById", auth, reviewController.deleteReviewById);
 
 module.exports = router;

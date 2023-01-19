@@ -28,11 +28,11 @@ const router = express.Router();
  *      '200':
  *        description: response on status 200
  */
-router.post("/createBanner", auth, bannerController.create);
+router.post("/createBanner", auth, bannerController.createBanner);
 
 /**
  * @swagger
- * /api/banner/getBanner:
+ * /api/banner/getBannerById:
  *  post:
  *    tags:
  *      - user
@@ -55,11 +55,11 @@ router.post("/createBanner", auth, bannerController.create);
  *      '200':
  *        description: response on status 200
  */
-router.post("/getBanner", auth, bannerController.get);
+router.post("/getBannerById", auth, bannerController.getBannerById);
 
 /**
  * @swagger
- * /api/banner/getAllBanner:
+ * /api/banner/getAllBanners:
  *  post:
  *    tags:
  *      - user
@@ -71,11 +71,11 @@ router.post("/getBanner", auth, bannerController.get);
  *      '200':
  *        description: response on status 200
  */
-router.post("/getAllBanner", auth, bannerController.getAll);
+router.post("/getAllBanners", auth, bannerController.getAllBanners);
 
 /**
  * @swagger
- * /api/banner/update:
+ * /api/banner/updateBannerById:
  *  post:
  *    tags:
  *      - admin
@@ -99,11 +99,11 @@ router.post("/getAllBanner", auth, bannerController.getAll);
  *      '200':
  *        description: response on status 200
  */
-router.post("/update", auth, bannerController.update);
+router.post("/updateBannerById", auth, bannerController.updateBannerById);
 
 /**
  * @swagger
- * /api/banner/delete:
+ * /api/banner/deleteBannerById:
  *  post:
  *    tags:
  *      - admin
@@ -125,6 +125,6 @@ router.post("/update", auth, bannerController.update);
  *      '200':
  *        description: response on status 200
  */
-router.post("/delete", auth, bannerController.delete);
+router.post("/deleteBannerById", auth, bannerController.deleteBannerById);
 
 module.exports = router;

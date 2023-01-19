@@ -81,11 +81,11 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/createProduct", auth, productController.create);
+router.post("/createProduct", auth, productController.createProduct);
 
 /**
  * @swagger
- * /api/product/getProduct:
+ * /api/product/getProductById:
  *  post:
  *    tags:
  *      - user
@@ -112,7 +112,7 @@ router.post("/createProduct", auth, productController.create);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/getProduct", auth, productController.get);
+router.post("/getProductById", auth, productController.getProductById);
 
 /**
  * @swagger
@@ -178,7 +178,7 @@ router.post("/getProductsByBrandId", auth, productController.getProductsByBrandI
 
 /**
  * @swagger
- * /api/product/getAllProduct:
+ * /api/product/getAllProducts:
  *  post:
  *    tags:
  *      - user
@@ -194,7 +194,7 @@ router.post("/getProductsByBrandId", auth, productController.getProductsByBrandI
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/getAllProduct", auth, productController.getAll);
+router.post("/getAllProducts", auth, productController.getAllProducts);
 
 /**
  * @swagger
@@ -247,7 +247,60 @@ router.post("/getTop3NewestProducts", auth, productController.getTop3NewestProdu
 
 /**
  * @swagger
- * /api/product/updateProduct:
+ * /api/product/getDiscountedProducts:
+ *  post:
+ *    tags:
+ *      - user
+ *      - admin
+ *    security:
+ *      - bearerAuth: []
+ *    description: get All discounted products
+ *    responses:
+ *      '200':
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
+ */
+router.post("/getDiscountedProducts", auth, productController.getDiscountedProducts);
+
+/**
+ * @swagger
+ * /api/product/getBestMatchProducts:
+ *  post:
+ *    tags:
+ *      - user
+ *      - admin
+ *    security:
+ *      - bearerAuth: []
+ *    description: get user's best match products by passing in limit and user id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - userId
+ *            properties:
+ *              userId:
+ *                type: string
+ *              limit:
+ *                type: integer
+ *    responses:
+ *      '200':
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
+ */
+router.post("/getBestMatchProducts", auth, productController.getBestMatchProducts);
+
+/**
+ * @swagger
+ * /api/product/updateProductById:
  *  post:
  *    tags:
  *      - admin
@@ -300,11 +353,11 @@ router.post("/getTop3NewestProducts", auth, productController.getTop3NewestProdu
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/updateProduct", auth, productController.update);
+router.post("/updateProductById", auth, productController.updateProductById);
 
 /**
  * @swagger
- * /api/product/deleteProduct:
+ * /api/product/deleteProductById:
  *  post:
  *    tags:
  *      - admin
@@ -330,6 +383,6 @@ router.post("/updateProduct", auth, productController.update);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/deleteProduct", auth, productController.delete);
+router.post("/deleteProductById", auth, productController.deleteProductById);
 
 module.exports = router;

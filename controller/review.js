@@ -1,7 +1,7 @@
 const Product = require("../model/product");
 const Review = require("../model/review");
 
-exports.create = async (req, res) => {
+exports.createReview = async (req, res) => {
     try {
         const product = await Product.findOne({_id: req.body.prodcutId});
         const review = await new Review(req.body);
@@ -23,7 +23,7 @@ exports.create = async (req, res) => {
     }
 }
 
-exports.get = async (req, res) => {
+exports.getReviewById = async (req, res) => {
     try {
         const review = await Review.findOne({_id: req.body.id, isDeleted: {$ne: 1}});
     
@@ -38,7 +38,7 @@ exports.get = async (req, res) => {
     }
 }
 
-exports.getAll = async (req, res) => {
+exports.getAllReviews = async (req, res) => {
     try {
         const review = await Review.find({isDeleted: {$ne: 1}});
     
@@ -53,7 +53,7 @@ exports.getAll = async (req, res) => {
     }
 }
 
-exports.update = async (req, res) => {
+exports.updateReviewById = async (req, res) => {
     try {
         const review = await Review.findOne({_id: req.body.id});
         if(!review){
@@ -81,7 +81,7 @@ exports.update = async (req, res) => {
     }
 }
 
-exports.delete = async (req, res) => {
+exports.deleteReviewById = async (req, res) => {
     try {
         const review = await Review.findOne({_id: req.body.id});
         if(!review){
