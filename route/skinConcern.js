@@ -32,7 +32,7 @@ router.post("/createSkinConcern", auth, skinConcernController.createSkinConcern)
 
 /**
  * @swagger
- * /api/getSkinConcernById/get:
+ * /api/skinConcern/getSkinConcernById:
  *  post:
  *    tags:
  *      - user

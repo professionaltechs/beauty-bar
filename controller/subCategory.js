@@ -21,7 +21,7 @@ exports.createSubCategory = async (req, res) => {
 
 exports.getSubCategoryById = async (req, res) => {
     try {
-        const subCategory = await SubCategory.findOne({_id: req.body.id, isDeleted: {$ne: 1}});
+        const subCategory = await SubCategory.findOne({_id: req.body.id, isDeleted: {$ne: 1}}).populate("categoryId");
     
         res.status(200).json({
             message: subCategory
@@ -36,7 +36,7 @@ exports.getSubCategoryById = async (req, res) => {
 
 exports.getAllSubCategories = async (req, res) => {
     try {
-        const subCategory = await SubCategory.find({isDeleted: {$ne: 1}});
+        const subCategory = await SubCategory.find({isDeleted: {$ne: 1}}).populate("categoryId");
     
         res.status(200).json({
             message: subCategory

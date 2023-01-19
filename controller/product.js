@@ -22,7 +22,7 @@ exports.createProduct = async (req, res) => {
 
 exports.getProductById = async (req, res) => {
     try {
-        const product = await Product.findOne({_id: req.body.id, isDeleted: {$ne: 1}}).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernId shades");
+        const product = await Product.findOne({_id: req.body.id, isDeleted: {$ne: 1}}).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades");
     
         res.status(200).json({
             message: product
@@ -37,7 +37,7 @@ exports.getProductById = async (req, res) => {
 
 exports.getAllProducts = async (req, res) => {
     try {
-        const product = await Product.find({isDeleted: {$ne: 1}}).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernId shades");
+        const product = await Product.find({isDeleted: {$ne: 1}}).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades");
     
         res.status(200).json({
             message: product
@@ -59,7 +59,6 @@ exports.updateProductById = async (req, res) => {
             });
         }
     
-        product.name = req.body.name || product.name;
         product.images = req.body.images || product.images;
         product.title = req.body.title || product.title;
         product.price = req.body.price || product.price;
@@ -68,6 +67,13 @@ exports.updateProductById = async (req, res) => {
         product.ingredients = req.body.ingredients || product.ingredients;
         product.discount = req.body.discount || product.discount;
         product.categoryId = req.body.categoryId || product.categoryId;
+        product.subCategoryId = req.body.subCategoryId || product.subCategoryId;
+        product.brandId = req.body.brandId || product.brandId;
+        product.skinTypeId = req.body.skinTypeId || product.skinTypeId;
+        product.skinToneId = req.body.skinToneId || product.skinToneId;
+        product.skinUnderToneId = req.body.skinUnderToneId || product.skinUnderToneId;
+        product.skinConcernIds = req.body.skinConcernIds || product.skinConcernIds;
+        product.shades = req.body.shades || product.shades;
     
         product.save().then(response => {
             res.status(200).json({
@@ -110,7 +116,7 @@ exports.deleteProductById = async (req, res) => {
 
 exports.getPopularProducts = async (req, res) => {
     try {
-        const products = await Product.find({isDeleted: {$ne: 1}}).sort({rating: -1}).limit(req.body.limit).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernId shades")
+        const products = await Product.find({isDeleted: {$ne: 1}}).sort({rating: -1}).limit(req.body.limit).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades")
 
         res.status(200).json({
             message: products
@@ -125,7 +131,7 @@ exports.getPopularProducts = async (req, res) => {
 
 exports.getProductsBySubCatId = async (req, res) => {
     try {
-        const products = Product.find({subCategoryId: req.body.subCategoryId, isDeleted: {$ne: 1}});
+        const products = await Product.find({subCategoryId: req.body.subCategoryId, isDeleted: {$ne: 1}}).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades");
         
         res.status(200).json({
             message: products
@@ -141,7 +147,7 @@ exports.getProductsBySubCatId = async (req, res) => {
 
 exports.getProductsByBrandId = async (req, res) => {
     try {
-        const products = Product.find({brandId: req.body.brandId, isDeleted: {$ne: 1}});
+        const products = await Product.find({brandId: req.body.brandId, isDeleted: {$ne: 1}}).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades");
 
         res.status(200).json({
             message: products
@@ -156,7 +162,7 @@ exports.getProductsByBrandId = async (req, res) => {
 
 exports.getTop3NewestProducts = async (req, res) => {
     try {
-        const products = Product.find({isDeleted: {$ne: 1}}).sort({createdAt: -1}).limit(3);
+        const products = await Product.find({isDeleted: {$ne: 1}}).sort({createdAt: -1}).limit(3).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades");
 
         res.status(200).json({
             message: products
@@ -172,23 +178,28 @@ exports.getTop3NewestProducts = async (req, res) => {
 exports.getBestMatchProducts = async (req, res) => {
     try {
         const user = await User.findOne({_id: req.body.userId})
+        let productIds = []
         let products = await Product.find({
             skinTypeId: user.skinTypeId, 
             skinToneId: user.skinToneId, 
             skinUnderToneId: user.skinUnderToneId
-        }).limit(req.body.limit).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernId shades");
-
+        }).limit(req.body.limit).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades");
+        
+        products.forEach((item, pos) => {
+            productIds.push(item._id)
+        })
+        
         let moreProducts = [];
         if(req.body.limit > products.length){
             moreProducts = await Product.find({
                 $or: [
-                    {$and : [{ skinTypeId: user.skinTypeId}, { skinToneId: user.skinToneId }]},
-                    {$and : [{ skinTypeId: user.skinTypeId}, { skinUnderToneId: user.skinUnderToneId }]},
-                    {$and : [{ skinToneId: user.skinToneId}, { skinUnderToneId: user.skinUnderToneId }]},
+                    {$and : [{ skinTypeId: user.skinTypeId}, { skinToneId: user.skinToneId }, { _id: {$nin: productIds} }]},
+                    {$and : [{ skinTypeId: user.skinTypeId}, { skinUnderToneId: user.skinUnderToneId }, { _id: {$nin: productIds} }]},
+                    {$and : [{ skinToneId: user.skinToneId}, { skinUnderToneId: user.skinUnderToneId }, { _id: {$nin: productIds} }]},
                 ]
-            }).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernId shades")
+            }).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades")
 
-            products = [...products, moreProducts]
+            products = [...products, ...moreProducts]
         }
 
         return res.json({
@@ -206,15 +217,13 @@ exports.getDiscountedProducts = async (req, res) => {
     try {
         const discounts = await Discount.find().sort({percentage: -1}).populate("productIds");
 
-        const productArray = [];
+        let productArray = [];
         discounts.forEach((item, index) => {
             productArray = [...productArray, ...item.productIds]
         })
     
-        const finalProducts = productArray.filter((item, index) => productArray.indexOf(item) == -1)
-    
         res.status(200).json({
-            finalProducts
+            productArray
         })
     } catch (error) {
         console.log(error)

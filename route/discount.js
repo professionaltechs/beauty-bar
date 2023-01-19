@@ -170,6 +170,40 @@ router.post("/insertProductsInDiscountById", auth, discountController.insertProd
 
 /**
  * @swagger
+ * /api/discount/removeProductsInDiscountById:
+ *  post:
+ *    tags:
+ *      - admin
+ *    security:
+ *      - bearerAuth: []
+ *    description: update discount by id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *              productIds:
+ *                type: array
+ *                items:
+ *                  type: string
+ *    responses:
+ *      '200':
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
+ */
+router.post("/removeProductsInDiscountById", auth, discountController.removeProductsInDiscountById);
+
+/**
+ * @swagger
  * /api/discount/deleteDiscountById:
  *  post:
  *    tags:

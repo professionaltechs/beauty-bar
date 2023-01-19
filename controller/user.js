@@ -91,7 +91,7 @@ exports.update = async (req, res) => {
     user.skinTypeId = req.body.skinTypeId || user.skinTypeId;
     user.skinToneId = req.body.skinToneId || user.skinToneId;
     user.skinUnderToneId = req.body.skinUnderToneId || user.skinUnderToneId;
-    user.skinConcernId = req.body.skinConcernId || user.skinConcernId;
+    user.skinConcernIds = req.body.skinConcernIds || user.skinConcernIds;
     user.age = req.body.age || user.age;
     user.gender = req.body.gender || user.gender;
     user.phone = req.body.phone || user.phone;

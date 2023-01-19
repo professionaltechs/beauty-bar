@@ -97,7 +97,7 @@ router.post("/signIn", userController.signIn);
  *                type: integer
  *              posts:
  *                type: integer
- *              skinConcernId:
+ *              skinConcernIds:
  *                type: array
  *                items:
  *                  type: string

@@ -6,7 +6,7 @@ exports.createBrand = async (req, res)=>{
         brand.save().then(()=>{
             res.status(200).json({
                 id: brand._id,
-                message : "updated brand"
+                message : "brand created"
             })
         })
     } catch (error) {

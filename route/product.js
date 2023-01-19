@@ -32,7 +32,7 @@ const router = express.Router();
  *                type: array
  *                items:
  *                  type: string
- *              skinConcernId:
+ *              skinConcernIds:
  *                type: array
  *                items:
  *                  type: string
@@ -69,8 +69,6 @@ const router = express.Router();
  *                    type: string
  *              ingredients:
  *                type: string
- *              discount:
- *                type: integer
  *              categoryId:
  *                type: string
  *    responses:
@@ -341,10 +339,26 @@ router.post("/getBestMatchProducts", auth, productController.getBestMatchProduct
  *                    type: string
  *              ingredients:
  *                type: string
- *              discount:
- *                type: integer
  *              categoryId:
  *                type: string
+ *              subCategoryId:
+ *                type: string
+ *              brandId:
+ *                type: string
+ *              skinTypeId:
+ *                type: string
+ *              skinToneId:
+ *                type: string
+ *              skinUnderToneId:
+ *                type: string
+ *              skinConcernIds:
+ *                type: array
+ *                items:
+ *                  type: string
+ *              shades:
+ *                type: array
+ *                items:
+ *                  type: string
  *    responses:
  *      '200':
  *        description: 200 OK response

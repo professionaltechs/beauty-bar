@@ -11,7 +11,8 @@ const discountSchema = Schema({
         required: [true, "validity is required"]
     },
     productIds: {
-        type: [Schema.Types.ObjectId]
+        type: [Schema.Types.ObjectId],
+        ref: "Product"
     }
 })
 

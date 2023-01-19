@@ -30,10 +30,6 @@ const productSchema = new Schema({
         type: String,
         required: [true, "ingredients required"]
     },
-    discount: {
-        type: Number,
-        required: false
-    },
     categoryId: {
         type: Schema.Types.ObjectId,
         ref: "Category",
@@ -61,7 +57,7 @@ const productSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "SkinUnderTone",
     },
-    skinConcernId: {
+    skinConcernIds: {
         type: [Schema.Types.ObjectId],
         ref: "SkinConcern",
     },

@@ -40,7 +40,7 @@ const UserSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "SkinUnderTone",
     },
-    skinConcernId: {
+    skinConcernIds: {
         type: [Schema.Types.ObjectId],
         ref: "SkinConcern",
     },

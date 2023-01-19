@@ -3,10 +3,14 @@ const Review = require("../model/review");
 
 exports.createReview = async (req, res) => {
     try {
-        const product = await Product.findOne({_id: req.body.prodcutId});
+        const product = await Product.findOne({_id: req.body.productId});
         const review = await new Review(req.body);
 
-        product.rating = (req.body.rating + product.rating) / 2;
+        if(product.rating == 0){
+            product.rating = (req.body.rating + product.rating);
+        }else{
+            product.rating = (req.body.rating + product.rating) / 2;
+        }
         product.save();
 
         review.save().then(response => {
@@ -25,7 +29,7 @@ exports.createReview = async (req, res) => {
 
 exports.getReviewById = async (req, res) => {
     try {
-        const review = await Review.findOne({_id: req.body.id, isDeleted: {$ne: 1}});
+        const review = await Review.findOne({_id: req.body.id, isDeleted: {$ne: 1}}).populate("userId productId");
     
         res.status(200).json({
             message: review
@@ -40,7 +44,7 @@ exports.getReviewById = async (req, res) => {
 
 exports.getAllReviews = async (req, res) => {
     try {
-        const review = await Review.find({isDeleted: {$ne: 1}});
+        const review = await Review.find({isDeleted: {$ne: 1}}).populate("userId productId");
     
         res.status(200).json({
             message: review

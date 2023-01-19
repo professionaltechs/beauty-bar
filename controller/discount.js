@@ -47,7 +47,9 @@ exports.updateDiscountById = async (req, res) =>{
       
         discount.percentage = req.body.percentage || discount.percentage;
         discount.validity = req.body.validity || discount.validity;
-        discount.productIds = req.body.productIds || discount.productIds;
+        
+        discount.productIds = [...discount.productIds, ...req.body.productIds]
+        discount.productIds = [...new Set(discount.productIds)] // remove duplicates
 
         discount.save().then(()=>{
             res.status(200).json({
@@ -78,12 +80,22 @@ exports.insertProductsInDiscountById = async (req, res) => {
     try {
         const discount = await Discount.findOne({_id: req.body.id})
         discount.productIds = [...discount.productIds, ...req.body.productIds]
+        discount.productIds = [...new Set(discount.productIds)] // remove duplicates
         discount.save().then(()=>{
             res.status(200).json({
                 discount,
                 message : "Inserted Successfully"
             })
         })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({message : error.message})
+    }
+}
+
+exports.removeProductsInDiscountById = async (req, res) => {
+    try {
+        const result = Discount.updateOne( { _id: req.body.id }, { $pullAll: { productIds: req.body.productIds } } )
     } catch (error) {
         console.log(error)
         res.status(500).json({message : error.message})

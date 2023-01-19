@@ -23,7 +23,7 @@ const router = express.Router();
  *              - title
  *              - image
  *            properties:
- *              name:
+ *              title:
  *                type: string
  *              image:
  *                type: string

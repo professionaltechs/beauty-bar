@@ -62,7 +62,7 @@ router.post("/getSkinUnderToneById", auth, skinUnderToneController.getSkinUnderT
 
 /**
  * @swagger
- * /api/skinUnerTone/getAllSkinUnderTones:
+ * /api/skinUnderTone/getAllSkinUnderTones:
  *  post:
  *    tags:
  *      - user
