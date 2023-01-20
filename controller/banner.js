@@ -1,7 +1,4 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
 const Banner = require("../model/Banner");
-
 
 exports.createBanner = async (req, res) => {
     try {

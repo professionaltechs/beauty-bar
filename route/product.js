@@ -83,7 +83,7 @@ router.post("/createProduct", auth, productController.createProduct);
 
 /**
  * @swagger
- * /api/product/getProductById:
+ * /api/product/getProductDetailsById:
  *  post:
  *    tags:
  *      - user
@@ -110,7 +110,7 @@ router.post("/createProduct", auth, productController.createProduct);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/getProductById", auth, productController.getProductById);
+router.post("/getProductDetailsById", auth, productController.getProductDetailsById);
 
 /**
  * @swagger
@@ -121,7 +121,7 @@ router.post("/getProductById", auth, productController.getProductById);
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get product by id
+ *    description: get product by subCategory id, remove limit field to get all matched products.
  *    requestBody:
  *      required: true
  *      content:
@@ -133,6 +133,8 @@ router.post("/getProductById", auth, productController.getProductById);
  *            properties:
  *              subCategoryId:
  *                type: string
+ *              limit:
+ *                type: integer
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -152,7 +154,7 @@ router.post("/getProductsBySubCatId", auth, productController.getProductsBySubCa
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get product by id
+ *    description: get product by Brand id, remove limit field to get all matched products.
  *    requestBody:
  *      required: true
  *      content:
@@ -164,6 +166,8 @@ router.post("/getProductsBySubCatId", auth, productController.getProductsBySubCa
  *            properties:
  *              brandId:
  *                type: string
+ *              limit:
+ *                type: integer
  *    responses:
  *      '200':
  *        description: 200 OK response
@@ -203,7 +207,7 @@ router.post("/getAllProducts", auth, productController.getAllProducts);
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get popular products by passing the limit(number of products to fetch) this will be also used be used for top 10/3 products
+ *    description: get popular products by passing the limit(number of products to fetch) this will be also be used for top 10 || 3 products and also for top rated products
  *    requestBody:
  *      required: true
  *      content:
@@ -222,6 +226,39 @@ router.post("/getAllProducts", auth, productController.getAllProducts);
  *        description: Internal Server Error
  */
 router.post("/getPopularProducts", auth, productController.getPopularProducts);
+
+/**
+ * @swagger
+ * /api/product/getFilteredProductsByPrice:
+ *  post:
+ *    tags:
+ *      - user
+ *      - admin
+ *    security:
+ *      - bearerAuth: []
+ *    description: pass in "highest" for products filtered by highest price and "lowest" for lowest price, remove limit field to get all matched products.
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - flag
+ *            properties:
+ *              flag:
+ *                type: string
+ *              limit:
+ *                type: integer
+ *    responses:
+ *      '200':
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
+ */
+router.post("/getFilteredProductsByPrice", auth, productController.getFilteredProductsByPrice);
 
 /**
  * @swagger
@@ -252,7 +289,16 @@ router.post("/getTop3NewestProducts", auth, productController.getTop3NewestProdu
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get All discounted products
+ *    description: get discounted products by passing limit or remove the limit field to get all discounted products.
+ *    requestBody:
+ *      required: false
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              limit:
+ *                type: integer
  *    responses:
  *      '200':
  *        description: 200 OK response

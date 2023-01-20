@@ -1,6 +1,7 @@
 const Discount = require("../model/discount");
 const Product = require("../model/product");
 const User = require("../model/user");
+const Review = require("../model/review");
 
 exports.createProduct = async (req, res) => {
     try {
@@ -20,12 +21,29 @@ exports.createProduct = async (req, res) => {
     }
 }
 
-exports.getProductById = async (req, res) => {
+exports.getProductDetailsById = async (req, res) => {
+    // "categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades"
     try {
-        const product = await Product.findOne({_id: req.body.id, isDeleted: {$ne: 1}}).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades");
-    
+        const reviews = await Review.find({productId: req.body.id}).select({_id: 0, userId: 1, rating: 1, comment: 1, createdAt: 1}).populate({path: "userId", select: {"_id": 0, "name": 1, "profileImage": 1}})
+        const discount = await Discount.findOne({productIds: { "$in" : [req.body.id]} }).select({_id: 0, productIds: 0})
+        const product = await Product.findOne({_id: req.body.id, isDeleted: {$ne: 1}})
+            .select({images: 1, title: 1, price: 1, rating: 1, description: 1, brandId: 1, shades: 1, ingredients: 1})
+            .populate({path: "shades", select: {"_id": 0, "name": 1, "colorShade": 1}})
+            .populate({path: "brandId", select: {"_id": 0, "title": 1, "image": 1}});
+        
+        const finalProduct = {...product._doc}
+        finalProduct.reviews = []
+        reviews.forEach((item, index) => {
+            finalProduct.reviews.push(item)
+        })
+
+        finalProduct.discountPercentage = discount.percentage
+        finalProduct.discountValidity = discount.validity
+
+        finalProduct.discountedPrice = (product.price / 100) * discount.percentage
+
         res.status(200).json({
-            message: product
+            message: finalProduct
         })
     } catch (error) {
         console.log(error)
@@ -115,11 +133,71 @@ exports.deleteProductById = async (req, res) => {
 }
 
 exports.getPopularProducts = async (req, res) => {
+    // "categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades"
     try {
-        const products = await Product.find({isDeleted: {$ne: 1}}).sort({rating: -1}).limit(req.body.limit).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades")
+        const discounts = await Discount.find().sort({percentage: -1});
+
+        const products = await Product
+            .find({isDeleted: {$ne: 1}})
+            .select({images: 1, title: 1, rating: 1, brand: 1, price: 1, ingredients: 1})
+            .sort({rating: -1})
+            .limit(req.body.limit);
+
+
+        let productArray = []
+        discounts.forEach((item, index) => {
+            products.forEach((element, position) => {
+                const obj = {...element._doc}
+                if(item.productIds.indexOf(element._id) >= 0){
+                    obj.discountedPrice = (element.price / 100) * item.percentage
+                    obj.discountPercentage = item.percentage
+                    productArray.push(obj);
+                }else{
+                    obj.discountedPrice = null
+                    obj.discountPercentage = null
+                    productArray.push(obj);
+                }
+            })
+        })
 
         res.status(200).json({
-            message: products
+            message: productArray
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: error.message
+        })
+    }
+}
+
+exports.getFilteredProductsByPrice = async (req, res) => {
+    try {
+        const products = await Product
+            .find({isDeleted: {$ne: 1}})
+            .select({images: 1, title: 1, rating: 1, brand: 1, price: 1, ingredients: 1})
+            .sort({price: req.body.flag == "highest" ? -1 : req.body.flag == "lowest" ? 1 : null})
+            .limit(req.body.limit)
+
+        const discounts = await Discount.find().sort({percentage: -1});
+        let productArray = []
+        discounts.forEach((item, index) => {
+            products.forEach((element, position) => {
+                const obj = {...element._doc}
+                if(item.productIds.indexOf(element._id) >= 0){
+                    obj.discountedPrice = (element.price / 100) * item.percentage
+                    obj.discountPercentage = item.percentage
+                    productArray.push(obj);
+                }else{
+                    obj.discountedPrice = null
+                    obj.discountPercentage = null
+                    productArray.push(obj);
+                }
+            })
+        })
+
+        res.status(200).json({
+            message: productArray
         })
     } catch (error) {
         console.log(error)
@@ -131,10 +209,30 @@ exports.getPopularProducts = async (req, res) => {
 
 exports.getProductsBySubCatId = async (req, res) => {
     try {
-        const products = await Product.find({subCategoryId: req.body.subCategoryId, isDeleted: {$ne: 1}}).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades");
+        const products = await Product
+            .find({subCategoryId: req.body.subCategoryId, isDeleted: {$ne: 1}})
+            .select({images: 1, title: 1, rating: 1, brand: 1, price: 1, ingredients: 1})
+            .limit(req.body.limit)
+        
+        const discounts = await Discount.find().sort({percentage: -1});
+        let productArray = []
+        discounts.forEach((item, index) => {
+            products.forEach((element, position) => {
+                const obj = {...element._doc}
+                if(item.productIds.indexOf(element._id) >= 0){
+                    obj.discountedPrice = (element.price / 100) * item.percentage
+                    obj.discountPercentage = item.percentage
+                    productArray.push(obj);
+                }else{
+                    obj.discountedPrice = null
+                    obj.discountPercentage = null
+                    productArray.push(obj);
+                }
+            })
+        })
         
         res.status(200).json({
-            message: products
+            message: productArray
         })
     } catch (error) {
         console.log(error)
@@ -147,10 +245,30 @@ exports.getProductsBySubCatId = async (req, res) => {
 
 exports.getProductsByBrandId = async (req, res) => {
     try {
-        const products = await Product.find({brandId: req.body.brandId, isDeleted: {$ne: 1}}).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades");
-
+        const products = await Product
+            .find({brandId: req.body.brandId, isDeleted: {$ne: 1}})
+            .select({images: 1, title: 1, rating: 1, brand: 1, price: 1, ingredients: 1})
+            .limit(req.body.limit)
+    
+        const discounts = await Discount.find().sort({percentage: -1});
+        let productArray = []
+        discounts.forEach((item, index) => {
+            products.forEach((element, position) => {
+                const obj = {...element._doc}
+                if(item.productIds.indexOf(element._id) >= 0){
+                    obj.discountedPrice = (element.price / 100) * item.percentage
+                    obj.discountPercentage = item.percentage
+                    productArray.push(obj);
+                }else{
+                    obj.discountedPrice = null
+                    obj.discountPercentage = null
+                    productArray.push(obj);
+                }
+            })
+        })
+        
         res.status(200).json({
-            message: products
+            message: productArray
         })
     } catch (error) {
         console.log(error)
@@ -162,10 +280,30 @@ exports.getProductsByBrandId = async (req, res) => {
 
 exports.getTop3NewestProducts = async (req, res) => {
     try {
-        const products = await Product.find({isDeleted: {$ne: 1}}).sort({createdAt: -1}).limit(3).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades");
+        const products = await Product
+            .find({isDeleted: {$ne: 1}}).sort({createdAt: -1})
+            .select({images: 1, title: 1, rating: 1, brand: 1, price: 1, ingredients: 1})
+            .limit(3)
 
+        const discounts = await Discount.find().sort({percentage: -1});
+        let productArray = []
+        discounts.forEach((item, index) => {
+            products.forEach((element, position) => {
+                const obj = {...element._doc}
+                if(item.productIds.indexOf(element._id) >= 0){
+                    obj.discountedPrice = (element.price / 100) * item.percentage
+                    obj.discountPercentage = item.percentage
+                    productArray.push(obj);
+                }else{
+                    obj.discountedPrice = null
+                    obj.discountPercentage = null
+                    productArray.push(obj);
+                }
+            })
+        })
+        
         res.status(200).json({
-            message: products
+            message: productArray
         })
     } catch (error) {
         console.log(error)
@@ -183,8 +321,8 @@ exports.getBestMatchProducts = async (req, res) => {
             skinTypeId: user.skinTypeId, 
             skinToneId: user.skinToneId, 
             skinUnderToneId: user.skinUnderToneId
-        }).limit(req.body.limit).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades");
-        
+        }).select({images: 1, title: 1, rating: 1, brand: 1, price: 1, ingredients: 1}).limit(req.body.limit)
+
         products.forEach((item, pos) => {
             productIds.push(item._id)
         })
@@ -197,13 +335,30 @@ exports.getBestMatchProducts = async (req, res) => {
                     {$and : [{ skinTypeId: user.skinTypeId}, { skinUnderToneId: user.skinUnderToneId }, { _id: {$nin: productIds} }]},
                     {$and : [{ skinToneId: user.skinToneId}, { skinUnderToneId: user.skinUnderToneId }, { _id: {$nin: productIds} }]},
                 ]
-            }).populate("categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades")
+            }).select({images: 1, title: 1, rating: 1, brand: 1, price: 1, ingredients: 1}).limit(req.body.limit - products.length)
 
             products = [...products, ...moreProducts]
         }
 
-        return res.json({
-            products
+        const discounts = await Discount.find().sort({percentage: -1});
+        let productArray = []
+        discounts.forEach((item, index) => {
+            products.forEach((element, position) => {
+                const obj = {...element._doc}
+                if(item.productIds.indexOf(element._id) >= 0){
+                    obj.discountedPrice = (element.price / 100) * item.percentage
+                    obj.discountPercentage = item.percentage
+                    productArray.push(obj);
+                }else{
+                    obj.discountedPrice = null
+                    obj.discountPercentage = null
+                    productArray.push(obj);
+                }
+            })
+        })
+        
+        res.status(200).json({
+            message: productArray
         })
     } catch (error) {
         console.log(error)
@@ -215,11 +370,26 @@ exports.getBestMatchProducts = async (req, res) => {
 
 exports.getDiscountedProducts = async (req, res) => {
     try {
-        const discounts = await Discount.find().sort({percentage: -1}).populate("productIds");
-
+        const discounts = await Discount.find().sort({percentage: -1}).populate({path: "productIds", select: "images title rating brand price ingredients"});
+        
+        let i = 0
         let productArray = [];
-        discounts.forEach((item, index) => {
-            productArray = [...productArray, ...item.productIds]
+        discounts.every((item, index) => {
+            item.productIds.every((element, posittion) => {
+                console.log(req.body.limit <= i && req.body.limit != null)
+                if(req.body.limit <= i && req.body.limit != null){
+                    return false
+                }
+                const obj = {...element._doc}
+                obj.discountedPrice = (element.price / 100) * item.percentage
+                obj.discountPercentage = item.percentage
+                productArray.push(obj);
+                i++
+                return true
+            })
+            if(req.body.limit <= i && req.body.limit != null){
+                return false
+            }
         })
     
         res.status(200).json({
