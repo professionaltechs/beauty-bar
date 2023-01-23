@@ -45,6 +45,11 @@ const productSchema = new Schema({
         ref: "Brand",
         required: [true, "BrandId is required"]
     },
+    storeId: {
+        type: Schema.Types.ObjectId,
+        ref: "Store",
+        required: [true, "storeId is required"]
+    },
     skinTypeId: {
         type: Schema.Types.ObjectId,
         ref: "SkinType",
@@ -64,6 +69,10 @@ const productSchema = new Schema({
     shades: {
         type: [Schema.Types.ObjectId],
         ref: "Shades"
+    },
+    isFeatured: {
+        type: Boolean,
+        default: false
     },
     isActive: {
         type: Number,

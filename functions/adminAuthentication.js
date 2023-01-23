@@ -14,7 +14,15 @@ module.exports = (req, res, next) => {
           statusCode: 403,
         });
       } else {
-        req.user = Authdata;
+        req.user = {...Authdata};
+        console.log(req.user)
+
+        if(req.user.isAdmin != 1){
+          return res.json({
+              error: "Admin acces denied",
+              message: "This API is admin protected"
+          })
+        }
 
         next();
       }

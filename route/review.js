@@ -1,6 +1,7 @@
 const express = require('express')
-const auth = require("../functions/authentication");
 const reviewController = require("../controller/review")
+const auth = require("../functions/authentication");
+const adminAuth = require("../functions/adminAuthentication");
 
 const router = express.Router();
 
@@ -40,7 +41,7 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/createReview", auth,reviewController.createReview);
+router.post("/createReview", adminAuth,reviewController.createReview);
 
 /**
  * @swagger
@@ -129,7 +130,7 @@ router.post("/getAllReviews", auth, reviewController.getAllReviews);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/updateReviewById", auth, reviewController.updateReviewById);
+router.post("/updateReviewById", adminAuth, reviewController.updateReviewById);
 
 /**
  * @swagger
@@ -159,6 +160,6 @@ router.post("/updateReviewById", auth, reviewController.updateReviewById);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/deleteReviewById", auth, reviewController.deleteReviewById);
+router.post("/deleteReviewById", adminAuth, reviewController.deleteReviewById);
 
 module.exports = router;

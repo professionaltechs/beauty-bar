@@ -1,6 +1,7 @@
 const express = require('express');
-const auth = require("../functions/authentication");
 const discountController = require("../controller/discount");
+const auth = require("../functions/authentication");
+const adminAuth = require("../functions/adminAuthentication");
 
 const router = express.Router();
 
@@ -41,7 +42,7 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/createDiscount", auth, discountController.createDiscount);
+router.post("/createDiscount", adminAuth, discountController.createDiscount);
 
 /**
  * @swagger
@@ -132,7 +133,7 @@ router.post("/getAllDiscounts", auth, discountController.getAllDiscounts);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/updateDiscountById", auth, discountController.updateDiscountById);
+router.post("/updateDiscountById", adminAuth, discountController.updateDiscountById);
 
 /**
  * @swagger
@@ -166,7 +167,7 @@ router.post("/updateDiscountById", auth, discountController.updateDiscountById);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/insertProductsInDiscountById", auth, discountController.insertProductsInDiscountById);
+router.post("/insertProductsInDiscountById", adminAuth, discountController.insertProductsInDiscountById);
 
 /**
  * @swagger
@@ -200,7 +201,7 @@ router.post("/insertProductsInDiscountById", auth, discountController.insertProd
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/removeProductsInDiscountById", auth, discountController.removeProductsInDiscountById);
+router.post("/removeProductsInDiscountById", adminAuth, discountController.removeProductsInDiscountById);
 
 /**
  * @swagger
@@ -230,6 +231,6 @@ router.post("/removeProductsInDiscountById", auth, discountController.removeProd
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/deleteDiscountById", auth, discountController.deleteDiscountById);
+router.post("/deleteDiscountById", adminAuth, discountController.deleteDiscountById);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const skinConcernController = require('../controller/skinConcern')
 const express = require('express')
 const auth = require("../functions/authentication");
+const adminAuth = require("../functions/adminAuthentication");
 
 const router = express.Router();
 
@@ -28,7 +29,7 @@ const router = express.Router();
  *      '200':
  *        description: response on status 200
  */
-router.post("/createSkinConcern", auth, skinConcernController.createSkinConcern);
+router.post("/createSkinConcern", adminAuth, skinConcernController.createSkinConcern);
 
 /**
  * @swagger
@@ -100,7 +101,7 @@ router.post("/getAllSkinConcerns", auth, skinConcernController.getAllSkinConcern
  *      '200':
  *        description: response on status 200
  */
-router.post("/updateSkinConcernById", auth, skinConcernController.updateSkinConcernById);
+router.post("/updateSkinConcernById", adminAuth, skinConcernController.updateSkinConcernById);
 
 /**
  * @swagger
@@ -126,6 +127,6 @@ router.post("/updateSkinConcernById", auth, skinConcernController.updateSkinConc
  *      '200':
  *        description: response on status 200
  */
-router.post("/deleteSkinConcernById", auth, skinConcernController.deleteSkinConcernById);
+router.post("/deleteSkinConcernById", adminAuth, skinConcernController.deleteSkinConcernById);
 
 module.exports = router;

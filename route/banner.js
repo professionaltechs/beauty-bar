@@ -1,6 +1,7 @@
 const bannerController = require('../controller/banner')
 const express = require('express')
 const auth = require("../functions/authentication");
+const adminAuth = require("../functions/adminAuthentication");
 
 const router = express.Router();
 
@@ -28,7 +29,7 @@ const router = express.Router();
  *      '200':
  *        description: response on status 200
  */
-router.post("/createBanner", auth, bannerController.createBanner);
+router.post("/createBanner", adminAuth, bannerController.createBanner);
 
 /**
  * @swagger
@@ -99,7 +100,7 @@ router.post("/getAllBanners", auth, bannerController.getAllBanners);
  *      '200':
  *        description: response on status 200
  */
-router.post("/updateBannerById", auth, bannerController.updateBannerById);
+router.post("/updateBannerById", adminAuth, bannerController.updateBannerById);
 
 /**
  * @swagger
@@ -125,6 +126,6 @@ router.post("/updateBannerById", auth, bannerController.updateBannerById);
  *      '200':
  *        description: response on status 200
  */
-router.post("/deleteBannerById", auth, bannerController.deleteBannerById);
+router.post("/deleteBannerById", adminAuth, bannerController.deleteBannerById);
 
 module.exports = router;

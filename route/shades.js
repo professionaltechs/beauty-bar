@@ -1,6 +1,7 @@
 const express = require('express')
-const auth = require("../functions/authentication");
 const shadesController = require("../controller/shades")
+const auth = require("../functions/authentication");
+const adminAuth = require("../functions/adminAuthentication");
 
 const router = express.Router();
 
@@ -35,7 +36,7 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/createShade", auth,shadesController.createShade);
+router.post("/createShade", adminAuth,shadesController.createShade);
 
 /**
  * @swagger
@@ -120,7 +121,7 @@ router.post("/getAllShades", auth, shadesController.getAllShades);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/updateShadeById", auth, shadesController.updateShadeById);
+router.post("/updateShadeById", adminAuth, shadesController.updateShadeById);
 
 /**
  * @swagger
@@ -150,6 +151,6 @@ router.post("/updateShadeById", auth, shadesController.updateShadeById);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/deleteShadeById", auth, shadesController.deleteShadeById);
+router.post("/deleteShadeById", adminAuth, shadesController.deleteShadeById);
 
 module.exports = router;

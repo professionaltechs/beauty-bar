@@ -65,8 +65,9 @@ exports.signIn = async (req, res) => {
         {
           phone: foundUser.phone,
           id: foundUser._id,
+          isAdmin: 0
         },
-        "test",
+        "BeautyBar",
         { expiresIn: "365d" }
       );
       const { ...responseUser } = foundUser._doc;

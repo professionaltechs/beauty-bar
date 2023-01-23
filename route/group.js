@@ -1,6 +1,7 @@
 const express = require('express')
-const auth = require("../functions/authentication");
 const groupController = require("../controller/group")
+const auth = require("../functions/authentication");
+const adminAuth = require("../functions/adminAuthentication");
 
 const router = express.Router();
 
@@ -38,7 +39,7 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/create", auth, groupController.create);
+router.post("/create", adminAuth, groupController.create);
 
 /**
  * @swagger
@@ -125,7 +126,7 @@ router.post("/getAll", auth, groupController.getAll);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/update", auth,groupController.update);
+router.post("/update", adminAuth ,groupController.update);
 
 /**
  * @swagger
@@ -155,6 +156,6 @@ router.post("/update", auth,groupController.update);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/delete", auth, groupController.delete);
+router.post("/delete", adminAuth, groupController.delete);
 
 module.exports = router;

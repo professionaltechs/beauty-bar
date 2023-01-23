@@ -22,6 +22,7 @@ const skinToneRoutes = require("./route/skinTone");
 const skinTypeRoutes = require("./route/skinType");
 const skinUnderToneRoutes = require("./route/skinUnderTone");
 const userRoutes = require("./route/user");
+const adminRoutes = require("./route/admin");
 const discountRoutes = require("./route/discount");
 
 // Middleware
@@ -36,6 +37,7 @@ app.use(function (req, res, next) {
 app.use(bodyParser.json());
 
 app.use("/api/user", userRoutes);
+app.use("/api/admin", adminRoutes);
 app.use("/api/skinType", skinTypeRoutes);
 app.use("/api/skinTone", skinToneRoutes);
 app.use("/api/skinUnderTone", skinUnderToneRoutes);
@@ -92,6 +94,7 @@ const swaggerOptions = {
     "./route/review.js",
     "./route/shades.js",
     "./route/discount.js",
+    "./route/admin.js",
     // "./route/popularProduct.js",
   ]
 }

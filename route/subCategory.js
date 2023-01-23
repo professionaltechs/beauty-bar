@@ -1,6 +1,7 @@
 const express = require('express')
-const auth = require("../functions/authentication");
 const subCategoryController = require("../controller/subCategory")
+const auth = require("../functions/authentication");
+const adminAuth = require("../functions/adminAuthentication");
 
 const router = express.Router();
 
@@ -37,7 +38,7 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/createSubCategory", auth, subCategoryController.createSubCategory);
+router.post("/createSubCategory", adminAuth, subCategoryController.createSubCategory);
 
 /**
  * @swagger
@@ -155,7 +156,7 @@ router.post("/getAllSubCategories", auth, subCategoryController.getAllSubCategor
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/updateSubCategoryById", auth,subCategoryController.updateSubCategoryById);
+router.post("/updateSubCategoryById", adminAuth,subCategoryController.updateSubCategoryById);
 
 /**
  * @swagger
@@ -185,6 +186,6 @@ router.post("/updateSubCategoryById", auth,subCategoryController.updateSubCatego
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/deleteSubCategoryById", auth, subCategoryController.deleteSubCategoryById);
+router.post("/deleteSubCategoryById", adminAuth, subCategoryController.deleteSubCategoryById);
 
 module.exports = router;

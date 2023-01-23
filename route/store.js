@@ -1,5 +1,5 @@
+const storeController = require('../controller/store')
 const express = require('express')
-const categoryController = require("../controller/category")
 const auth = require("../functions/authentication");
 const adminAuth = require("../functions/adminAuthentication");
 
@@ -7,48 +7,51 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/category/createCategory:
+ * /api/store/createStore:
  *  post:
  *    tags:
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: Create new category
+ *    description: Create new store
  *    requestBody:
+ *      description: store to create
  *      required: true
  *      content:
- *        application/json:  
+ *        application/json:
  *          schema:
  *            type: object
  *            required:
- *              - title
- *              - image
+ *              - name
  *            properties:
- *              title:
+ *              name:
  *                type: string
  *              image:
  *                type: string
+ *              coverImage:
+ *                type: string
+ *              address:
+ *                type: string
+ *              description:
+ *                type: string
  *    responses:
  *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
+ *        description: response on status 200
  */
-router.post("/createCategory", adminAuth, categoryController.createCategory);
+router.post("/createStore", adminAuth, storeController.createStore);
 
 /**
  * @swagger
- * /api/category/getCategoryById:
+ * /api/store/getStoreById:
  *  post:
  *    tags:
  *      - user
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get category by id
+ *    description: get store by Id 
  *    requestBody:
+ *      description: store
  *      required: true
  *      content:
  *        application/json:
@@ -61,44 +64,37 @@ router.post("/createCategory", adminAuth, categoryController.createCategory);
  *                type: string
  *    responses:
  *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
+ *        description: response on status 200
  */
-router.post("/getCategoryById", auth, categoryController.getCategoryById);
+router.post("/getStoreById", auth, storeController.getStoreById);
 
 /**
  * @swagger
- * /api/category/getAllCategories:
+ * /api/store/getAllStores:
  *  post:
  *    tags:
  *      - user
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get all categories
+ *    description: get all stores 
  *    responses:
  *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
+ *        description: response on status 200
  */
-router.post("/getAllCategories", auth, categoryController.getAllCategories);
+router.post("/getAllStores", auth, storeController.getAllStores);
 
 /**
  * @swagger
- * /api/category/updateCategoryById:
+ * /api/store/updateStoreById:
  *  post:
  *    tags:
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: update category by id
+ *    description: Update store
  *    requestBody:
+ *      description: update store
  *      required: true
  *      content:
  *        application/json:
@@ -109,30 +105,33 @@ router.post("/getAllCategories", auth, categoryController.getAllCategories);
  *            properties:
  *              id:
  *                type: string
- *              title:
+ *              name:
  *                type: string
  *              image:
  *                type: string
+ *              coverImage:
+ *                type: string
+ *              address:
+ *                type: string
+ *              description:
+ *                type: string
  *    responses:
  *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
+ *        description: response on status 200
  */
-router.post("/updateCategoryById", adminAuth,categoryController.updateCategoryById);
+router.post("/updateStoreById", adminAuth, storeController.updateStoreById);
 
 /**
  * @swagger
- * /api/category/deleteCategoryById:
+ * /api/store/deleteStoreById:
  *  post:
  *    tags:
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: delete category by id
+ *    description: delete store by Id 
  *    requestBody:
+ *      description: delete store by Id 
  *      required: true
  *      content:
  *        application/json:
@@ -145,12 +144,8 @@ router.post("/updateCategoryById", adminAuth,categoryController.updateCategoryBy
  *                type: string
  *    responses:
  *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
+ *        description: response on status 200
  */
-router.post("/deleteCategoryById", adminAuth, categoryController.deleteCategoryById);
+router.post("/deleteStoreById", adminAuth, storeController.deleteStoreById);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const skinToneController = require('../controller/skinTone')
 const express = require('express')
 const auth = require("../functions/authentication");
+const adminAuth = require("../functions/adminAuthentication");
 
 const router = express.Router();
 
@@ -31,7 +32,7 @@ const router = express.Router();
  *      '200':
  *        description: response on status 200
  */
-router.post("/createSkinTone", auth, skinToneController.createSkinTone);
+router.post("/createSkinTone", adminAuth, skinToneController.createSkinTone);
 
 /**
  * @swagger
@@ -104,7 +105,7 @@ router.post("/getAllSkinTones", auth, skinToneController.getAllSkinTones);
  *      '200':
  *        description: response on status 200
  */
-router.post("/updateSkinToneById", auth, skinToneController.updateSkinToneById);
+router.post("/updateSkinToneById", adminAuth, skinToneController.updateSkinToneById);
 
 /**
  * @swagger
@@ -130,6 +131,6 @@ router.post("/updateSkinToneById", auth, skinToneController.updateSkinToneById);
  *      '200':
  *        description: response on status 200
  */
-router.post("/deleteSkinToneById", auth, skinToneController.deleteSkinToneById);
+router.post("/deleteSkinToneById", adminAuth, skinToneController.deleteSkinToneById);
 
 module.exports = router;

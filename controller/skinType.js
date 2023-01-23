@@ -8,7 +8,7 @@ exports.createSkinType = async (req, res) => {
         const skinType = await new SkinType(req.body);
     
         skinType.save().then(response => {
-            res.json({
+            return res.json({
                 id: response._id,
                 message: "skinType created succesfully"
             })
@@ -45,7 +45,7 @@ exports.updateSkinTypeById = async (req, res) => {
         skinType.image = req.body.image || skinType.image;
     
         skinType.save().then(response => {
-            res.json({
+            return res.json({
                 skinType,
                 message: "updated succesfully"
             })
@@ -65,7 +65,7 @@ exports.deleteSkinTypeById = async (req, res) => {
         skinType.isDeleted = 1;
         skinType.save().then(response => {
             console.log(response)
-            res.json({
+            return res.json({
                 message: "deleted succesfully"
             })
         })

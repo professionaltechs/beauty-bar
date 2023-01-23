@@ -1,6 +1,7 @@
 const express = require('express')
-const auth = require("../functions/authentication");
 const brandController = require("../controller/brand")
+const auth = require("../functions/authentication");
+const adminAuth = require("../functions/adminAuthentication");
 
 const router = express.Router();
 
@@ -35,7 +36,7 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/createBrand", auth,brandController.createBrand);
+router.post("/createBrand", adminAuth ,brandController.createBrand);
 
 /**
  * @swagger
@@ -120,7 +121,7 @@ router.post("/getAllBrands", auth, brandController.getAllBrands);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/updateBrandById", auth, brandController.updateBrandById);
+router.post("/updateBrandById", adminAuth, brandController.updateBrandById);
 
 /**
  * @swagger
@@ -150,6 +151,6 @@ router.post("/updateBrandById", auth, brandController.updateBrandById);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/deleteBrandById", auth, brandController.deleteBrandById);
+router.post("/deleteBrandById", adminAuth, brandController.deleteBrandById);
 
 module.exports = router;

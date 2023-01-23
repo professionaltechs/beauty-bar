@@ -1,6 +1,7 @@
 const express = require('express')
-const auth = require("../functions/authentication");
 const productController = require("../controller/product")
+const auth = require("../functions/authentication");
+const adminAuth = require("../functions/adminAuthentication");
 
 const router = express.Router();
 
@@ -48,6 +49,8 @@ const router = express.Router();
  *                type: integer
  *              brandId:
  *                type: string
+ *              storeId:
+ *                type: string
  *              subCategoryId:
  *                type: string
  *              skinTypeId:
@@ -79,7 +82,7 @@ const router = express.Router();
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/createProduct", auth, productController.createProduct);
+router.post("/createProduct", adminAuth , productController.createProduct);
 
 /**
  * @swagger
@@ -262,6 +265,39 @@ router.post("/getFilteredProductsByPrice", auth, productController.getFilteredPr
 
 /**
  * @swagger
+ * /api/product/getFilteredProductsByStoreId:
+ *  post:
+ *    tags:
+ *      - user
+ *      - admin
+ *    security:
+ *      - bearerAuth: []
+ *    description: pass in "storeId" to get products of specific store, remove limit field to get all matched products.
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - storeId
+ *            properties:
+ *              storeId:
+ *                type: string
+ *              limit:
+ *                type: integer
+ *    responses:
+ *      '200':
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
+ */
+router.post("/getFilteredProductsByStoreId", auth, productController.getFilteredProductsByStoreId);
+
+/**
+ * @swagger
  * /api/product/getTop3NewestProducts:
  *  post:
  *    tags:
@@ -391,6 +427,8 @@ router.post("/getBestMatchProducts", auth, productController.getBestMatchProduct
  *                type: string
  *              brandId:
  *                type: string
+ *              storeId:
+ *                type: string
  *              skinTypeId:
  *                type: string
  *              skinToneId:
@@ -413,7 +451,7 @@ router.post("/getBestMatchProducts", auth, productController.getBestMatchProduct
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/updateProductById", auth, productController.updateProductById);
+router.post("/updateProductById", adminAuth , productController.updateProductById);
 
 /**
  * @swagger
@@ -443,6 +481,6 @@ router.post("/updateProductById", auth, productController.updateProductById);
  *      '500':
  *        description: Internal Server Error
  */
-router.post("/deleteProductById", auth, productController.deleteProductById);
+router.post("/deleteProductById", adminAuth , productController.deleteProductById);
 
 module.exports = router;
