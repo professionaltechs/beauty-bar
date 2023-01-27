@@ -3,8 +3,13 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const app = express();
+const multer = require("multer");
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
+require("dotenv").config()
+
+const DB = process.env.DB;
+const PORT = process.env.PORT;
 
 // Routes
 const bannerRoutes = require("./route/banner");
@@ -24,6 +29,9 @@ const skinUnderToneRoutes = require("./route/skinUnderTone");
 const userRoutes = require("./route/user");
 const adminRoutes = require("./route/admin");
 const discountRoutes = require("./route/discount");
+const uploadToS3Bucket = require("./route/uploadToS3Bucket");
+
+var uploads = multer().any();
 
 // Middleware
 app.use(cors());
@@ -35,6 +43,8 @@ app.use(function (req, res, next) {
   next();
 });
 app.use(bodyParser.json());
+app.use(uploads);
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/user", userRoutes);
 app.use("/api/admin", adminRoutes);
@@ -53,6 +63,7 @@ app.use("/api/review", reviewRoutes);
 app.use("/api/shades", shadesRoutes);
 // app.use("/api/popularProduct", popularProductRoutes);
 app.use("/api/discount", discountRoutes);
+app.use("/api/S3Bucket/", uploadToS3Bucket);
 
 // swaggerOptionObject
 const swaggerOptions = {
@@ -95,6 +106,7 @@ const swaggerOptions = {
     "./route/shades.js",
     "./route/discount.js",
     "./route/admin.js",
+    "./route/uploadToS3Bucket.js",
     // "./route/popularProduct.js",
   ]
 }
@@ -103,11 +115,11 @@ const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 mongoose
-  .connect(
-    "mongodb+srv://testDatabase:testdatabase@cluster0.xyfq66h.mongodb.net/?retryWrites=true&w=majority"
-  )
+  .connect(DB).then(res => {
+    console.log("DataBase Connected!")
+  })
   .catch((err) => console.log(err));
 
-app.listen(5000, () => {
-    console.log(`Server started on `)
+app.listen(PORT || 5000, () => {
+    console.log(`Server started on ${PORT || 5000}`)
 })

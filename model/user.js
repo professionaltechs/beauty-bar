@@ -4,11 +4,9 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     phone: {
         type: String,
-        unique : true
     },
     userId: {
-        type: String,
-        unique: true
+        type: String
     },
     loginMode: {
         type: String
