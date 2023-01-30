@@ -16,15 +16,16 @@ const router = express.Router();
  *      - bearerAuth: []
  *    description: upload to S3 Bucket and get image link.
  *    requestBody:
- *      required: true
  *      content:
  *        multipart/form-data:  
  *          schema:
  *            type: object
  *            properties:
- *              fileName:
- *                type: string,
- *                format: binary
+ *              file:
+ *                type: array
+ *                items:
+ *                  type: string
+ *                  format: binary
  *    responses:
  *      '200':
  *        description: 200 OK response

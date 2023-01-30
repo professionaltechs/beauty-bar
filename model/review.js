@@ -26,7 +26,7 @@ const reviewSchema = new Schema({
     isActive: {
         type: Number,
         required: false,
-        default: 0,
+        default: 1,
         min: 0,
         max: 1,
     },
