@@ -4,7 +4,7 @@ const User = require("../model/user");
 
 exports.signUp = async (req, res) => {
   const body = req.body;
-  User.findOne({ phone: body.phone }).then((found) => {
+  User.findOne({ firebase_uid: body.firebase_uid }).then((found) => {
     if (found) {
       return res.json({
         status: "success",
@@ -24,36 +24,13 @@ exports.signUp = async (req, res) => {
         console.log(error);
         res.json({ status: "failed", message: error });
       });
-
-    // const hashedPw = bcrypt
-    //     .hash(body.password, 12)
-    //     .then((hashedPw) => {
-    //         const newUser = new User(req.body);
-    //         newUser.password = hashedPw;
-    //         newUser
-    //             .save()
-    //             .then((result) => {
-    //                 res.json({
-    //                     status: "success",
-    //                     message: "user created successfully",
-    //                 });
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error);
-    //                 res.json({ status: "failed", message: error });
-    //             });
-    //     })
-    //     .catch((error) => {
-    //         console.log(error);
-    //         res.json({ status: "failed", message: error });
-    //     });
   });
 };
 
 exports.signIn = async (req, res) => {
   console.log(req.body);
   let foundUser;
-  User.findOne({ phone: req.body.phone }).then((user) => {
+  User.findOne({ firebase_uid: req.body.firebase_uid }, {__v: 0, createdAt: 0, updatedAt: 0}).then((user) => {
     if (!user) {
       res.json({
         status: "failed",
@@ -83,23 +60,24 @@ exports.signIn = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.body.id });
+    const user = await User.findOne({ _id: req.body.id }, {__v: 0, createdAt: 0, updatedAt: 0});
 
-    user.userId = req.body.userId || user.userId;
     user.name = req.body.name || user.name;
-    // user.email = req.body.email || user.email;
-    // user.password = req.body.password || user.password;
     user.skinTypeId = req.body.skinTypeId || user.skinTypeId;
     user.skinToneId = req.body.skinToneId || user.skinToneId;
     user.skinUnderToneId = req.body.skinUnderToneId || user.skinUnderToneId;
     user.skinConcernIds = req.body.skinConcernIds || user.skinConcernIds;
     user.age = req.body.age || user.age;
     user.gender = req.body.gender || user.gender;
-    user.phone = req.body.phone || user.phone;
+    // user.phone = req.body.phone || user.phone;
     user.profileImage = req.body.profileImage || user.profileImage;
     user.socialMedia = req.body.socialMedia || user.socialMedia;
     user.followers = req.body.followers || user.followers;
     user.posts = req.body.posts || user.posts;
+
+    if(user.isProfileComplete != 1){
+      user.isProfileComplete = 1
+    }
 
     user.save().then((response) => {
       res.json({

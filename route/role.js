@@ -1,5 +1,5 @@
-const skinToneController = require('../controller/skinTone')
 const express = require('express')
+const roleController = require("../controller/role")
 const auth = require("../functions/authentication");
 const adminAuth = require("../functions/adminAuthentication");
 
@@ -7,13 +7,13 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/skinTone/createSkinTone:
+ * /api/role/createRole:
  *  post:
  *    tags:
  *      - admin
- *    security:
+ *    security: 
  *      - bearerAuth: []
- *    description: Create new skinTone
+ *    description: Create new role
  *    requestBody:
  *      required: true
  *      content:
@@ -22,28 +22,34 @@ const router = express.Router();
  *            type: object
  *            required:
  *              - title
- *              - colorCode
+ *              - permissionIds
  *            properties:
  *              title:
  *                type: string
- *              colorCode:
- *                type: string
+ *              permissionIds:
+ *                type: array
+ *                items:
+ *                  type: string
  *    responses:
  *      '200':
- *        description: response on status 200
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
  */
-router.post("/createSkinTone", adminAuth, skinToneController.createSkinTone);
+router.post("/createRole", adminAuth,roleController.createRole);
 
 /**
  * @swagger
- * /api/skinTone/getSkinToneById:
+ * /api/role/getRoleById:
  *  post:
  *    tags:
  *      - user
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get skinTone by Id
+ *    description: get role by id
  *    requestBody:
  *      required: true
  *      content:
@@ -57,35 +63,43 @@ router.post("/createSkinTone", adminAuth, skinToneController.createSkinTone);
  *                type: string
  *    responses:
  *      '200':
- *        description: response on status 200
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
  */
-router.post("/getSkinToneById", auth, skinToneController.getSkinToneById);
+router.post("/getRoleById", auth,roleController.getRoleById);
 
 /**
  * @swagger
- * /api/skinTone/getAllSkinTones:
+ * /api/role/getAllRoles:
  *  post:
  *    tags:
  *      - user
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get all skinTones 
+ *    description: get all roles
  *    responses:
  *      '200':
- *        description: response on status 200
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
  */
-router.post("/getAllSkinTones", auth, skinToneController.getAllSkinTones);
+router.post("/getAllRoles", auth, roleController.getAllRoles);
 
 /**
  * @swagger
- * /api/skinTone/updateSkinToneById:
+ * /api/role/updateRoleById:
  *  post:
  *    tags:
  *      - admin
- *    security:
+ *    security: 
  *      - bearerAuth: []
- *    description: Update skinTone
+ *    description: update role by id
  *    requestBody:
  *      required: true
  *      content:
@@ -99,23 +113,29 @@ router.post("/getAllSkinTones", auth, skinToneController.getAllSkinTones);
  *                type: string
  *              title:
  *                type: string
- *              colorCode:
- *                type: string
+ *              permissionIds:
+ *                type: array
+ *                items:
+ *                  type: string
  *    responses:
  *      '200':
- *        description: response on status 200
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
  */
-router.post("/updateSkinToneById", adminAuth, skinToneController.updateSkinToneById);
+router.post("/updateRoleById", adminAuth, roleController.updateRoleById);
 
 /**
  * @swagger
- * /api/skinTone/deleteSkinToneById:
+ * /api/role/deleteRoleById:
  *  post:
  *    tags:
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: delete skinTone by Id
+ *    description: delete role by id
  *    requestBody:
  *      required: true
  *      content:
@@ -129,8 +149,12 @@ router.post("/updateSkinToneById", adminAuth, skinToneController.updateSkinToneB
  *                type: string
  *    responses:
  *      '200':
- *        description: response on status 200
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
  */
-router.post("/deleteSkinToneById", adminAuth, skinToneController.deleteSkinToneById);
+router.post("/deleteRoleById", adminAuth, roleController.deleteRoleById);
 
 module.exports = router;

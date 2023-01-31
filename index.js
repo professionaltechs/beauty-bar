@@ -29,6 +29,8 @@ const skinUnderToneRoutes = require("./route/skinUnderTone");
 const userRoutes = require("./route/user");
 const adminRoutes = require("./route/admin");
 const discountRoutes = require("./route/discount");
+const roleRoutes = require("./route/role");
+const permissionRoutes = require("./route/permission");
 const uploadToS3Bucket = require("./route/uploadToS3Bucket");
 
 var uploads = multer().any();
@@ -63,6 +65,8 @@ app.use("/api/review", reviewRoutes);
 app.use("/api/shades", shadesRoutes);
 // app.use("/api/popularProduct", popularProductRoutes);
 app.use("/api/discount", discountRoutes);
+app.use("/api/role", roleRoutes);
+app.use("/api/permission", permissionRoutes);
 app.use("/api/S3Bucket/", uploadToS3Bucket);
 
 // swaggerOptionObject
@@ -106,6 +110,8 @@ const swaggerOptions = {
     "./route/shades.js",
     "./route/discount.js",
     "./route/admin.js",
+    "./route/role.js",
+    "./route/permission.js",
     "./route/uploadToS3Bucket.js",
     // "./route/popularProduct.js",
   ]

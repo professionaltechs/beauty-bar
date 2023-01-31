@@ -42,7 +42,7 @@ exports.updateSkinUnderToneById = async (req, res) => {
         const skinUnderTone = await SkinUnderTone.findOne({_id: req.body.id});
     
         skinUnderTone.title = req.body.title || skinUnderTone.title;
-        skinUnderTone.image = req.body.image || skinUnderTone.image;
+        skinUnderTone.colorCode = req.body.colorCode || skinUnderTone.colorCode;
     
         skinUnderTone.save().then(response => {
             res.json({

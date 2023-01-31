@@ -2,10 +2,16 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
+    isProfileComplete: {
+        type: Number,
+        default: 0,
+        min: 0,
+        max: 1
+    },
     phone: {
         type: String,
     },
-    userId: {
+    firebase_uid: {
         type: String
     },
     loginMode: {

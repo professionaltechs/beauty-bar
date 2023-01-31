@@ -18,6 +18,16 @@ const StoreSchema = Schema({
     description: {
         type: String,
     },
+    email: {
+        type: String,
+    },
+    password: {
+        type: String,
+    },
+    manager: {
+        type: Schema.Types.ObjectId,
+        ref: "Role"
+    }
 })
 
 module.exports = mongoose.model("Store", StoreSchema)

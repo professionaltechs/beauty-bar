@@ -6,7 +6,7 @@ const skinUnderToneSchema = Schema({
         type: String,
         required: [true, "title is required"],
     },
-    image: {
+    colorCode: {
         type: String,
         required: [true, "image is required"]
     },

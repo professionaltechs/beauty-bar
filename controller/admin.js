@@ -40,7 +40,7 @@ exports.createAdmin = async (req, res) => {
 exports.signIn = async (req, res) => {
   console.log(req.body);
   let foundUser;
-  Admin.findOne({ phone: req.body.email }).then((user) => {
+  Admin.findOne({ phone: req.body.email }, {__v: 0}).then((user) => {
     if (!user) {
       res.json({
         status: "failed",

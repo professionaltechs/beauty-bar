@@ -1,5 +1,5 @@
-const skinToneController = require('../controller/skinTone')
 const express = require('express')
+const permissionController = require("../controller/permission")
 const auth = require("../functions/authentication");
 const adminAuth = require("../functions/adminAuthentication");
 
@@ -7,13 +7,13 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/skinTone/createSkinTone:
+ * /api/permission/createPermission:
  *  post:
  *    tags:
  *      - admin
- *    security:
+ *    security: 
  *      - bearerAuth: []
- *    description: Create new skinTone
+ *    description: Create new permission
  *    requestBody:
  *      required: true
  *      content:
@@ -22,28 +22,34 @@ const router = express.Router();
  *            type: object
  *            required:
  *              - title
- *              - colorCode
+ *              - permissionIds
  *            properties:
  *              title:
  *                type: string
- *              colorCode:
- *                type: string
+ *              permissionIds:
+ *                type: array
+ *                items:
+ *                  type: string
  *    responses:
  *      '200':
- *        description: response on status 200
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
  */
-router.post("/createSkinTone", adminAuth, skinToneController.createSkinTone);
+router.post("/createPermission", adminAuth,permissionController.createPermission);
 
 /**
  * @swagger
- * /api/skinTone/getSkinToneById:
+ * /api/permission/getPermissionById:
  *  post:
  *    tags:
  *      - user
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get skinTone by Id
+ *    description: get permission by id
  *    requestBody:
  *      required: true
  *      content:
@@ -57,35 +63,43 @@ router.post("/createSkinTone", adminAuth, skinToneController.createSkinTone);
  *                type: string
  *    responses:
  *      '200':
- *        description: response on status 200
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
  */
-router.post("/getSkinToneById", auth, skinToneController.getSkinToneById);
+router.post("/getPermissionById", auth,permissionController.getPermissionById);
 
 /**
  * @swagger
- * /api/skinTone/getAllSkinTones:
+ * /api/permission/getAllPermissions:
  *  post:
  *    tags:
  *      - user
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: get all skinTones 
+ *    description: get all permissions
  *    responses:
  *      '200':
- *        description: response on status 200
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
  */
-router.post("/getAllSkinTones", auth, skinToneController.getAllSkinTones);
+router.post("/getAllPermissions", auth, permissionController.getAllPermissions);
 
 /**
  * @swagger
- * /api/skinTone/updateSkinToneById:
+ * /api/permission/updatePermissionById:
  *  post:
  *    tags:
  *      - admin
- *    security:
+ *    security: 
  *      - bearerAuth: []
- *    description: Update skinTone
+ *    description: update permission by id
  *    requestBody:
  *      required: true
  *      content:
@@ -99,23 +113,29 @@ router.post("/getAllSkinTones", auth, skinToneController.getAllSkinTones);
  *                type: string
  *              title:
  *                type: string
- *              colorCode:
- *                type: string
+ *              permissionIds:
+ *                type: array
+ *                items:
+ *                  type: string
  *    responses:
  *      '200':
- *        description: response on status 200
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
  */
-router.post("/updateSkinToneById", adminAuth, skinToneController.updateSkinToneById);
+router.post("/updatePermissionById", adminAuth, permissionController.updatePermissionById);
 
 /**
  * @swagger
- * /api/skinTone/deleteSkinToneById:
+ * /api/permission/deletePermissionById:
  *  post:
  *    tags:
  *      - admin
  *    security:
  *      - bearerAuth: []
- *    description: delete skinTone by Id
+ *    description: delete permission by id
  *    requestBody:
  *      required: true
  *      content:
@@ -129,8 +149,12 @@ router.post("/updateSkinToneById", adminAuth, skinToneController.updateSkinToneB
  *                type: string
  *    responses:
  *      '200':
- *        description: response on status 200
+ *        description: 200 OK response
+ *      '404':
+ *        description: Not Found
+ *      '500':
+ *        description: Internal Server Error
  */
-router.post("/deleteSkinToneById", adminAuth, skinToneController.deleteSkinToneById);
+router.post("/deletePermissionById", adminAuth, permissionController.deletePermissionById);
 
 module.exports = router;

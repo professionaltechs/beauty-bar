@@ -26,7 +26,7 @@ const router = express.Router();
  *            properties:
  *              title:
  *                type: string
- *              image:
+ *              colorCode:
  *                type: string
  *    responses:
  *      '200':
@@ -99,7 +99,7 @@ router.post("/getAllSkinUnderTones", auth, skinUnderToneController.getAllSkinUnd
  *                type: string
  *              title:
  *                type: string
- *              image:
+ *              colorCode:
  *                type: string
  *    responses:
  *      '200':

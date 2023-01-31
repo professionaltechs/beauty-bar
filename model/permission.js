@@ -1,14 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const skinToneSchema = Schema({
+const permissionSchema = Schema({
     title: {
         type: String,
         required: [true, "title is required"],
-    },
-    colorCode: {
-        type: String,
-        required: [true, "image is required"]
     },
     isActive: {
         type: Number,
@@ -28,4 +24,4 @@ const skinToneSchema = Schema({
     { timestamps: true }
 )
 
-module.exports = mongoose.model("SkinTone", skinToneSchema);
+module.exports = mongoose.model("Permission", permissionSchema)

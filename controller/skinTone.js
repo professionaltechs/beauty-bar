@@ -30,7 +30,7 @@ exports.getSkinToneById = async (req, res) => {
 }
 
 exports.getAllSkinTones = async (req, res) => {
-    const skinTone = await SkinTone.find({isDeleted: {$ne: 1}});
+    const skinTone = await SkinTone.find({isDeleted: {$ne: 1}}, {__v: 0, createdAt: 0, updatedAt: 0, isDeleted: 0, isActive: 0});
 
     res.json({
         message: skinTone
@@ -42,7 +42,7 @@ exports.updateSkinToneById = async (req, res) => {
         const skinTone = await SkinTone.findOne({_id: req.body.id});
     
         skinTone.title = req.body.title || skinTone.title;
-        skinTone.image = req.body.image || skinTone.image;
+        skinTone.colorCode = req.body.colorCode || skinTone.colorCode;
     
         skinTone.save().then(response => {
             res.json({
