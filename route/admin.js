@@ -26,6 +26,10 @@ const adminAuth = require("../functions/adminAuthentication");
  *                type: string
  *              password:
  *                type: string
+ *              fistName:
+ *                type: string
+ *              lastName:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200

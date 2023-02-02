@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const Store = require("../model/store");
 
 exports.storeSignUp = async (req, res) => {
@@ -6,7 +8,7 @@ exports.storeSignUp = async (req, res) => {
     if (found) {
       return res.json({
         status: "success",
-        message: "user exists with this email",
+        message: "store exists with this email",
       });
     }
     bcrypt
@@ -19,7 +21,7 @@ exports.storeSignUp = async (req, res) => {
           .then((result) => {
             res.json({
               status: "success",
-              message: "admin created successfully",
+              message: "store created successfully",
             });
           })
           .catch((error) => {
@@ -37,36 +39,42 @@ exports.storeSignUp = async (req, res) => {
 exports.storeSignIn = async (req, res) => {
   console.log(req.body);
   let foundUser;
-  Store.findOne({ email: req.body.email }).then((user) => {
-    if (!user) {
-      res.json({
-        status: "failed",
-        message: "the user has not been found with this email",
-      });
-    } else {
-      foundUser = user;
-      bcrypt.compare(req.body.password, user.password).then((response) => {
-        console.log(response);
-        const token = jwt.sign(
-          {
-            email: foundUser.email,
-            id: foundUser._id,
-            isStore: 1,
-            role: foundUser.role
-          },
-          "BeautyBar",
-          { expiresIn: "365d" }
-        );
-        const { password, ...responseUser } = foundUser._doc;
+  Store.findOne({ email: req.body.email })
+    .populate({
+      path: "manager",
+      populate: { path: "permissionIds", select: { _id: 0, title: 1 } },
+      select: { _id: 0, title: 1, permissionIds: 1 },
+    })
+    .then((user) => {
+      if (!user) {
         res.json({
-          status: "success",
-          message: "the user has been loggedIn",
-          Data: responseUser,
-          token: token,
+          status: "failed",
+          message: "the store has not been found with this email",
         });
-      });
-    }
-  });
+      } else {
+        foundUser = user;
+        bcrypt.compare(req.body.password, user.password).then((response) => {
+          console.log(response);
+          const token = jwt.sign(
+            {
+              email: foundUser.email,
+              id: foundUser._id,
+              isStore: 1,
+              role: foundUser.role,
+            },
+            "BeautyBar",
+            { expiresIn: "365d" }
+          );
+          const { __v, password, ...responseUser } = foundUser._doc;
+          res.json({
+            status: "success",
+            message: "the store has been loggedIn",
+            Data: responseUser,
+            token: token,
+          });
+        });
+      }
+    });
 };
 
 exports.createStore = async (req, res) => {
@@ -91,7 +99,13 @@ exports.getStoreById = async (req, res) => {
   const store = await Store.findOne({
     _id: req.body.id,
     isDeleted: { $ne: 1 },
-  });
+  })
+    .select({ __v: 0, password: 0 })
+    .populate({
+      path: "manager",
+      populate: { path: "permissionIds", select: { _id: 0, title: 1 } },
+      select: { _id: 0, title: 1, permissionIds: 1 },
+    });
 
   res.json({
     store,

@@ -9,6 +9,14 @@ const AdminSchema = Schema({
     password: {
         type: String,
         required: [true, "Password is Required"],
+    },
+    fistName: {
+        type: String,
+        required: [true, "fistName is Required"],
+    },
+    lastName: {
+        type: String,
+        required: [true, "lastName is Required"],
     }
 })
 

@@ -19,14 +19,14 @@ exports.createPermission = async (req, res) => {
 }
 
 exports.getPermissionById = async (req, res) => {
-    const permission = await Permission.findOne({_id: req.body.id, isDeleted: {$ne: 1}}).select({createdAt: 0, updatedAt: 0});
+    const permission = await Permission.findOne({_id: req.body.id, isDeleted: {$ne: 1}}).select({createdAt: 0, updatedAt: 0, __v: 0, isActive: 0, isDeleted: 0});
     res.json({
         permission
     })
 }
 
 exports.getAllPermissions = async (req, res) => {
-    const permission = await Permission.find({isDeleted: {$ne: 1}}).select({createdAt: 0, updatedAt: 0});
+    const permission = await Permission.find({isDeleted: {$ne: 1}}).select({createdAt: 0, updatedAt: 0, __v: 0, isActive: 0, isDeleted: 0});
     res.json({
         permission
     })
@@ -34,7 +34,7 @@ exports.getAllPermissions = async (req, res) => {
 
 exports.updatePermissionById = async (req, res) => {
     try {
-        const permission = await Permission.findOne({_id: req.body.id}).select({createdAt: 0, updatedAt: 0});
+        const permission = await Permission.findOne({_id: req.body.id}).select({createdAt: 0, updatedAt: 0, __v: 0, isActive: 0, isDeleted: 0});
     
         permission.title = req.body.title || permission.title;
         permission.permissionIds = req.body.permissionIds || permission.permissionIds;

@@ -22,14 +22,9 @@ const router = express.Router();
  *            type: object
  *            required:
  *              - title
- *              - permissionIds
  *            properties:
  *              title:
  *                type: string
- *              permissionIds:
- *                type: array
- *                items:
- *                  type: string
  *    responses:
  *      '200':
  *        description: 200 OK response

@@ -5,7 +5,7 @@ const User = require("../model/user");
 
 exports.createAdmin = async (req, res) => {
   const body = req.body;
-  Admin.findOne({ phone: body.email }).then((found) => {
+  Admin.findOne({ email: body.email }).then((found) => {
     if (found) {
       return res.json({
         status: "success",
@@ -40,7 +40,7 @@ exports.createAdmin = async (req, res) => {
 exports.signIn = async (req, res) => {
   console.log(req.body);
   let foundUser;
-  Admin.findOne({ phone: req.body.email }, {__v: 0}).then((user) => {
+  Admin.findOne({ email: req.body.email }, {__v: 0}).then((user) => {
     if (!user) {
       res.json({
         status: "failed",

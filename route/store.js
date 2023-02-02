@@ -23,8 +23,17 @@ const router = express.Router();
  *            type: object
  *            required:
  *              - name
+ *              - email
+ *              - password
+ *              - manager
  *            properties:
  *              name:
+ *                type: string
+ *              email:
+ *                type: string
+ *              password:
+ *                type: string
+ *              manager:
  *                type: string
  *              image:
  *                type: string
@@ -39,6 +48,34 @@ const router = express.Router();
  *        description: response on status 200
  */
 router.post("/createStore", adminAuth, storeController.createStore);
+
+/**
+ * @swagger
+ * /api/store/storeSignIn:
+ *  post:
+ *    tags:
+ *      - store
+ *    description: store signin
+ *    requestBody:
+ *      description: store signin
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - email
+ *              - password
+ *            properties:
+ *              email:
+ *                type: string
+ *              password:
+ *                type: string
+ *    responses:
+ *      '200':
+ *        description: response on status 200
+ */
+router.post("/storeSignIn", storeController.storeSignIn);
 
 /**
  * @swagger

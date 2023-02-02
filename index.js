@@ -31,6 +31,7 @@ const adminRoutes = require("./route/admin");
 const discountRoutes = require("./route/discount");
 const roleRoutes = require("./route/role");
 const permissionRoutes = require("./route/permission");
+const storeRoutes = require("./route/store");
 const uploadToS3Bucket = require("./route/uploadToS3Bucket");
 
 var uploads = multer().any();
@@ -67,6 +68,7 @@ app.use("/api/shades", shadesRoutes);
 app.use("/api/discount", discountRoutes);
 app.use("/api/role", roleRoutes);
 app.use("/api/permission", permissionRoutes);
+app.use("/api/store", storeRoutes);
 app.use("/api/S3Bucket/", uploadToS3Bucket);
 
 // swaggerOptionObject
