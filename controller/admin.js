@@ -71,19 +71,12 @@ exports.signIn = async (req, res) => {
   });
 };
 
-exports.testAdmin = async (req, res) => {
-//   if (req.user.isAdmin != 1) {
-//     res.json({
-//         error: "Admin Acces Denied",
-//         message: "this Api is only accessible by admin"
-//     });
-//   }
-  if (req.user.isAdmin == 1) {
-    res.json({ admin: "yes" });
-  } else {
-    res.json({ admin: "no" });
-  }
-};
+exports.getAdminDetails = async (req, res) => {
+  const admin = await Admin.findOne({_id: req.body.id}, {password: 0, __v: 0})
+  res.json({
+    admin
+  })
+}
 
 exports.getUserList = async (req, res) => {
   try {

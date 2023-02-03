@@ -66,6 +66,30 @@ router.post("/signIn", adminController.signIn);
 
 /**
  * @swagger
+ * /api/admin/getAdminDetails:
+ *  post:
+ *    tags:
+ *      - admin
+ *    description: Admin Details
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - id
+ *            properties:
+ *              id:
+ *                type: string
+ *    responses:
+ *      '200':
+ *        description: response on status 200
+ */
+router.post("/getAdminDetails", adminController.getAdminDetails);
+
+/**
+ * @swagger
  * /api/admin/getUserList:
  *  post:
  *    tags:
