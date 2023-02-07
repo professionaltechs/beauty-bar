@@ -11,6 +11,7 @@ const router = express.Router();
  *  post:
  *    tags:
  *      - admin
+ *      - store
  *    security:
  *      - bearerAuth: []
  *    description: Create new store
@@ -126,7 +127,7 @@ router.post("/getAllStores", auth, storeController.getAllStores);
  * /api/store/updateStoreById:
  *  post:
  *    tags:
- *      - admin
+ *      - store
  *    security:
  *      - bearerAuth: []
  *    description: Update store
@@ -164,6 +165,7 @@ router.post("/updateStoreById", adminAuth, storeController.updateStoreById);
  *  post:
  *    tags:
  *      - admin
+ *      - store
  *    security:
  *      - bearerAuth: []
  *    description: delete store by Id 

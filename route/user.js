@@ -20,8 +20,11 @@ const router = express.Router();
  *            type: object
  *            required:
  *              - phone
+ *              - firebase_uid
  *            properties:
  *              phone:
+ *                type: string
+ *              firebase_uid:
  *                type: string
  *    responses:
  *      '200':
@@ -45,8 +48,11 @@ router.post("/", userController.signUp);
  *            type: object
  *            required:
  *              - phone
+ *              - firebase_uid
  *            properties:
  *              phone:
+ *                type: string
+ *              firebase_uid:
  *                type: string
  *    responses:
  *      '200':

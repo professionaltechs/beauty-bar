@@ -115,6 +115,7 @@ const swaggerOptions = {
     "./route/role.js",
     "./route/permission.js",
     "./route/uploadToS3Bucket.js",
+    "./route/store.js",
     // "./route/popularProduct.js",
   ]
 }
