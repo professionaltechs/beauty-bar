@@ -5,38 +5,7 @@ const adminAuth = require("../functions/adminAuthentication");
 
 const router = express.Router();
 
-/**
- * @swagger
- * /api/brand/createBrand:
- *  post:
- *    tags:
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: Create new brand
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - title
- *              - image
- *            properties:
- *              title:
- *                type: string
- *              image:
- *                type: string
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/createBrand", adminAuth ,brandController.createBrand);
+
 
 /**
  * @swagger
@@ -44,7 +13,6 @@ router.post("/createBrand", adminAuth ,brandController.createBrand);
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: get brand by id
@@ -75,7 +43,6 @@ router.post("/getBrandById", auth,brandController.getBrandById);
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: get all brands
@@ -88,69 +55,5 @@ router.post("/getBrandById", auth,brandController.getBrandById);
  *        description: Internal Server Error
  */
 router.post("/getAllBrands", auth, brandController.getAllBrands);
-
-/**
- * @swagger
- * /api/brand/updateBrandById:
- *  post:
- *    tags:
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: update brand by id
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *             - id
- *            properties:
- *              id:
- *                type: string
- *              title:
- *                type: string
- *              image:
- *                type: string
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/updateBrandById", adminAuth, brandController.updateBrandById);
-
-/**
- * @swagger
- * /api/brand/deleteBrandById:
- *  post:
- *    tags:
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: delete brand by id
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - id
- *            properties:
- *              id:
- *                type: string
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/deleteBrandById", adminAuth, brandController.deleteBrandById);
 
 module.exports = router;

@@ -3,24 +3,6 @@ const Product = require("../model/product");
 const User = require("../model/user");
 const Review = require("../model/review");
 
-exports.createProduct = async (req, res) => {
-    try {
-        const product = await new Product(req.body);
-    
-        product.save().then(response => {
-            res.status(200).json({
-                id: response._id,
-                message: "product created succesfully"
-            })
-        })
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            message: error.message
-        })
-    }
-}
-
 exports.getProductDetailsById = async (req, res) => {
     // "categoryId subCategoryId brandId skinTypeId skinToneId skinUnderToneId skinConcernIds shades storeId"
     try {
@@ -66,71 +48,6 @@ exports.getAllProducts = async (req, res) => {
         res.status(200).json({
             message: product
         })
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            message: error.message
-        })
-    }
-}
-
-exports.updateProductById = async (req, res) => {
-    try {
-        const product = await Product.findOne({_id: req.body.id});
-        if(!product){
-            res.status(404).json({
-                message: "Product not found with given id "
-            });
-        }
-    
-        product.images = req.body.images || product.images;
-        product.title = req.body.title || product.title;
-        product.price = req.body.price || product.price;
-        product.rating = req.body.rating || product.rating;
-        product.description = req.body.description || product.description;
-        product.ingredients = req.body.ingredients || product.ingredients;
-        product.discount = req.body.discount || product.discount;
-        product.categoryId = req.body.categoryId || product.categoryId;
-        product.subCategoryId = req.body.subCategoryId || product.subCategoryId;
-        product.brandId = req.body.brandId || product.brandId;
-        product.storeId = req.body.storeId || product.storeId;
-        product.skinTypeId = req.body.skinTypeId || product.skinTypeId;
-        product.skinToneId = req.body.skinToneId || product.skinToneId;
-        product.skinUnderToneId = req.body.skinUnderToneId || product.skinUnderToneId;
-        product.skinConcernIds = req.body.skinConcernIds || product.skinConcernIds;
-        product.shades = req.body.shades || product.shades;
-    
-        product.save().then(response => {
-            res.status(200).json({
-                product,
-                message: "updated succesfully"
-            })
-        })
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            message: error.message
-        })
-    }
-}
-
-exports.deleteProductById = async (req, res) => {
-    try {
-        const product = await Product.findOne({_id: req.body.id});
-        if(!product){
-            res.status(404).json({
-                message: "Product not found with given id "
-            });
-        }
-    
-        product.isDeleted = 1;
-        product.save().then(response => {
-            console.log(response)
-            res.status(200).json({
-                message: "deleted succesfully"
-            })
-        })
-        
     } catch (error) {
         console.log(error)
         res.status(500).json({

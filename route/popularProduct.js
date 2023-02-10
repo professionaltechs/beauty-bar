@@ -6,36 +6,6 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/popularProduct/create:
- *  post:
- *    tags:
- *      - admin
- *    security: 
- *      - bearerAuth: []
- *    description: Create new popularProduct
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - productId
- *            properties:
- *              productId:
- *                type: string
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/create", auth, popularProductController.create);
-
-/**
- * @swagger
  * /api/popularProduct/get:
  *  post:
  *    tags:
@@ -83,67 +53,5 @@ router.post("/get", auth, popularProductController.get);
  *        description: Internal Server Error
  */
 router.post("/getAll", auth, popularProductController.getAll);
-
-/**
- * @swagger
- * /api/popularProduct/update:
- *  post:
- *    tags:
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: update popularProduct by id
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - id
- *            properties:
- *              id:
- *                type: string
- *              productId:
- *                type: string
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/update", auth, popularProductController.update);
-
-/**
- * @swagger
- * /api/popularProduct/delete:
- *  post:
- *    tags:
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: delete popularProduct by id
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - id
- *            properties:
- *              id:
- *                type: string
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/delete", auth, popularProductController.delete);
 
 module.exports = router;

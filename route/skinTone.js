@@ -1,38 +1,8 @@
 const skinToneController = require('../controller/skinTone')
 const express = require('express')
 const auth = require("../functions/authentication");
-const adminAuth = require("../functions/adminAuthentication");
 
 const router = express.Router();
-
-/**
- * @swagger
- * /api/skinTone/createSkinTone:
- *  post:
- *    tags:
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: Create new skinTone
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - title
- *              - colorCode
- *            properties:
- *              title:
- *                type: string
- *              colorCode:
- *                type: string
- *    responses:
- *      '200':
- *        description: response on status 200
- */
-router.post("/createSkinTone", adminAuth, skinToneController.createSkinTone);
 
 /**
  * @swagger
@@ -40,7 +10,6 @@ router.post("/createSkinTone", adminAuth, skinToneController.createSkinTone);
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: get skinTone by Id
@@ -67,7 +36,6 @@ router.post("/getSkinToneById", auth, skinToneController.getSkinToneById);
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: get all skinTones 
@@ -76,61 +44,5 @@ router.post("/getSkinToneById", auth, skinToneController.getSkinToneById);
  *        description: response on status 200
  */
 router.post("/getAllSkinTones", auth, skinToneController.getAllSkinTones);
-
-/**
- * @swagger
- * /api/skinTone/updateSkinToneById:
- *  post:
- *    tags:
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: Update skinTone
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - id
- *            properties:
- *              id:
- *                type: string
- *              title:
- *                type: string
- *              colorCode:
- *                type: string
- *    responses:
- *      '200':
- *        description: response on status 200
- */
-router.post("/updateSkinToneById", adminAuth, skinToneController.updateSkinToneById);
-
-/**
- * @swagger
- * /api/skinTone/deleteSkinToneById:
- *  post:
- *    tags:
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: delete skinTone by Id
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - id
- *            properties:
- *              id:
- *                type: string
- *    responses:
- *      '200':
- *        description: response on status 200
- */
-router.post("/deleteSkinToneById", adminAuth, skinToneController.deleteSkinToneById);
 
 module.exports = router;

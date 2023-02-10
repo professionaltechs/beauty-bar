@@ -27,7 +27,7 @@ const skinToneRoutes = require("./route/skinTone");
 const skinTypeRoutes = require("./route/skinType");
 const skinUnderToneRoutes = require("./route/skinUnderTone");
 const userRoutes = require("./route/user");
-const adminRoutes = require("./route/admin");
+// const adminRoutes = require("./route/admin");
 const discountRoutes = require("./route/discount");
 const roleRoutes = require("./route/role");
 const permissionRoutes = require("./route/permission");
@@ -50,7 +50,7 @@ app.use(uploads);
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/user", userRoutes);
-app.use("/api/admin", adminRoutes);
+// app.use("/api/admin", adminRoutes);
 app.use("/api/skinType", skinTypeRoutes);
 app.use("/api/skinTone", skinToneRoutes);
 app.use("/api/skinUnderTone", skinUnderToneRoutes);
@@ -111,7 +111,7 @@ const swaggerOptions = {
     "./route/review.js",
     "./route/shades.js",
     "./route/discount.js",
-    "./route/admin.js",
+    // "./route/admin.js",
     "./route/role.js",
     "./route/permission.js",
     "./route/uploadToS3Bucket.js",

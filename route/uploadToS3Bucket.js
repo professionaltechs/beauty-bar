@@ -1,7 +1,6 @@
 const express = require('express')
 const uploadToS3BucketController = require("../controller/uploadToS3Bucket")
 const auth = require("../functions/authentication");
-const adminAuth = require("../functions/adminAuthentication");
 
 const router = express.Router();
 
@@ -10,7 +9,6 @@ const router = express.Router();
  * /api/S3Bucket/uploadToS3Bucket:
  *  post:
  *    tags:
- *      - admin
  *      - user
  *    security:
  *      - bearerAuth: []
@@ -35,6 +33,5 @@ const router = express.Router();
  *        description: Internal Server Error
  */
 router.post("/uploadToS3Bucket", auth, uploadToS3BucketController.uploadToS3Bucket);
-
 
 module.exports = router;

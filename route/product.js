@@ -7,90 +7,10 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/product/createProduct:
- *  post:
- *    tags:  
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: Create new product
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - images
- *              - title
- *              - price
- *              - ingredients
- *              - categoryId
- *              - subCategoryId
- *              - brandId
- *            properties:
- *              images:
- *                type: array
- *                items:
- *                  type: string
- *              skinConcernIds:
- *                type: array
- *                items:
- *                  type: string
- *              shades:
- *                type: array
- *                items:
- *                  type: string
- *              title:
- *                type: string
- *              price:
- *                type: integer
- *              rating:
- *                type: integer
- *              brandId:
- *                type: string
- *              storeId:
- *                type: string
- *              subCategoryId:
- *                type: string
- *              skinTypeId:
- *                type: string
- *              skinToneId:
- *                type: string
- *              skinUnderToneId:
- *                type: string
- *              description:
- *                type: object
- *                properties:
- *                  images:
- *                    type: array
- *                    items:
- *                      type: string
- *                  text:
- *                    type: string
- *                  videoURL:
- *                    type: string
- *              ingredients:
- *                type: string
- *              categoryId:
- *                type: string
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/createProduct", adminAuth , productController.createProduct);
-
-/**
- * @swagger
  * /api/product/getProductDetailsById:
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: get product by id
@@ -121,7 +41,6 @@ router.post("/getProductDetailsById", auth, productController.getProductDetailsB
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: get product by subCategory id, remove limit field to get all matched products.
@@ -154,7 +73,6 @@ router.post("/getProductsBySubCatId", auth, productController.getProductsBySubCa
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: get product by Brand id, remove limit field to get all matched products.
@@ -187,7 +105,6 @@ router.post("/getProductsByBrandId", auth, productController.getProductsByBrandI
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: get all products
@@ -207,7 +124,6 @@ router.post("/getAllProducts", auth, productController.getAllProducts);
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: get popular products by passing the limit(number of products to fetch) this will be also be used for top 10 || 3 products and also for top rated products
@@ -236,7 +152,6 @@ router.post("/getPopularProducts", auth, productController.getPopularProducts);
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: pass in "highest" for products filtered by highest price and "lowest" for lowest price, remove limit field to get all matched products.
@@ -269,7 +184,6 @@ router.post("/getFilteredProductsByPrice", auth, productController.getFilteredPr
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: pass in "storeId" to get products of specific store, remove limit field to get all matched products.
@@ -302,7 +216,6 @@ router.post("/getFilteredProductsByStoreId", auth, productController.getFiltered
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: get top 3 newest products
@@ -322,7 +235,6 @@ router.post("/getTop3NewestProducts", auth, productController.getTop3NewestProdu
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: get discounted products by passing limit or remove the limit field to get all discounted products.
@@ -351,7 +263,6 @@ router.post("/getDiscountedProducts", auth, productController.getDiscountedProdu
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: get user's best match products by passing in limit and user id
@@ -377,110 +288,5 @@ router.post("/getDiscountedProducts", auth, productController.getDiscountedProdu
  *        description: Internal Server Error
  */
 router.post("/getBestMatchProducts", auth, productController.getBestMatchProducts);
-
-/**
- * @swagger
- * /api/product/updateProductById:
- *  post:
- *    tags:
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: update product
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - id
- *            properties:
- *              id:
- *                type: string
- *              images:
- *                type: array
- *                items:
- *                  type: string
- *              title:
- *                type: string
- *              price:
- *                type: integer
- *              rating:
- *                type: integer
- *              description:
- *                type: object
- *                properties:
- *                  images:
- *                    type: array
- *                    items:
- *                      type: string
- *                  text:
- *                    type: string
- *                  videoURL:
- *                    type: string
- *              ingredients:
- *                type: string
- *              categoryId:
- *                type: string
- *              subCategoryId:
- *                type: string
- *              brandId:
- *                type: string
- *              storeId:
- *                type: string
- *              skinTypeId:
- *                type: string
- *              skinToneId:
- *                type: string
- *              skinUnderToneId:
- *                type: string
- *              skinConcernIds:
- *                type: array
- *                items:
- *                  type: string
- *              shades:
- *                type: array
- *                items:
- *                  type: string
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/updateProductById", adminAuth , productController.updateProductById);
-
-/**
- * @swagger
- * /api/product/deleteProductById:
- *  post:
- *    tags:
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: delete new product
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - id
- *            properties:
- *              id:
- *                type: string
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/deleteProductById", adminAuth , productController.deleteProductById);
 
 module.exports = router;

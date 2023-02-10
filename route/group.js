@@ -1,45 +1,8 @@
 const express = require('express')
 const groupController = require("../controller/group")
 const auth = require("../functions/authentication");
-const adminAuth = require("../functions/adminAuthentication");
 
 const router = express.Router();
-
-/**
- * @swagger
- * /api/group/create:
- *  post:
- *    tags:
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: Create new group
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - title
- *              - image
- *              - description
- *            properties:
- *              title:
- *                type: string
- *              image: 
- *                type: string
- *              description: 
- *                type: string
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/create", adminAuth, groupController.create);
 
 /**
  * @swagger
@@ -47,7 +10,6 @@ router.post("/create", adminAuth, groupController.create);
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: get group by id
@@ -78,7 +40,6 @@ router.post("/get", auth, groupController.get);
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: get all groups
@@ -91,71 +52,5 @@ router.post("/get", auth, groupController.get);
  *        description: Internal Server Error
  */
 router.post("/getAll", auth, groupController.getAll);
-
-/**
- * @swagger
- * /api/group/update:
- *  post:
- *    tags:
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: update group by id
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - id
- *            properties:
- *              id:
- *                type: string
- *              title:
- *                type: string
- *              image: 
- *                type: string
- *              description: 
- *                type: string
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/update", adminAuth ,groupController.update);
-
-/**
- * @swagger
- * /api/group/delete:
- *  post:
- *    tags:
- *      - admin
- *    security:
- *      - bearerAuth: []
- *    description: delete group by id
- *    requestBody:
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - id
- *            properties:
- *              id:
- *                type: string
- *    responses:
- *      '200':
- *        description: 200 OK response
- *      '404':
- *        description: Not Found
- *      '500':
- *        description: Internal Server Error
- */
-router.post("/delete", adminAuth, groupController.delete);
 
 module.exports = router;
