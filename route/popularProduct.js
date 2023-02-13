@@ -9,7 +9,7 @@ const router = express.Router();
  * /api/popularProduct/get:
  *  post:
  *    tags:
- *      - admin
+ *      - user
  *    security:
  *      - bearerAuth: []
  *    description: get popularProduct by id
@@ -40,7 +40,6 @@ router.post("/get", auth, popularProductController.get);
  *  post:
  *    tags:
  *      - user
- *      - admin
  *    security:
  *      - bearerAuth: []
  *    description: get all popularProduct

@@ -14,6 +14,15 @@ const UserSchema = new Schema({
     firebase_uid: {
         type: String
     },
+    google_uid: {
+        type: String
+    },
+    facebook_uid: {
+        type: String
+    },
+    kakao_uid: {
+        type: String
+    },
     loginMode: {
         type: String
     },

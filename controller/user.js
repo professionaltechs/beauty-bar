@@ -2,6 +2,10 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../model/user");
 
+// login mode -> 0 -> phone number login
+// login mode -> 1 -> google login
+// login mode -> 2 -> facebook login
+// login mode -> 3 -> kakao login
 exports.signUp = async (req, res) => {
   const body = req.body;
   User.findOne({ firebase_uid: body.firebase_uid }).then((found) => {
@@ -28,34 +32,40 @@ exports.signUp = async (req, res) => {
 };
 
 exports.signIn = async (req, res) => {
-  console.log(req.body);
   let foundUser;
-  User.findOne({ firebase_uid: req.body.firebase_uid }, {__v: 0, createdAt: 0, updatedAt: 0}).then((user) => {
-    if (!user) {
-      res.json({
-        status: "failed",
-        message: "the user has not been found with this phone",
-      });
-    } else {
-      foundUser = user;
-      const token = jwt.sign(
-        {
-          phone: foundUser.phone,
-          id: foundUser._id,
-          isAdmin: 0
-        },
-        "BeautyBar",
-        { expiresIn: "365d" }
-      );
-      const { ...responseUser } = foundUser._doc;
-      res.json({
-        status: "success",
-        message: "the user has been loggedIn",
-        Data: responseUser,
-        token: token,
-      });
-    }
-  });
+  if(req.body.loginMode === '0'){
+    User.findOne({ firebase_uid: req.body.firebase_uid, phone: req.body.phone }, {__v: 0, createdAt: 0, updatedAt: 0}).then((user) => {
+      if (!user) {
+        res.json({
+          status: "failed",
+          message: "the user has not been found with this phone",
+        });
+      } else {
+        foundUser = user;
+        const token = jwt.sign(
+          {
+            phone: foundUser.phone,
+            id: foundUser._id,
+            isAdmin: 0
+          },
+          "BeautyBar",
+          { expiresIn: "365d" }
+        );
+        const { ...responseUser } = foundUser._doc;
+        res.json({
+          status: "success",
+          message: "the user has been loggedIn",
+          Data: responseUser,
+          token: token,
+        });
+      }
+    });
+  }else{
+    res.json({
+      status: "failed",
+      message: "Please select a valid login mode"
+    })
+  }
 };
 
 exports.update = async (req, res) => {
