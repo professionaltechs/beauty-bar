@@ -36,9 +36,21 @@ exports.signUp = async (req, res) => {
         newUser
           .save()
           .then((result) => {
+            const token = jwt.sign(
+              {
+                phone: result.phone,
+                id: result._id,
+                firebase_uid: result.firebase_uid,
+                isAdmin: 0,
+              },
+              "BeautyBar",
+              { expiresIn: "365d" }
+            );
             res.json({
               status: "success",
-              message: "user created successfully",
+              message: "user created successfully and has been loggedIn",
+              Data: result,
+              token: token,
             });
           })
           .catch((error) => {
@@ -74,9 +86,21 @@ exports.signUp = async (req, res) => {
         newUser
           .save()
           .then((result) => {
+            const token = jwt.sign(
+              {
+                phone: result.phone,
+                id: result._id,
+                google_uid: result.google_uid,
+                isAdmin: 0,
+              },
+              "BeautyBar",
+              { expiresIn: "365d" }
+            );
             res.json({
               status: "success",
-              message: "user created successfully",
+              message: "user created successfully and has been loggedIn",
+              Data: result,
+              token: token,
             });
           })
           .catch((error) => {
@@ -112,9 +136,21 @@ exports.signUp = async (req, res) => {
         newUser
           .save()
           .then((result) => {
+            const token = jwt.sign(
+              {
+                phone: result.phone,
+                id: result._id,
+                facebook_uid: result.facebook_uid,
+                isAdmin: 0,
+              },
+              "BeautyBar",
+              { expiresIn: "365d" }
+            );
             res.json({
               status: "success",
-              message: "user created successfully",
+              message: "user created successfully and has been loggedIn",
+              Data: result,
+              token: token,
             });
           })
           .catch((error) => {
@@ -150,9 +186,21 @@ exports.signUp = async (req, res) => {
         newUser
           .save()
           .then((result) => {
+            const token = jwt.sign(
+              {
+                phone: result.phone,
+                id: result._id,
+                kakao_uid: result.kakao_uid,
+                isAdmin: 0,
+              },
+              "BeautyBar",
+              { expiresIn: "365d" }
+            );
             res.json({
               status: "success",
-              message: "user created successfully",
+              message: "user created successfully and has been loggedIn",
+              Data: result,
+              token: token,
             });
           })
           .catch((error) => {
