@@ -34,34 +34,6 @@ router.post("/", userController.signUp);
 
 /**
  * @swagger
- * /api/user/signIn:
- *  post:
- *    tags:
- *      - user
- *    description: User SignIn(login) Api
- *    requestBody:
- *      description: user to login
- *      required: true
- *      content:
- *        application/json:
- *          schema:
- *            type: object
- *            required:
- *              - phone
- *              - firebase_uid
- *            properties:
- *              phone:
- *                type: string
- *              firebase_uid:
- *                type: string
- *    responses:
- *      '200':
- *        description: response on status 200
- */
-router.post("/signIn", userController.signIn);
-
-/**
- * @swagger
  * /api/user/completeProfile:
  *  post:
  *    tags:

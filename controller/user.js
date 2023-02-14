@@ -13,97 +13,153 @@ exports.signUp = async (req, res) => {
   if (type == "0") {
     User.findOne({ firebase_uid: body.firebase_uid }).then((found) => {
       if (found) {
-        console.log(found);
+        foundUser = found;
+        const token = jwt.sign(
+          {
+            phone: foundUser.phone,
+            id: foundUser._id,
+            firebase_uid: foundUser.firebase_uid,
+            isAdmin: 0,
+          },
+          "BeautyBar",
+          { expiresIn: "365d" }
+        );
+        const { ...responseUser } = foundUser._doc;
         return res.json({
           status: "success",
-          message: "user exists with this phone number",
+          message: "the user has been loggedIn",
+          Data: responseUser,
+          token: token,
         });
-      }
-      const newUser = new User(req.body);
-      newUser
-        .save()
-        .then((result) => {
-          res.json({
-            status: "success",
-            message: "user created successfully",
+      }else{
+        const newUser = new User(req.body);
+        newUser
+          .save()
+          .then((result) => {
+            res.json({
+              status: "success",
+              message: "user created successfully",
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+            res.json({ status: "failed", message: error });
           });
-        })
-        .catch((error) => {
-          console.log(error);
-          res.json({ status: "failed", message: error });
-        });
+      }
     });
   }
   else if (type == "1") {
     User.findOne({ google_uid: body.google_uid }).then((found) => {
       if (found) {
-        console.log(found);
+        foundUser = found;
+        const token = jwt.sign(
+          {
+            google_uid: foundUser.google_uid,
+            phone: foundUser.phone,
+            id: foundUser._id,
+            isAdmin: 0,
+          },
+          "BeautyBar",
+          { expiresIn: "365d" }
+        );
+        const { ...responseUser } = foundUser._doc;
         return res.json({
           status: "success",
-          message: "user exists with this google account",
+          message: "the user has been loggedIn",
+          Data: responseUser,
+          token: token,
         });
-      }
-      const newUser = new User(req.body);
-      newUser
-        .save()
-        .then((result) => {
-          res.json({
-            status: "success",
-            message: "user created successfully",
+      }else{
+        const newUser = new User(req.body);
+        newUser
+          .save()
+          .then((result) => {
+            res.json({
+              status: "success",
+              message: "user created successfully",
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+            res.json({ status: "failed", message: error });
           });
-        })
-        .catch((error) => {
-          console.log(error);
-          res.json({ status: "failed", message: error });
-        });
+      }
     });
   }
   else if (type == "2") {
     User.findOne({ facebook_uid: body.facebook_uid }).then((found) => {
       if (found) {
-        console.log(found);
+        foundUser = found;
+        const token = jwt.sign(
+          {
+            phone: foundUser.phone,
+            facebook_uid: foundUser.facebook_uid,
+            id: foundUser._id,
+            isAdmin: 0,
+          },
+          "BeautyBar",
+          { expiresIn: "365d" }
+        );
+        const { ...responseUser } = foundUser._doc;
         return res.json({
           status: "success",
-          message: "user exists with this account",
+          message: "the user has been loggedIn",
+          Data: responseUser,
+          token: token,
         });
-      }
-      const newUser = new User(req.body);
-      newUser
-        .save()
-        .then((result) => {
-          res.json({
-            status: "success",
-            message: "user created successfully",
+      }else{
+        const newUser = new User(req.body);
+        newUser
+          .save()
+          .then((result) => {
+            res.json({
+              status: "success",
+              message: "user created successfully",
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+            res.json({ status: "failed", message: error });
           });
-        })
-        .catch((error) => {
-          console.log(error);
-          res.json({ status: "failed", message: error });
-        });
+      }
     });
   }
   else if (type == "3") {
     User.findOne({ kakao_uid: body.kakao_uid }).then((found) => {
       if (found) {
-        console.log(found);
+        foundUser = found;
+        const token = jwt.sign(
+          {
+            phone: foundUser.phone,
+            kakao_uid: foundUser.kakao_uid,
+            id: foundUser._id,
+            isAdmin: 0,
+          },
+          "BeautyBar",
+          { expiresIn: "365d" }
+        );
+        const { ...responseUser } = foundUser._doc;
         return res.json({
           status: "success",
-          message: "user exists with this account",
+          message: "the user has been loggedIn",
+          Data: responseUser,
+          token: token,
         });
-      }
-      const newUser = new User(req.body);
-      newUser
-        .save()
-        .then((result) => {
-          res.json({
-            status: "success",
-            message: "user created successfully",
+      }else{
+        const newUser = new User(req.body);
+        newUser
+          .save()
+          .then((result) => {
+            res.json({
+              status: "success",
+              message: "user created successfully",
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+            res.json({ status: "failed", message: error });
           });
-        })
-        .catch((error) => {
-          console.log(error);
-          res.json({ status: "failed", message: error });
-        });
+      }
     });
   }
   else {
@@ -111,139 +167,139 @@ exports.signUp = async (req, res) => {
   }
 };
 
-exports.signIn = async (req, res) => {
-  let foundUser;
-  let type = req.body.loginMode;
-  if (type === "0") {
-    User.findOne(
-      { firebase_uid: req.body.firebase_uid, phone: req.body.phone },
-      { __v: 0, createdAt: 0, updatedAt: 0 }
-    ).then((user) => {
-      if (!user) {
-        res.json({
-          status: "failed",
-          message: "the user has not been found with this phone",
-        });
-      } else {
-        foundUser = user;
-        const token = jwt.sign(
-          {
-            phone: foundUser.phone,
-            id: foundUser._id,
-            isAdmin: 0,
-          },
-          "BeautyBar",
-          { expiresIn: "365d" }
-        );
-        const { ...responseUser } = foundUser._doc;
-        res.json({
-          status: "success",
-          message: "the user has been loggedIn",
-          Data: responseUser,
-          token: token,
-        });
-      }
-    });
-  }
-  else if(type == "1") {
-    User.findOne(
-      { google_uid: req.body.google_uid },
-      { __v: 0, createdAt: 0, updatedAt: 0 }
-    ).then((user) => {
-      if (!user) {
-        res.json({
-          status: "failed",
-          message: "the user has not been found with this account",
-        });
-      } else {
-        foundUser = user;
-        const token = jwt.sign(
-          {
-            phone: foundUser.phone,
-            id: foundUser._id,
-            isAdmin: 0,
-          },
-          "BeautyBar",
-          { expiresIn: "365d" }
-        );
-        const { ...responseUser } = foundUser._doc;
-        res.json({
-          status: "success",
-          message: "the user has been loggedIn",
-          Data: responseUser,
-          token: token,
-        });
-      }
-    });
-  }
-  else if(type == "2") {
-    User.findOne(
-      { facebook_uid: req.body.facebook_uid },
-      { __v: 0, createdAt: 0, updatedAt: 0 }
-    ).then((user) => {
-      if (!user) {
-        res.json({
-          status: "failed",
-          message: "the user has not been found with this account",
-        });
-      } else {
-        foundUser = user;
-        const token = jwt.sign(
-          {
-            phone: foundUser.phone,
-            id: foundUser._id,
-            isAdmin: 0,
-          },
-          "BeautyBar",
-          { expiresIn: "365d" }
-        );
-        const { ...responseUser } = foundUser._doc;
-        res.json({
-          status: "success",
-          message: "the user has been loggedIn",
-          Data: responseUser,
-          token: token,
-        });
-      }
-    });
-  }
-  else if (type == "3") {
-    User.findOne(
-      { kakao_uid: req.body.kakao_uid },
-      { __v: 0, createdAt: 0, updatedAt: 0 }
-    ).then((user) => {
-      if (!user) {
-        res.json({
-          status: "failed",
-          message: "the user has not been found with this account",
-        });
-      } else {
-        foundUser = user;
-        const token = jwt.sign(
-          {
-            phone: foundUser.phone,
-            id: foundUser._id,
-            isAdmin: 0,
-          },
-          "BeautyBar",
-          { expiresIn: "365d" }
-        );
-        const { ...responseUser } = foundUser._doc;
-        res.json({
-          status: "success",
-          message: "the user has been loggedIn",
-          Data: responseUser,
-          token: token,
-        });
-      }
-    });
-  } else {
-    res.json({
-      status: "failed",
-      message: "Please select a valid login mode",
-    });
-  }
-};
+// exports.signIn = async (req, res) => {
+//   let foundUser;
+//   let type = req.body.loginMode;
+//   if (type === "0") {
+//     User.findOne(
+//       { firebase_uid: req.body.firebase_uid, phone: req.body.phone },
+//       { __v: 0, createdAt: 0, updatedAt: 0 }
+//     ).then((user) => {
+//       if (!user) {
+//         res.json({
+//           status: "failed",
+//           message: "the user has not been found with this phone",
+//         });
+//       } else {
+//         foundUser = user;
+//         const token = jwt.sign(
+//           {
+//             phone: foundUser.phone,
+//             id: foundUser._id,
+//             isAdmin: 0,
+//           },
+//           "BeautyBar",
+//           { expiresIn: "365d" }
+//         );
+//         const { ...responseUser } = foundUser._doc;
+//         res.json({
+//           status: "success",
+//           message: "the user has been loggedIn",
+//           Data: responseUser,
+//           token: token,
+//         });
+//       }
+//     });
+//   }
+//   else if(type == "1") {
+//     User.findOne(
+//       { google_uid: req.body.google_uid },
+//       { __v: 0, createdAt: 0, updatedAt: 0 }
+//     ).then((user) => {
+//       if (!user) {
+//         res.json({
+//           status: "failed",
+//           message: "the user has not been found with this account",
+//         });
+//       } else {
+//         foundUser = user;
+//         const token = jwt.sign(
+//           {
+//             phone: foundUser.phone,
+//             id: foundUser._id,
+//             isAdmin: 0,
+//           },
+//           "BeautyBar",
+//           { expiresIn: "365d" }
+//         );
+//         const { ...responseUser } = foundUser._doc;
+//         res.json({
+//           status: "success",
+//           message: "the user has been loggedIn",
+//           Data: responseUser,
+//           token: token,
+//         });
+//       }
+//     });
+//   }
+//   else if(type == "2") {
+//     User.findOne(
+//       { facebook_uid: req.body.facebook_uid },
+//       { __v: 0, createdAt: 0, updatedAt: 0 }
+//     ).then((user) => {
+//       if (!user) {
+//         res.json({
+//           status: "failed",
+//           message: "the user has not been found with this account",
+//         });
+//       } else {
+//         foundUser = user;
+//         const token = jwt.sign(
+//           {
+//             phone: foundUser.phone,
+//             id: foundUser._id,
+//             isAdmin: 0,
+//           },
+//           "BeautyBar",
+//           { expiresIn: "365d" }
+//         );
+//         const { ...responseUser } = foundUser._doc;
+//         res.json({
+//           status: "success",
+//           message: "the user has been loggedIn",
+//           Data: responseUser,
+//           token: token,
+//         });
+//       }
+//     });
+//   }
+//   else if (type == "3") {
+//     User.findOne(
+//       { kakao_uid: req.body.kakao_uid },
+//       { __v: 0, createdAt: 0, updatedAt: 0 }
+//     ).then((user) => {
+//       if (!user) {
+//         res.json({
+//           status: "failed",
+//           message: "the user has not been found with this account",
+//         });
+//       } else {
+//         foundUser = user;
+//         const token = jwt.sign(
+//           {
+//             phone: foundUser.phone,
+//             id: foundUser._id,
+//             isAdmin: 0,
+//           },
+//           "BeautyBar",
+//           { expiresIn: "365d" }
+//         );
+//         const { ...responseUser } = foundUser._doc;
+//         res.json({
+//           status: "success",
+//           message: "the user has been loggedIn",
+//           Data: responseUser,
+//           token: token,
+//         });
+//       }
+//     });
+//   } else {
+//     res.json({
+//       status: "failed",
+//       message: "Please select a valid login mode",
+//     });
+//   }
+// };
 
 exports.update = async (req, res) => {
   try {
@@ -282,3 +338,4 @@ exports.update = async (req, res) => {
     });
   }
 };
+
