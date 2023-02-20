@@ -39,7 +39,18 @@ router.post("/getSkinTypeById", auth, skinTypeController.getSkinTypeById);
  *      - user
  *    security:
  *      - bearerAuth: []
- *    description: get all SkinTypes 
+ *    description: get all SkinTypes
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - gender
+ *            properties:
+ *              gender:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200

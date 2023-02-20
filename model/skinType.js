@@ -10,6 +10,10 @@ const skinTypeSchema = Schema({
         type: String,
         required: [true, "image is required"]
     },
+    gender: {
+        type: String,
+        required: [true, "gender is required"]
+    },
     isActive: {
         type: Number,
         required: false,

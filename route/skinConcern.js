@@ -40,10 +40,22 @@ router.post("/getSkinConcernById", auth, skinConcernController.getSkinConcernByI
  *    security:
  *      - bearerAuth: []
  *    description: get all skinConcerns
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - gender
+ *            properties:
+ *              gender:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
  */
 router.post("/getAllSkinConcerns", auth, skinConcernController.getAllSkinConcerns);
+
 
 module.exports = router;

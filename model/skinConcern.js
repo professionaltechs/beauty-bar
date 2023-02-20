@@ -6,6 +6,10 @@ const skinConcernSchema = Schema({
         type: String,
         required: [true, "name is required"],
     },
+    gender: {
+        type: String,
+        required: [true, "gender is required"]
+    },
     isActive: {
         type: Number,
         required: false,

@@ -38,7 +38,18 @@ router.post("/getSkinToneById", auth, skinToneController.getSkinToneById);
  *      - user
  *    security:
  *      - bearerAuth: []
- *    description: get all skinTones 
+ *    description: get all skinTones
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - gender
+ *            properties:
+ *              gender:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200

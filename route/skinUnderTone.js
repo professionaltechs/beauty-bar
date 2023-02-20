@@ -39,7 +39,18 @@ router.post("/getSkinUnderToneById", auth, skinUnderToneController.getSkinUnderT
  *      - user
  *    security:
  *      - bearerAuth: []
- *    description: get all skinUnderTones 
+ *    description: get all skinUnderTones
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            required:
+ *              - gender
+ *            properties:
+ *              gender:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
