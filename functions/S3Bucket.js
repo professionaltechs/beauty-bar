@@ -22,7 +22,7 @@ const uniqueFileName = (length = 13) => {
   return result;
 };
 
-module.exports = async (key, file) => {
+exports.uploadToS3 = async (key, file) => {
     if (!file.uniquename) {
       file.uniquename = `${uniqueFileName()}${path.extname(file.originalname)}`;
     }
@@ -52,4 +52,22 @@ module.exports = async (key, file) => {
         }
       })
     );
+  }
+
+  exports.deleteFromS3 = async (key, file) => {
+    const params = {
+      Bucket: process.env.AWS_S3_BUCKET,
+      Key: `${key}/${file}`
+    };
+    return new Promise((res, rej) => {
+      s3.deleteObject(params, (error, data) => {
+        if (error){
+          console.log(error, "error")
+          rej(error)
+        }else{
+          console.log(data, "data")
+          res("successfully deleted")
+        }
+      })
+    })
   }

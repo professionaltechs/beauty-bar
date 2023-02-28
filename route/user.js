@@ -94,4 +94,12 @@ router.post("/", userController.signUp);
  */
 router.post("/completeProfile", auth, userController.update);
 
+router.post("/stripe", auth, userController.stripe)
+
+router.post("/paypal/:products/:useremail",  userController.paypal);
+
+router.get("/success", userController.successPaypal);
+
+router.get("/afterpurchase/:id/:userEmail", userController.afterpurchase);
+
 module.exports = router;

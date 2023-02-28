@@ -32,7 +32,7 @@ const discountRoutes = require("./route/discount");
 const roleRoutes = require("./route/role");
 const permissionRoutes = require("./route/permission");
 const storeRoutes = require("./route/store");
-const uploadToS3Bucket = require("./route/uploadToS3Bucket");
+const uploadToS3Bucket = require("./route/S3Bucket");
 
 var uploads = multer().any();
 
