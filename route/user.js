@@ -26,6 +26,8 @@ const router = express.Router();
  *                type: string
  *              firebase_uid:
  *                type: string
+ *              loginMode:
+ *                type: string
  *    responses:
  *      '200':
  *        description: response on status 200
@@ -93,6 +95,21 @@ router.post("/", userController.signUp);
  *        description: response on status 200
  */
 router.post("/completeProfile", auth, userController.update);
+
+/**
+ * @swagger
+ * /api/user/deleteUser:
+ *  post:
+ *    tags:
+ *      - user
+ *    security:
+ *      - bearerAuth: []
+ *    description: delete user
+ *    responses:
+ *      '200':
+ *        description: response on status 200
+ */
+router.post("/deleteUser", auth, userController.delete);
 
 router.post("/stripe", auth, userController.stripe)
 
